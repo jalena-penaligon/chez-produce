@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190401225914) do
+ActiveRecord::Schema.define(version: 20190402224605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "items", force: :cascade do |t|
     t.string "name"
-    t.string "image"
+    t.string "image", default: "http://kriokrush.com.au/wp-content/uploads/2016/12/ComingSoon.jpg"
     t.text "description"
     t.integer "inventory"
     t.float "current_price"
@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(version: 20190401225914) do
     t.string "zipcode"
     t.string "email"
     t.string "password_digest"
-    t.integer "role"
-    t.boolean "active"
+    t.integer "role", default: 0
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
