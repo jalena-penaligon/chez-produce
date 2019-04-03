@@ -9,16 +9,15 @@ Rails.application.routes.draw do
 
   get '/profile/:id', to: 'users#show', as: :profile
   get '/register', to: 'users#new'
+
+  # resources :users, only: [:create], as: :register
+  # post '/register', to: 'users#create'
+  resources :items, only: [:index, :show]
+
   resources :users, only:  [:index, :create]
 
   resources :items, only: [:index]
   resources :merchants, only: [:index]
   get '/cart', to: 'carts#show', as: :cart
-
-
-  # resources :users, only: [:create], as: :register
-  # post '/register', to: 'users#create'
-# resources :users
-
 
 end
