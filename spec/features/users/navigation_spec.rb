@@ -25,7 +25,7 @@ RSpec.describe "navigation" do
     end
   end
   describe 'As a registered user' do
-    it 'I see the same links as a visitor' do
+    it 'I see the same links as a visitor except, Register and Login.  I also see link for Profile and Logout' do
       user = User.create!(name: 'j', email: "j@gmail.com", password:"password", role:0)
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
@@ -37,6 +37,9 @@ RSpec.describe "navigation" do
 
       click_on "Login"
 
+      expect(page).to_not have_content("Register")
+      expect(page).to_not have_content("Login")
+      
       click_on "Home"
       expect(current_path).to eq(root_path)
 
