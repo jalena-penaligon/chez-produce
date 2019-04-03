@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.describe 'As a visitor' do
   describe 'When I click on the register link in the nav bar' do
     it 'i see a form to register' do
-      visit root_path    
+      visit root_path
       click_on "Register"
       name = "hjk"
       address = "hjk"
@@ -61,6 +61,37 @@ RSpec.describe 'As a visitor' do
         click_button "Register"
 
         expect(page).to have_content("Password confirmation doesn't match Password")
+      end
+
+      it 'will not allow multiple users with the same email' do
+        visit root_path
+        click_on "Register"
+
+        fill_in :Name, with: "name"
+        fill_in "Street address", with: "address"
+        fill_in :City, with: "city"
+        fill_in :State, with: "state"
+        fill_in :Zipcode, with: "zip"
+        fill_in :Email, with: "email@email.com"
+        fill_in :Password, with: "password"
+        fill_in "Password confirmation", with: 'password'
+
+        click_button "Register"
+
+        visit root_path
+        click_on "Register"
+        fill_in :Name, with: "name"
+        fill_in "Street address", with: "address"
+        fill_in :City, with: "city"
+        fill_in :State, with: "state"
+        fill_in :Zipcode, with: "zip"
+        fill_in :Email, with: "email@email.com"
+        fill_in :Password, with: "password"
+        fill_in "Password confirmation", with: 'password'
+
+        click_button "Register"
+
+        expect(page).to have_content("Email has already been taken")
       end
     end
   end
