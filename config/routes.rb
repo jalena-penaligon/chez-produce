@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get '/register', to: 'users#new'
   # resources :users, only: [:create], as: :register
   # post '/register', to: 'users#create'
-  resources :items, only: [:index]
+  resources :items, only: [:index, :show]
   resources :users, only:  [:index, :create]
   resources :merchants, only: [:index]
   get '/cart', to: 'carts#show', as: :cart
