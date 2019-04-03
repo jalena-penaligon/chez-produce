@@ -1,19 +1,27 @@
+<% if @user.errors.any? %>
+  <ul class="errors">
+    <% @user.errors.full_messages.each do |message| %>
+      <li class="error"><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_for @user, action: :create do |f| %>
-<%= f.label :name %>
-<%= f.text_field :name %>
-<%= f.label :street_address %>
-<%= f.text_field :street_address %>
-<%= f.label :city %>
-<%= f.text_field :city %>
-<%= f.label :state %>
-<%= f.text_field :state %>
-<%= f.label :zipcode %>
-<%= f.text_field :zipcode %>
-<%= f.label :email %>
-<%= f.text_field :email %>
-<%= f.label :password %>
-<%= f.password_field :password %>
-<%= f.label :confirmation_password %>
-<%= f.password_field :confirmation_password %>
-<%= f.submit "Register" %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :street_address %>
+  <%= f.text_field :street_address %>
+  <%= f.label :city %>
+  <%= f.text_field :city %>
+  <%= f.label :state %>
+  <%= f.text_field :state %>
+  <%= f.label :zipcode %>
+  <%= f.text_field :zipcode %>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %>
+  <%= f.submit "Register" %>
 <% end %>
