@@ -39,6 +39,7 @@ RSpec.describe "navigation" do
   end
   
   describe 'As a registered user' do
+
     it 'I see all the links visible only to registered user' do
       user = User.create!(name: 'j', email: "j@gmail.com", password:"password", role:0)
 

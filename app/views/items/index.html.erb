@@ -1,10 +1,8 @@
 <h1>Browse All Items</h1>
-<% @users.each do |user| %>
-  <%= user.name %>
-  <%= user.items.each do |item| %>
-    <%= link_to "#{item.name}", item_path(item) %>
-    <%= item.current_price %>
-    <%= item.inventory %>
-    <img src="<%=link_to "#{item.image}", item_path(item) %>" alt="#{item.id}">
+<% @items.each do |item| %>
+<h3><%= link_to "#{item.name}", item_path(item) %></h3>
+  <%= item.merchant_name %>
+    Price: <%= item.current_price %>
+    Inventory: <%= item.inventory %>
+    <%= link_to image_tag(item.image), item_path(item) %>
   <% end %>
-<% end %>
