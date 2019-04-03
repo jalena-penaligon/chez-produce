@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.describe 'As a visitor' do
   describe 'When I click on the register link in the nav bar' do
     it 'i see a form to register' do
-      visit root_path
+      visit root_path    
       click_on "Register"
       name = "hjk"
       address = "hjk"
