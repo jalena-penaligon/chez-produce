@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "navigation" do
+  before(:each) do
+  	@user = create(:user)
+  	allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+  end
+
   describe "visitor navigation" do
     it "should have links" do
       visit root_path
@@ -26,7 +31,6 @@ RSpec.describe "navigation" do
   end
   describe 'As a registered user' do
     xit 'I see the same links as a visitor' do
-      user = User.create(email: "j@gmail.com", password:"password", role:0)
       visit root_path
 
       click_on "Home"
