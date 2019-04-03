@@ -80,18 +80,27 @@ RSpec.describe 'As a visitor' do
 
         visit root_path
         click_on "Register"
-        fill_in :Name, with: "name"
-        fill_in "Street address", with: "address"
-        fill_in :City, with: "city"
-        fill_in :State, with: "state"
-        fill_in :Zipcode, with: "zip"
+        fill_in :Name, with: "jalena"
+        fill_in "Street address", with: "123 address"
+        fill_in :City, with: "denver"
+        fill_in :State, with: "co"
+        fill_in :Zipcode, with: "12345"
         fill_in :Email, with: "email@email.com"
         fill_in :Password, with: "password"
         fill_in "Password confirmation", with: 'password'
 
         click_button "Register"
+        save_and_open_page
 
         expect(page).to have_content("Email has already been taken")
+        expect(page).to have_selector("input[value='jalena']")
+        expect(page).to have_selector("input[value='123 address']")
+        expect(page).to have_selector("input[value='denver']")
+        expect(page).to have_selector("input[value='co']")
+        expect(page).to have_selector("input[value='12345']")
+        expect(page).to_not have_selector("input[value='email@email.com']")
+
+
       end
     end
   end
