@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.describe 'As a visitor' do
   describe 'When I click on the register link in the nav bar' do
     it 'i see a form to register' do
-      visit root_path
+      visit root_path    
       click_on "Register"
       name = "hjk"
       address = "hjk"
@@ -11,7 +11,6 @@ RSpec.describe 'As a visitor' do
       zip = "hjk"
       email = "new@g.com"
       password = "hjk"
-      confirmation_password = "hjk"
 
       fill_in :Name, with: name
       fill_in "Street address", with: address
@@ -20,7 +19,7 @@ RSpec.describe 'As a visitor' do
       fill_in :Zipcode, with: zip
       fill_in :Email, with: email
       fill_in :Password, with: password
-      fill_in "Confirmation password", with: password
+      fill_in "Password confirmation", with: password
 
       click_button "Register"
 
@@ -28,6 +27,41 @@ RSpec.describe 'As a visitor' do
       expect(page).to have_content(user.name)
       expect(current_path).to eq(profile_path(user))
       expect(page).to have_content("Thanks for registering, you are now logged in!")
+    end
+  end
+  describe 'When I visit the user registration page' do
+    describe 'And I do not fill in the form completely' do
+      it 'shows a message that required fields are missing' do
+        visit root_path
+        click_on "Register"
+
+        click_button "Register"
+
+        expect(page).to have_content("Street address can't be blank")
+        expect(page).to have_content("City can't be blank")
+        expect(page).to have_content("State can't be blank")
+        expect(page).to have_content("Zipcode can't be blank")
+        expect(page).to have_content("Name can't be blank")
+        expect(page).to have_content("Email can't be blank")
+        expect(page).to have_content("Password can't be blank")
+      end
+
+      it 'will not create a user without a confirmed password' do
+        visit root_path
+        click_on "Register"
+
+        fill_in :Name, with: "name"
+        fill_in "Street address", with: "address"
+        fill_in :City, with: "city"
+        fill_in :State, with: "state"
+        fill_in :Zipcode, with: "zip"
+        fill_in :Email, with: "email"
+        fill_in :Password, with: "password"
+
+        click_button "Register"
+
+        expect(page).to have_content("Password confirmation doesn't match Password")
+      end
     end
   end
 end
