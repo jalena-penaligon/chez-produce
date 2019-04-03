@@ -1,8 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe "navigation" do
+
+  before(:each) do
+  	@user = create(:user)
+  	allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+  end
+  
   describe "all users navigation" do
     it "should show all the common links visible to all users" do
+
       visit root_path
 
       click_on "Home"
@@ -30,6 +37,7 @@ RSpec.describe "navigation" do
       expect(current_path).to eq(register_path)
     end
   end
+  
   describe 'As a registered user' do
     it 'I see all the links visible only to registered user' do
       user = User.create!(name: 'j', email: "j@gmail.com", password:"password", role:0)
