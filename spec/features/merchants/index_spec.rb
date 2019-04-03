@@ -9,7 +9,6 @@ RSpec.describe 'merchant index page', type: :feature do
   describe "When I visit the merchant index page" do
     it "shows all merchants who are active" do
       visit merchants_path
-      save_and_open_page
 
       within "#merchant-#{@merchant_1.id}" do
         expect(page).to have_content(@merchant_1.name)
