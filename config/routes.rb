@@ -22,4 +22,8 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: 'merchants#show'
 
+  namespace :admin do
+    get '/dashboard', to: 'users#show'
+  end
+
 end
