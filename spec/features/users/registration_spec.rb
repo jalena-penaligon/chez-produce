@@ -78,7 +78,7 @@ RSpec.describe 'As a visitor' do
 
         click_button "Register"
 
-        visit root_path
+        visit root_path      
         click_on "Register"
         fill_in :Name, with: "jalena"
         fill_in "Street address", with: "123 address"

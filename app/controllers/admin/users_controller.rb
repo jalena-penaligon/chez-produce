@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
   def show
-    @admin = current_admin
+    @admin = current_user
   end
 end
