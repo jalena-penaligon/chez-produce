@@ -21,4 +21,8 @@ Rails.application.routes.draw do
   get '/cart', to: 'carts#show', as: :cart
 
   get '/dashboard', to: 'merchants#show'
+
+  namespace :admin do
+    get '/dashboard', to: 'users#show'
+  end
 end
