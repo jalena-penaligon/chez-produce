@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:notice] = "You're logged in!"
-      redirect_to profile_path(user) if user.role == "user"
+      redirect_to profile_path if user.role == "user"
       redirect_to dashboard_path if user.role == "merchant"
       redirect_to root_path if user.role == "admin"
     else
@@ -16,7 +16,12 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.clear
-    redirect_to root_path
+    if session.clear
+      flash[:notice] = "You're logged out!"
+      redirect_to root_path
+    else
+      flash[:alert] = "Please try logging out again."
+      redirect_to root_path
+    end
   end
 end

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/logout', to: 'sessions#destroy'
 
-  get '/profile/:id', to: 'users#show', as: :profile
+  get '/profile', to: 'users#show', as: :profile
   get '/register', to: 'users#new'
 
   # resources :users, only: [:create], as: :register

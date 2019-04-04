@@ -25,7 +25,7 @@ RSpec.describe 'As a visitor' do
 
       user = User.last
       expect(page).to have_content(user.name)
-      expect(current_path).to eq(profile_path(user))
+      expect(current_path).to eq(profile_path)
       expect(page).to have_content("Thanks for registering, you are now logged in!")
     end
   end
