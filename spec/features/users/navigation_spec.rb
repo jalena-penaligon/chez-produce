@@ -49,7 +49,7 @@ RSpec.describe "navigation" do
       expect(current_path).to eq(root_path)
 
       click_on "Profile"
-      expect(current_path).to eq(profile_path(user))
+      expect(current_path).to eq(profile_path)
 
       expect(page).to have_content("Logged in as #{user.name}")
     end
