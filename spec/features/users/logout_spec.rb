@@ -17,7 +17,7 @@ RSpec.describe "As a registered user, merchant, or admin" do
 
       click_button "Login"
 
-      expect(current_path).to eq(profile_path(user))
+      expect(current_path).to eq(profile_path)
       expect(page).to have_content("You're logged in!")
       expect(page).to have_content(user.name)
 

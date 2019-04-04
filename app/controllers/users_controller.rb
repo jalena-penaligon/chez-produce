@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = "Thanks for registering, you are now logged in!"
-      redirect_to profile_path(@user)
+      redirect_to profile_path
     else
       render :new
     end
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   private

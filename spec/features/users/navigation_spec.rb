@@ -6,7 +6,7 @@ RSpec.describe "navigation" do
   	@user = create(:user)
   	allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
   end
-  
+
   describe "all users navigation" do
     it "should show all the common links visible to all users" do
 
@@ -37,7 +37,7 @@ RSpec.describe "navigation" do
       expect(current_path).to eq(register_path)
     end
   end
-  
+
   describe 'As a registered user' do
 
     it 'I see all the links visible only to registered user' do
@@ -54,12 +54,12 @@ RSpec.describe "navigation" do
 
       expect(page).to_not have_content("Register")
       expect(page).to_not have_content("Login")
-      
+
       click_on "Logout"
       expect(current_path).to eq(root_path)
 
       click_on "Profile"
-      expect(current_path).to eq(profile_path(user))
+      expect(current_path).to eq(profile_path)
 
       expect(page).to have_content("Logged in as #{user.name}")
     end
