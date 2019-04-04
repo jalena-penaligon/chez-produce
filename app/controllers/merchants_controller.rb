@@ -5,6 +5,6 @@ class MerchantsController < ApplicationController
   end
 
   def show
-    @merchant = current_merchant
+    @merchant = current_user
   end
 end
