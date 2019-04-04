@@ -27,7 +27,7 @@ RSpec.describe "As a visitor" do
         end
 
         context "If I am a merchant user" do
-          xit "I am redirected to my merchant dashboard page and I see a flash message that I am logged in" do
+          it "I am redirected to my merchant dashboard page and I see a flash message that I am logged in" do
             merchant = create(:merchant)
 
             visit root_path
@@ -41,7 +41,7 @@ RSpec.describe "As a visitor" do
 
             click_button "Login"
 
-            expect(current_path).to eq(dashboard_path(merchant))
+            expect(current_path).to eq(dashboard_path)
             expect(page).to have_content("You're logged in!")
             expect(page).to have_content(merchant.name)
           end
@@ -64,7 +64,6 @@ RSpec.describe "As a visitor" do
 
             expect(current_path).to eq(root_path)
             expect(page).to have_content("You're logged in!")
-            # expect(page).to have_content(admin.name)
           end
         end
       end

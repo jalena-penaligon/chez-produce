@@ -8,13 +8,12 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       flash[:notice] = "You're logged in!"
       redirect_to profile_path(user) if user.role == "user"
-      # redirect_to dashboard_path(user) if user.role == "merchant"
+      redirect_to dashboard_path if user.role == "merchant"
       redirect_to root_path if user.role == "admin"
     else
       render :new
     end
   end
-
 
   def destroy
     session.clear
