@@ -45,13 +45,15 @@ RSpec.describe "navigation" do
       expect(page).to_not have_content("Register")
       expect(page).to_not have_content("Login")
 
-      click_on "Logout"
-      expect(current_path).to eq(root_path)
+      within('#user-nav') do
+        click_on "Logout"
+        expect(current_path).to eq(root_path)
 
-      click_on "Profile"
-      expect(current_path).to eq(profile_path)
+        click_on "Profile"
+        expect(current_path).to eq(profile_path)
 
-      expect(page).to have_content("Logged in as #{user.name}")
+        expect(page).to have_content("Logged in as #{user.name}")
+      end
     end
   end
 
@@ -65,13 +67,15 @@ RSpec.describe "navigation" do
       expect(page).to_not have_content("Register")
       expect(page).to_not have_content("Login")
 
-      click_on "Logout"
-      expect(current_path).to eq(root_path)
+      within('#merchant-nav') do
+        click_on "Logout"
+        expect(current_path).to eq(root_path)
 
-      click_on "Dashboard"
-      expect(current_path).to eq(dashboard_path)
+        click_on "Dashboard"
+        expect(current_path).to eq(dashboard_path)
 
-      expect(page).to have_content("Logged in as #{merchant_1.name}")
+        expect(page).to have_content("Logged in as #{merchant_1.name}")
+      end
     end
   end
 
@@ -85,13 +89,15 @@ RSpec.describe "navigation" do
       expect(page).to_not have_content("Register")
       expect(page).to_not have_content("Login")
 
-      click_on "Logout"
-      expect(current_path).to eq(root_path)
+      within('#admin-nav') do
+        click_on "Logout"
+        expect(current_path).to eq(root_path)
 
-      click_on "Dashboard"
-      expect(current_path).to eq(admin_dashboard_path)
+        click_on "Dashboard"
+        expect(current_path).to eq(admin_dashboard_path)
 
-      expect(page).to have_content("Logged in as #{admin.name}")
+        expect(page).to have_content("Logged in as #{admin.name}")
+      end
     end
   end
 end
