@@ -12,27 +12,25 @@
     <nav>
       <ul>
 
-      <% if current_user && current_user.role == "user" %>
+      <% if current_merchant %>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Shop", items_path %></li>
+          <li><%= link_to "Merchants", merchants_path %></li>
+          <li><%= link_to "Dashboard", dashboard_path %></li>
+          <li><%= link_to "Logout", logout_path %></li>
+      <% elsif current_admin %>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Shop", items_path %></li>
+          <li><%= link_to "Merchants", merchants_path %></li>
+          <li><%= link_to "Dashboard", admin_dashboard_path %></li>
+          <li><%= link_to "Logout", logout_path %></li>
+        <% elsif current_user %>
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Shop", items_path %></li>
           <li><%= link_to "Merchants", merchants_path %></li>
           <li><%= link_to "Cart", cart_path %></li>
           <li><%= link_to "Profile", profile_path(current_user.id) %></li>
           <li><%= link_to "Logout", logout_path %></li>
-      <% elsif current_user && current_user.role == "merchant" %>
-          <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Shop", items_path %></li>
-          <li><%= link_to "Merchants", merchants_path %></li>
-          <li><%= link_to "Dashboard", dashboard_path %></li>
-          <li><%= link_to "Logout", logout_path %></li>
-          <!-- <li> link_to "Cart", cart_path </li> -->
-      <% elsif current_user && current_user.role == "admin" %>
-          <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Shop", items_path %></li>
-          <li><%= link_to "Merchants", merchants_path %></li>
-          <li><%= link_to "Dashboard", admin_dashboard_path %></li>
-          <li><%= link_to "Logout", logout_path %></li>
-          <!-- <li> link_to "Cart", cart_path </li> -->
       <% else %>
           <li> <%= link_to "Home", root_path %> </li>
           <li> <%= link_to "Shop", items_path %> </li>
