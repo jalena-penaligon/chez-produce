@@ -73,6 +73,25 @@ RSpec.describe "navigation" do
 
       expect(page).to have_content("Logged in as #{merchant_1.name}")
     end
+  end
 
+  describe "As an admin user" do
+    it "I see only the links visible to admin" do
+      admin = create(:admin)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
+
+      visit root_path
+
+      expect(page).to_not have_content("Register")
+      expect(page).to_not have_content("Login")
+
+      click_on "Logout"
+      expect(current_path).to eq(root_path)
+
+      click_on "Dashboard"
+      expect(current_path).to eq(admin_dashboard_path)
+
+      expect(page).to have_content("Logged in as #{admin.name}")
+    end
   end
 end
