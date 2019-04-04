@@ -78,7 +78,7 @@ RSpec.describe 'As a visitor' do
 
         click_button "Register"
 
-        visit root_path
+        visit root_path      
         click_on "Register"
         fill_in :Name, with: "jalena"
         fill_in "Street address", with: "123 address"
@@ -90,7 +90,6 @@ RSpec.describe 'As a visitor' do
         fill_in "Password confirmation", with: 'password'
 
         click_button "Register"
-        save_and_open_page
 
         expect(page).to have_content("Email has already been taken")
         expect(page).to have_selector("input[value='jalena']")
@@ -99,8 +98,6 @@ RSpec.describe 'As a visitor' do
         expect(page).to have_selector("input[value='co']")
         expect(page).to have_selector("input[value='12345']")
         expect(page).to_not have_selector("input[value='email@email.com']")
-
-
       end
     end
   end
