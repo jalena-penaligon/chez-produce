@@ -1,2 +1,9 @@
 <%= flash.notice %>
 <h1>Logged in as <%= @user.name %></h1>
+<li><%= @user.email %></li>
+<li><%= @user.street_address %></li>
+<li><%= @user.city %></li>
+<li><%= @user.state %></li>
+<li><%= @user.zipcode %></li>
+
+<%= link_to 'Edit Profile', edit_user_path(@user) %>
