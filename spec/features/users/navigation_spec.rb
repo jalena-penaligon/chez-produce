@@ -1,12 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "navigation" do
-  # commented out below lines in order to pass the tests below.
-  # before(:each) do
-  # 	@user = create(:user)
-  # 	allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
-  # end
-
   describe "all users navigation" do
     it "should show all the common links visible to all users" do
 
@@ -37,7 +31,7 @@ RSpec.describe "navigation" do
       click_on "Register"
       expect(current_path).to eq(register_path)
 
-        expect(page).to_not have_content("Logout")
+      expect(page).to_not have_content("Logout")
     end
   end
 
@@ -76,7 +70,7 @@ RSpec.describe "navigation" do
 
       click_on "Dashboard"
       expect(current_path).to eq(dashboard_path)
-save_and_open_page
+
       expect(page).to have_content("Logged in as #{merchant_1.name}")
     end
 
