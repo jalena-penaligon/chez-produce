@@ -20,7 +20,7 @@ RSpec.describe "As a visitor" do
 
             click_button "Login"
 
-            expect(current_path).to eq(profile_path)
+            expect(current_path).to eq(profile_path(user))
             expect(page).to have_content("You're logged in!")
             expect(page).to have_content(user.name)
           end
