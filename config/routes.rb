@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # post '/register', to: 'users#create'
   resources :items, only: [:index, :show]
 
-  resources :users, only:  [:index, :create]
+  resources :users, only:  [:index, :create, :edit]
 
   resources :items, only: [:index]
   resources :merchants, only: [:index]
