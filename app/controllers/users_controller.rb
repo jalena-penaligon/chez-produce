@@ -27,10 +27,6 @@ class UsersController < ApplicationController
 
   end
 
-  def edit
-
-  end
-
   private
   def user_params
     params.require(:user).permit(:name, :street_address, :city, :state, :zipcode, :email, :password, :password_confirmation)
