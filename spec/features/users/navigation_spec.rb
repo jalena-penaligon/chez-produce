@@ -1,12 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "navigation" do
-  # commented out below lines in order to pass the tests below.
-  # before(:each) do
-  # 	@user = create(:user)
-  # 	allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
-  # end
-
   describe "all users navigation" do
     it "should show all the common links visible to all users" do
 
