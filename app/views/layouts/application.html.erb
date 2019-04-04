@@ -9,31 +9,31 @@
   </head>
 
   <body>
-    <nav>
+    <nav class="nav-bar">
       <ul>
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Shop", items_path %></li>
+        <li><%= link_to "Merchants", merchants_path %></li>
         <% if current_merchant %>
-            <li><%= link_to "Home", root_path %></li>
-            <li><%= link_to "Shop", items_path %></li>
-            <li><%= link_to "Merchants", merchants_path %></li>
+          <section id="merchant-nav">
             <li><%= link_to "Dashboard", dashboard_path %></li>
             <li><%= link_to "Logout", logout_path %></li>
+            <li>Logged in as <%= current_user.name %></li>
+          </section>
         <% elsif current_admin %>
-            <li><%= link_to "Home", root_path %></li>
-            <li><%= link_to "Shop", items_path %></li>
-            <li><%= link_to "Merchants", merchants_path %></li>
+          <section id="admin-nav">
             <li><%= link_to "Dashboard", admin_dashboard_path %></li>
             <li><%= link_to "Logout", logout_path %></li>
-          <% elsif current_user %>
-            <li><%= link_to "Home", root_path %></li>
-            <li><%= link_to "Shop", items_path %></li>
-            <li><%= link_to "Merchants", merchants_path %></li>
+            <li>Logged in as <%= current_user.name %></li>
+          </section>
+        <% elsif current_user %>
+          <section id="user-nav">
             <li><%= link_to "Cart", cart_path %></li>
             <li><%= link_to "Profile", profile_path %></li>
             <li><%= link_to "Logout", logout_path %></li>
+            <li>Logged in as <%= current_user.name %></li>
+          </section>
         <% else %>
-            <li> <%= link_to "Home", root_path %> </li>
-            <li> <%= link_to "Shop", items_path %> </li>
-            <li> <%= link_to "Merchants", merchants_path %> </li>
             <li> <%= link_to "Cart", cart_path %> </li>
             <li> <%= link_to "Register", register_path %> </li>
             <li> <%= link_to "Login", login_path %> </li>
