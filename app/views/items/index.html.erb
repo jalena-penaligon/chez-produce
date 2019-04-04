@@ -1,4 +1,12 @@
 <h1>Browse All Items</h1>
+<section class="tron">
+  <p class="most-popular">Most Popular Items: <%@most_popular.each do |item| %>
+  <%= item.name %>: <%= item.items_qty %>
+  <% end %></p>
+<p class="least-popular"> Least Popular Items: <% @least_popular.each do |item| %>
+  <%= item.name %>: <%= item.items_qty %>
+  <% end %></p>
+</section>
 <% @items.each do |item| %>
 <h3><%= link_to "#{item.name}", item_path(item) %></h3>
   <%= item.merchant_name %>
