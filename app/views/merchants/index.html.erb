@@ -1,8 +1,12 @@
 <% @merchants.each do |merchant| %>
   <section id="merchant-<%= merchant.id %>">
-    <h2><%= merchant.name %></h2>
+    <% if current_admin %>
+      <h2><%= link_to merchant.name, admin_merchant_path(merchant) %></h2>
+    <% else %>
+      <h2><%= merchant.name %></h2>
+    <% end %>
     City: <%= merchant.city %><br />
     State: <%= merchant.state %><br />
-    Registered: <%= merchant.created_at %>
+    Registered: <%= merchant.created_at %> #format created_at.to_s(:long)
   </section>
 <% end %>

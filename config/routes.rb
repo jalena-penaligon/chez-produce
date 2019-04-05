@@ -26,4 +26,6 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'users#show'
   end
 
+  get 'admin/merchants/:id', to: 'admin/merchants#show', as: :admin_merchant
+
 end

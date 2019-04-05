@@ -1,10 +1,14 @@
 class MerchantsController < ApplicationController
 
   def index
-    @merchants = User.active_merchants
+    if current_admin
+      @merchants = User.all_merchants
+    else
+      @merchants = User.active_merchants
+    end
   end
 
   def show
-    @merchant = current_merchant
+    @merchant = current_user
   end
 end

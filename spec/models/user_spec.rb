@@ -28,6 +28,11 @@ RSpec.describe User, type: :model do
 
       expect(User.active_merchants).to eq([@merchant_1, @merchant_2])
     end
+
+    it '.all_merchants returns all merchants' do
+
+      expect(User.all_merchants).to eq([@merchant_1, @merchant_2, @merchant_3])
+    end
   end
 
 end
