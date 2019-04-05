@@ -16,14 +16,14 @@ RSpec.describe 'merchant index page', type: :feature do
         expect(page).to have_content(@merchant_1.name)
         expect(page).to have_content(@merchant_1.city)
         expect(page).to have_content(@merchant_1.state)
-        expect(page).to have_content(@merchant_1.created_at)
+        expect(page).to have_content(@merchant_1.created_at.to_s(:long))
       end
 
       within "#merchant-#{@merchant_2.id}" do
         expect(page).to have_content(@merchant_2.name)
         expect(page).to have_content(@merchant_2.city)
         expect(page).to have_content(@merchant_2.state)
-        expect(page).to have_content(@merchant_2.created_at)
+        expect(page).to have_content(@merchant_2.created_at.to_s(:long))
       end
 
       expect(page).to_not have_content(@merchant_3.name)
@@ -38,7 +38,7 @@ RSpec.describe 'merchant index page', type: :feature do
     end
     describe "I see all the merchants in the system" do
       it "next to each merchant name I see city, state and their name is a link to their dashboard" do #"/admin/merchants/5"
-save_and_open_page
+
         within "#merchant-#{@merchant_1.id}" do
           expect(page).to have_link(@merchant_1.name)
           expect(page).to have_content(@merchant_1.city)
