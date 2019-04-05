@@ -10,7 +10,11 @@ class MerchantsController < ApplicationController
     @top_orders = Order.top_orders
   end
 
-  def show
-    @merchant = current_user
+    def show
+      if current_merchant
+        @merchant = current_user
+      else
+        render_not_found
+    end
   end
 end

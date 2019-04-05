@@ -18,6 +18,7 @@ RSpec.describe "navigation" do
       click_on "Cart"
       expect(current_path).to eq(cart_path)
     end
+
   end
 
   describe "visitor navigation" do
@@ -32,6 +33,16 @@ RSpec.describe "navigation" do
       expect(current_path).to eq(register_path)
 
       expect(page).to_not have_content("Logout")
+    end
+    it 'can restrict access for visitors' do
+      visit profile_path
+      expect(page.status_code).to eq(404)
+
+      visit dashboard_path
+      expect(page.status_code).to eq(404)
+
+      visit admin_dashboard_path
+      expect(page.status_code).to eq(404)
     end
   end
 
@@ -55,6 +66,17 @@ RSpec.describe "navigation" do
         expect(page).to have_content("Logged in as #{user.name}")
       end
     end
+    it 'can restrict access for registered user' do
+      user = create(:user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+      visit dashboard_path
+      expect(page.status_code).to eq(404)
+
+      visit admin_dashboard_path
+      expect(page.status_code).to eq(404)
+    end
+
   end
 
   describe "As a merchant user" do
@@ -77,6 +99,19 @@ RSpec.describe "navigation" do
         expect(page).to have_content("Logged in as #{merchant_1.name}")
       end
     end
+    it 'can restrict access for merchant' do
+      merchant_1 = create(:merchant)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_1)
+
+      visit profile_path
+      expect(page.status_code).to eq(404)
+
+      visit admin_dashboard_path
+      expect(page.status_code).to eq(404)
+
+      visit cart_path
+      expect(page.status_code).to eq(404)
+    end
   end
 
   describe "As an admin user" do
@@ -98,6 +133,19 @@ RSpec.describe "navigation" do
 
         expect(page).to have_content("Logged in as #{admin.name}")
       end
+    end
+    it 'can restrict access for admin' do
+      admin = create(:admin)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
+
+      visit profile_path
+      expect(page.status_code).to eq(404)
+
+      visit dashboard_path
+      expect(page.status_code).to eq(404)
+
+      visit cart_path
+      expect(page.status_code).to eq(404)
     end
   end
 end

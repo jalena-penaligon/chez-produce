@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :current_visitor, :current_admin, :current_merchant
 
+  def render_not_found
+    render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
+  end
+  
   private
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
