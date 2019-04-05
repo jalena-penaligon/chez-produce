@@ -38,7 +38,7 @@ RSpec.describe 'merchant index page', type: :feature do
     end
     describe "I see all the merchants in the system" do
       it "next to each merchant name I see city, state and their name is a link to their dashboard" do #"/admin/merchants/5"
-
+save_and_open_page
         within "#merchant-#{@merchant_1.id}" do
           expect(page).to have_link(@merchant_1.name)
           expect(page).to have_content(@merchant_1.city)
@@ -63,7 +63,6 @@ RSpec.describe 'merchant index page', type: :feature do
       end
 
       it "There is a disable button next to any merchant not yet disabled and an enable button to disabled merchants" do
-
         within "#merchant-#{@merchant_1.id}" do
           expect(page).to have_button("Disable")
         end
