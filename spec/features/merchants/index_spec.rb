@@ -62,7 +62,7 @@ RSpec.describe 'merchant index page', type: :feature do
         end
       end
 
-      xit "There is a disable button next to any merchant not yet disabled and an enable button to disabled merchants" do
+      it "There is a disable button next to any merchant not yet disabled and an enable button to disabled merchants" do
 
         within "#merchant-#{@merchant_1.id}" do
           expect(page).to have_button("Disable")
