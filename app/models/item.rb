@@ -19,12 +19,12 @@ class Item < ApplicationRecord
        .order("items_qty #{order}")
        .limit(limit)
   end
-    # - the top 5 most popular items by quantity purchased, plus the quantity bought
-    # - the bottom 5 least popular items, plus the quantity bought
-    #
-    # "Popularity" is determined by total quantity of that item fulfilled
 
-  def self.least_popular
+  def average_item_fulfillment
+    # binding.pry
+    order_items
+    .select('avg(order_items.updated_at - order_items.created_at)as avg_fulfillment')
+    .where(fulfilled: true)
   end
 
 end
