@@ -19,7 +19,7 @@ RSpec.describe 'cart page', type: :feature do
         click_link "Add to Cart"
 
         expect(current_path).to eq(items_path)
-        expect(page).to have_content("#{item_1.name.capitalize} has been added to your cart!")
+        expect(page).to have_content("#{item_1.name} has been added to your cart!")
         expect(page).to have_content("Cart: 1")
 
         item_2 = create(:item)
@@ -29,7 +29,7 @@ RSpec.describe 'cart page', type: :feature do
         click_link "Add to Cart"
 
         expect(current_path).to eq(items_path)
-        expect(page).to have_content("#{item_2.name.capitalize} has been added to your cart!")
+        expect(page).to have_content("#{item_2.name} has been added to your cart!")
         expect(page).to have_content("Cart: 2")
       end
     end
