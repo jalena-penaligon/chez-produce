@@ -33,8 +33,8 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    binding.pry
-    if @user.update(user_params)
+    # binding.pry
+    if @user.update!(user_params)
       flash[:notice] = "Your profile was updated."
       redirect_to profile_path
     else
