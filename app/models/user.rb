@@ -10,6 +10,10 @@ class User < ApplicationRecord
 
   enum role: ['user', 'merchant', 'admin']
 
+  def self.all_users
+    where(role: 0)
+  end
+
   def self.active_merchants
     where(role: 1, active: true)
   end
