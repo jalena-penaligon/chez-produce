@@ -73,7 +73,7 @@ RSpec.describe "navigation" do
       visit dashboard_path
       expect(page.status_code).to eq(404)
 
-      visit admin_dashboard_path
+      visit admin_users_path
       expect(page.status_code).to eq(404)
     end
 
@@ -106,7 +106,7 @@ RSpec.describe "navigation" do
       visit profile_path
       expect(page.status_code).to eq(404)
 
-      visit admin_dashboard_path
+      visit admin_users_path
       expect(page.status_code).to eq(404)
 
       visit cart_path
@@ -117,6 +117,7 @@ RSpec.describe "navigation" do
   describe "As an admin user" do
     it "I see only the links visible to admin" do
       admin = create(:admin)
+      user = create(:user)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
 
       visit root_path
@@ -125,13 +126,16 @@ RSpec.describe "navigation" do
       expect(page).to_not have_content("Login")
 
       within('#admin-nav') do
-        click_on "Logout"
-        expect(current_path).to eq(root_path)
-
-        click_on "Dashboard"
-        expect(current_path).to eq(admin_dashboard_path)
 
         expect(page).to have_content("Logged in as #{admin.name}")
+
+        # click_on "Dashboard"
+        # expect(current_path).to eq(admin_dashboard_path)
+
+        visit root_path
+
+        click_on "Logout"
+        expect(current_path).to eq(root_path)
       end
     end
     it 'can restrict access for admin' do

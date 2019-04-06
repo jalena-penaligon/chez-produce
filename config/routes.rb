@@ -23,8 +23,9 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: 'merchants#show'
 
+  get 'admin/dashboard', to: 'users#show', as: :admin_dashboard
+
   namespace :admin do
-    get '/dashboard', to: 'users#show'
     resources :users, only: [:index, :show]
   end
 
