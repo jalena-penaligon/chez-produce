@@ -36,9 +36,10 @@ RSpec.describe "As a registered user, they click on edit" do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user_1)
     visit edit_profile_path
 
-    fill_in "user[email]", with: "user_2@gmail.com"
+    fill_in "user[email]", with: "#{user_2.email}"
 
     click_button "Update Profile"
+
     expect(current_path).to eq(user_path(user_1))
     expect(page).to have_content("Email has already been taken")
   end
