@@ -4,4 +4,9 @@ class ItemsController < ApplicationController
     @most_popular = Item.items_sold(5, 'desc')
     @least_popular = Item.items_sold(5, 'asc')
   end
+
+  def show
+    @item = Item.find(params[:id])
+    @fulfillment_time = OrderItem.fulfillment_time(@item)
+  end
 end
