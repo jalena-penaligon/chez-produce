@@ -69,8 +69,11 @@ RSpec.describe User, type: :model do
     end
 
     it '.all_merchants returns all merchants' do
+      merchant_1 = create(:merchant)
+      merchant_2 = create(:merchant)
+      merchant_3 = create(:inactive_merchant)
 
-      expect(User.all_merchants).to eq([@merchant_1, @merchant_2, @merchant_3])
+      expect(User.all_merchants).to eq([merchant_1, merchant_2, merchant_3])
     end
 
     it '.merchants_by_fulfillment returns merchants with the slowest fulfillment times' do
