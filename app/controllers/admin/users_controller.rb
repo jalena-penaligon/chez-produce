@@ -11,6 +11,7 @@ class Admin::UsersController < ApplicationController
   def show
     if current_admin
       @admin = current_user
+      @user = User.find(params[:id])
     else
       render_not_found
     end
