@@ -77,8 +77,9 @@ RSpec.describe 'As a visitor' do
         fill_in "Password confirmation", with: 'password'
 
         click_button "Register"
+        click_on "Logout"
 
-        visit root_path      
+        visit root_path
         click_on "Register"
         fill_in :Name, with: "jalena"
         fill_in "Street address", with: "123 address"
