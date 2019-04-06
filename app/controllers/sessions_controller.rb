@@ -1,6 +1,15 @@
 class SessionsController < ApplicationController
   def new
-    
+    if current_user != nil
+      flash[:alert] = "You're already logged in!"
+      if current_user.role == "admin"
+        redirect_to root_path
+      elsif current_user.role == "merchant"
+        redirect_to dashboard_path
+      elsif current_user.role == "user"
+        redirect_to profile_path
+      end
+    end
   end
 
   def create
