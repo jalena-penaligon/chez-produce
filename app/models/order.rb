@@ -4,4 +4,14 @@ class Order < ApplicationRecord
   belongs_to :user
 
   enum status: ['pending', 'packaged', 'shipped', 'cancelled']
+
+  def self.top_orders
+    joins(:order_items)
+    .select('orders.*, sum(order_items.order_quantity) as total_quantity')
+    .where(status: 2)
+    .group(:id)
+    .order('total_quantity DESC')
+    .limit(3)
+  end
+
 end

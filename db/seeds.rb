@@ -18,6 +18,7 @@ inactive_user_1 = create(:inactive_user)
 
 item_1 = create(:item, user: merchant_1)
 item_2 = create(:item, user: merchant_2)
+item_3 = create(:item, user: merchant_3)
 create_list(:item, 10, user: merchant_1)
 
 inactive_item_1 = create(:inactive_item, user: merchant_1)

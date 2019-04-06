@@ -1,3 +1,52 @@
+<aside>
+  <h2>Merchant Statistics</h2>
+  <section id="top-by-revenue">
+    <% @top_by_revenue.each do |merchant| %>
+      <%= merchant.name %> <br />
+      Total Revenue: <%= merchant.revenue %>
+    <% end %>
+  </section>
+
+  <section id="top-by-fulfillment">
+    <% @top_by_fulfillment.each do |merchant| %>
+      <%= merchant.name %> <br />
+      Fulfillment Time: <%= merchant.fulfillment_time %><br />
+    <% end %>
+
+  </section>
+
+  <section id="bottom-by-fulfillment">
+    <% @bottom_by_fulfillment.each do |merchant| %>
+      <%= merchant.name %> <br />
+      Fulfillment Time: <%= merchant.fulfillment_time %><br />
+    <% end %>
+  </section>
+
+  <section id="top-states">
+    <% @top_states.each do |user| %>
+      <%= user.state %> <br />
+      Total Orders: <%= user.total_orders %><br />
+    <% end %>
+  </section>
+
+  <section id="top-cities">
+    <% @top_cities.each do |user| %>
+      <%= user.city %> <br />
+      Total Orders: <%= user.total_orders %><br />
+    <% end %>
+  </section>
+
+  <section id="top-orders">
+    <% @top_orders.each do |order| %>
+      <%= order.id %> <br />
+      Total Quantity: <%= order.total_quantity %><br />
+    <% end %>
+  </section>
+
+</aside>
+
+</aside>
+
 <% @merchants.each do |merchant| %>
   <section id="merchant-<%= merchant.id %>">
     <% if current_admin %>

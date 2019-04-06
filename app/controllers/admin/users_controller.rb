@@ -1,5 +1,9 @@
 class Admin::UsersController < ApplicationController
   def show
-    @admin = current_user
+    if current_admin
+      @admin = current_user
+    else
+      render_not_found
+    end
   end
 end

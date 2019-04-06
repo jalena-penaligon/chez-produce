@@ -20,11 +20,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
-  end
-
-  def edit
-
+    if current_user && current_user.role == 'user'
+      @user = current_user
+    else
+      render_not_found
+    end
   end
 
   def edit
