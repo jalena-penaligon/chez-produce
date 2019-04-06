@@ -21,7 +21,7 @@ RSpec.describe 'user profile', type: :feature do
         expect(page).to_not have_content(@user.password)
 
         click_link("Edit Profile")
-        expect(current_path).to eq(edit_user_path(@user))
+        expect(current_path).to eq(edit_profile_path)
       end
     end
   end

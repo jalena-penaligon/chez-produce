@@ -80,6 +80,7 @@ RSpec.describe 'As a visitor' do
         click_on "Logout"
 
         visit root_path
+        
         click_on "Register"
         fill_in :Name, with: "jalena"
         fill_in "Street address", with: "123 address"
