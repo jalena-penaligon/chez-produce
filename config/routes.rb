@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'users#show', as: :profile
   get '/profile/edit', to: 'users#edit', as: :edit_profile
+  get '/profile/orders', to: 'orders#index'
   get '/register', to: 'users#new'
 
   # resources :users, only: [:create], as: :register
