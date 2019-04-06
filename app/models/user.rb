@@ -14,6 +14,11 @@ class User < ApplicationRecord
     where(role: 1, active: true)
   end
 
+
+  def self.all_merchants
+    where(role: 1)
+  end
+
   def self.top_merchants_by_revenue
     joins(items: :order_items)
     .select("users.*, sum(order_items.order_price * order_items.order_quantity) as revenue")

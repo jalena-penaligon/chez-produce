@@ -68,6 +68,11 @@ RSpec.describe User, type: :model do
       expect(User.merchants_by_fulfillment("ASC")).to eq([merchant_4, merchant_3, merchant_1])
     end
 
+    it '.all_merchants returns all merchants' do
+
+      expect(User.all_merchants).to eq([@merchant_1, @merchant_2, @merchant_3])
+    end
+
     it '.merchants_by_fulfillment returns merchants with the slowest fulfillment times' do
       user = create(:user)
       order = create(:shipped_order, user: user)

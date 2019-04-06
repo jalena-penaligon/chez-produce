@@ -8,13 +8,18 @@ class MerchantsController < ApplicationController
     @top_states = User.top_states
     @top_cities = User.top_cities
     @top_orders = Order.top_orders
+    if current_admin
+      @merchants = User.all_merchants
+    else
+      @merchants = User.active_merchants
+    end
   end
 
-    def show
-      if current_merchant
-        @merchant = current_user
-      else
-        render_not_found
+  def show
+    if current_merchant
+      @merchant = current_user
+    else
+      render_not_found
     end
   end
 end
