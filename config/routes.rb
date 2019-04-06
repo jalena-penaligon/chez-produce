@@ -8,13 +8,14 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
 
   get '/profile', to: 'users#show', as: :profile
+  get '/profile/edit', to: 'users#edit', as: :edit_profile
   get '/register', to: 'users#new'
 
   # resources :users, only: [:create], as: :register
   # post '/register', to: 'users#create'
   resources :items, only: [:index, :show]
 
-  resources :users, only:  [:index, :create, :edit]
+  resources :users, only:  [:index, :create, :update]
 
   resources :items, only: [:index]
   resources :merchants, only: [:index]

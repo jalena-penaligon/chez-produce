@@ -1,5 +1,3 @@
-
-<%= flash.notice %>
 <h1>Logged in as <%= current_user.name %></h1>
 <li><%= current_user.email %></li>
 <li><%= current_user.street_address %></li>
@@ -7,4 +5,4 @@
 <li><%= current_user.state %></li>
 <li><%= current_user.zipcode %></li>
 
-<%= link_to 'Edit Profile', edit_user_path(current_user) %>
+<%= link_to 'Edit Profile', edit_profile_path %>
