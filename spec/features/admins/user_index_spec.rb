@@ -28,7 +28,7 @@ RSpec.describe "admin users index", type: :feature do
           expect(page).to have_content(user_2.created_at.to_s(:long))
           expect(page).to have_button("Upgrade to Merchant")
         end
-save_and_open_page
+
         within "#user-#{user_3.id}" do
           expect(page).to have_link(user_3.name)
           expect(page).to have_content(user_3.created_at.to_s(:long))
@@ -39,16 +39,16 @@ save_and_open_page
 
         expect(current_path).to eq(admin_user_path(user_3))
       end
+
+      it "only admins can reach this path" do
+        user = create(:user)
+
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+        visit admin_users_path
+
+        expect(page.status_code).to eq(404)
+      end
     end
   end
 end
-
-
-
-
-# I see all users in the system who are not merchants nor admins.
-# Each user's name is a link to a show page for that user ("/admin/users/5")
-# Next to each user's name is the date they registered
-# Next to each user's name is a button that says 'Upgrade to Merchant'
-
-# Only admin users can reach this path.
