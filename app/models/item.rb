@@ -20,11 +20,5 @@ class Item < ApplicationRecord
        .limit(limit)
   end
 
-  def average_item_fulfillment
-    # binding.pry
-    order_items
-    .select('avg(order_items.updated_at - order_items.created_at)as avg_fulfillment')
-    .where(fulfilled: true)
-  end
 
 end

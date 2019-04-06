@@ -1,0 +1,9 @@
+<h1><%=@item.name%></h1>
+<ul>
+  <li> <%= @item.description %> </li>
+  <li> <img src="<%= @item.image %>" /> </li>
+  <li> <%= @item.inventory %> </li>
+  <li> <%= @item.current_price %> </li>
+  <li> <%= @item.user.name %> </li>
+ <!-- <li>  @fulfillment_time.avg_time  </li> %> -->
+</ul>

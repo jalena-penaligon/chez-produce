@@ -7,5 +7,6 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @fulfillment_time = OrderItem.fulfillment_time(@item)
   end
 end
