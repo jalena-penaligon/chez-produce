@@ -9,9 +9,7 @@ RSpec.describe "As a registered user, merchant, or admin" do
       visit root_path
 
       click_link "Login"
-
-      # expect(current_path).to eq(login_path)
-
+ 
       fill_in :email, with: user.email
       fill_in :password, with: user.password
 

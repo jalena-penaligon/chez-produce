@@ -39,5 +39,7 @@ RSpec.describe Item, type: :model do
       actual = Item.items_sold(5,'asc')
       expect(actual).to eq([@item_1,@item_2,@item_3,@item_4,@item_5])
     end
+    it 'can calc 'do
+    end
   end
 end

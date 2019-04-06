@@ -18,12 +18,30 @@ RSpec.describe User, type: :model do
   end
 
   describe 'class methods' do
+    it '.all_users returns all users' do
+      user_1 = create(:user)
+      user_2 = create(:user)
+      user_3 = create(:inactive_user)
+      admin = create(:admin)
+      merchant = create(:merchant)
+
+      expect(User.all_users).to eq([user_1, user_2, user_3])
+    end
+
     it '.active_merchants returns active merchants' do
       merchant_1 = create(:merchant)
       merchant_2 = create(:merchant)
       merchant_3 = create(:inactive_merchant)
 
       expect(User.active_merchants).to eq([merchant_1, merchant_2])
+    end
+
+    it '.all_merchants returns all merchants' do
+      merchant_1 = create(:merchant)
+      merchant_2 = create(:merchant)
+      merchant_3 = create(:inactive_merchant)
+
+      expect(User.all_merchants).to eq([merchant_1, merchant_2, merchant_3])
     end
 
     it '.top_merchants_by_revenue returns merchants with most revenue' do
@@ -66,11 +84,6 @@ RSpec.describe User, type: :model do
       order_item_6 = create(:fulfilled_order_item, order: order, item: item_2, order_price: 4.5, order_quantity: 1, created_at: 6.days.ago, updated_at: 2.days.ago)
 
       expect(User.merchants_by_fulfillment("ASC")).to eq([merchant_4, merchant_3, merchant_1])
-    end
-
-    it '.all_merchants returns all merchants' do
-
-      expect(User.all_merchants).to eq([@merchant_1, @merchant_2, @merchant_3])
     end
 
     it '.merchants_by_fulfillment returns merchants with the slowest fulfillment times' do
