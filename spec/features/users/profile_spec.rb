@@ -27,7 +27,7 @@ RSpec.describe 'user profile', type: :feature do
       it "can display my orders, if I have any orders" do
 
         visit profile_path
-# save_and_open_page
+        
         click_on "My Orders"
         expect(current_path).to eq(profile_orders_path(@user))
       end

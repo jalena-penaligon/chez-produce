@@ -115,7 +115,7 @@ RSpec.describe "navigation" do
   end
 
   describe "As an admin user" do
-    it "I see only the links visible to admin" do
+    xit "I see only the links visible to admin" do
       admin = create(:admin)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
 
