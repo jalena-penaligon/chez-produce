@@ -74,20 +74,29 @@ RSpec.describe 'cart page', type: :feature do
 
         end
       end
+
+      describe 'when I click Clear Cart' do
+        it "clears my cart" do
+
+          item_1 = create(:item, id: 1, current_price: 3.0)
+          visit item_path(item_1)
+          click_link "Add to Cart"
+
+          visit item_path(item_1)
+          click_link "Add to Cart"
+
+          item_2 = create(:item, id: 2, current_price: 4.5)
+          visit item_path(item_2)
+          click_link "Add to Cart"
+
+          visit cart_path
+
+          click_link "Clear Cart"
+
+          expect(current_path).to eq(cart_path)
+          expect(page).to have_content("Cart: 0")
+        end
+      end
     end
   end
-
-
-#   As a visitor or registered user
-# When I have added items to my cart
-# And I visit my cart ("/cart")
-# I see all items I've added to my cart
-# And I see a link to empty my cart
-# Each item in my cart shows the following information:
-# - the name of the item
-# - a very small thumbnail image of the item
-# - the merchant I'm buying this item from
-# - the price of the item
-# - my desired quantity of the item
-# - a subtotal (price multiplied by quantity)
 end
