@@ -23,4 +23,9 @@ class OrderItem < ApplicationRecord
       0
     end
   end
+
+  def order_items_by_user(current_user, item_id)
+    binding.pry
+    OrderItem.where(item_id: item_id)
+  end
 end

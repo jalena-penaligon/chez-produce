@@ -10,12 +10,16 @@
   <%= item.image %>
   <%= item.current_price %>
 <% end %>
+
 <% @order.order_items.each do |order_item| %>
-<div id="item-info-<%= order_item.id %>">
-  Item Price: $<%= order_item.order_price %>
-  Number of Items: <%= order_item.order_quantity%>
-  Subtotal: $<%= (order_item.order_price * order_item.order_quantity) %>
-</div>
+  <% if current_merchant %>
+    <%= order_item.order_items_by_user(current_user, order_item.item_id) %>
+    <div id="item-info-<%= order_item.id %>">
+      Item Price: $<%= order_item.order_price %>
+      Number of Items: <%= order_item.order_quantity%>
+      Subtotal: $<%= (order_item.order_price * order_item.order_quantity) %>
+    </div>
+  <% end %>
 <% end %>
 Total Quantity: <%= @order.total_quantity %>
 Total Price: <%= @order.grand_total %>
