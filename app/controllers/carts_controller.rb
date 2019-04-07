@@ -21,8 +21,11 @@ class CartsController < ApplicationController
     # binding.pry
     if params[:increment] == "add"
       session[:cart][params[:item_id]]+=1
-    else params[:increment] == "subtract"
-      session[:cart][params[:item_id]] -= 1
+    else params[:increment]
+      item_total = (session[:cart][params[:item_id]] -= 1)
+      if item_total == 0
+        session[:cart].delete(params[:item_id])
+      end
     end
     redirect_to cart_path
   end
