@@ -16,7 +16,11 @@ class OrderItem < ApplicationRecord
     the_sum = orderitems.map do |orderitem|
       (orderitem.updated_at - orderitem.created_at)
     end.sum
-    avg_time = (the_sum)/the_count
-    (avg_time/(3600*24)).round(2)
+    if the_sum > 0
+      avg_time = (the_sum)/the_count
+      (avg_time/(3600*24)).round(2)
+    else
+      0
+    end
   end
 end

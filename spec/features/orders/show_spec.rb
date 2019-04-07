@@ -40,7 +40,7 @@ RSpec.describe "As a registered user" do
       end
       expect(page).to have_content(@order_1.total_quantity)
       expect(page).to have_content(@order_1.grand_total)
-      save_and_open_page
+  
     end
   end
 end
