@@ -5,7 +5,9 @@ class OrdersController < ApplicationController
   end
 
   def show
-
+    @order = Order.find(params[:id])
+    # binding.pry
+    # @item_subtotal = Order.subtotal(params[:item])
   end
 
 end

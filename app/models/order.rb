@@ -21,4 +21,12 @@ class Order < ApplicationRecord
   def grand_total
     order_items.sum(:order_price)
   end
+  # 
+  # def self.subtotal(item)
+  #   joins(:order_items)
+  #   .select("order.*, sum(order_price * order_quantity) as subtotal")
+  #   .group(:id)
+  #   .where("order_items.item_id = #{item.id}")
+  #   .pluck("sum(order_price * order_quantity) as subtotal")
+  # end
 end
