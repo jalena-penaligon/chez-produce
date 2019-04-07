@@ -18,9 +18,12 @@ class CartsController < ApplicationController
   end
 
   def update
-    # binding.pry
     if params[:increment] == "add"
-      session[:cart][params[:item_id]]+=1
+      item_total = (session[:cart][params[:item_id]])
+      inventory = params[:inventory].to_i
+      if item_total < inventory
+        session[:cart][params[:item_id]]+=1
+      end
     else params[:increment]
       item_total = (session[:cart][params[:item_id]] -= 1)
       if item_total == 0

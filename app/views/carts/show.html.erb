@@ -8,7 +8,7 @@
     Merchant: <%= item.user.name %>
     Subtotal: $<%= number_with_precision(@cart.item_subtotal(item), precision: 2) %>
     <img src="<%= item.image %> width="100" height="100" ">
-    <%= link_to "Add One", cart_path(item_id: item.id, increment: "add"), method: :patch  %>
+    <%= link_to "Add One", cart_path(item_id: item.id, increment: "add", inventory: item.inventory), method: :patch  %>
     <%= link_to "Delete One", cart_path(item_id: item.id, increment: "subtract"), method: :patch  %>
     <%= link_to "Delete Item", cart_path(item_id: item.id), method: :delete  %>
     </section>
