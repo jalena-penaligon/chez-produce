@@ -23,6 +23,22 @@ RSpec.describe Order, type: :model do
       expect(Order.top_orders).to eq([order_1, order_4, order_2])
 
     end
+    # it 'can calc 'do
+    #   user = create(:user)
+    #   merchant_1 = create(:merchant)
+    #   merchant_2 = create(:merchant)
+    #   item_1 = create(:item, user: merchant_1)
+    #   item_2 = create(:item, user: merchant_2)
+    #   order = create(:order, user: user)
+    #   create(:order_item, order: order, item: item_1, order_price: 1, order_quantity: 1)
+    #   create(:order_item, order: order, item: item_2, order_price: 2, order_quantity: 1)
+    #   order = create(:packaged_order, user: user)
+    #   oi_1 = create(:fulfilled_order_item, order: order, item: item_1, order_price: 1, order_quantity: 1, created_at: 3.5.days.ago, updated_at: 1.days.ago)
+    #   oi_2 = create(:fulfilled_order_item, order: order, item: item_2, order_price: 2, order_quantity: 1, created_at: 4.5.days.ago, updated_at: 1.days.ago)
+    #
+    #   actual = Order.fulfillment_time(item_1)
+    #   expect(actual).to eq(2.5)
+    # end
   end
 
 end

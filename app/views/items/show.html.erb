@@ -5,6 +5,6 @@
   <li> <%= @item.inventory %> </li>
   <li> <%= @item.current_price %> </li>
   <li> <%= @item.user.name %> </li>
- <!-- <li>  @fulfillment_time.avg_time  </li> %> -->
+  <li> <%=@fulfillment_time %>  </li> 
 </ul>
 <%= link_to "Add to Cart", cart_path %>

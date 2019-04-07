@@ -11,8 +11,8 @@ RSpec.describe OrderItem, type: :model do
     create(:order_item, order: @order, item: @item_1, order_price: 1, order_quantity: 1)
     create(:order_item, order: @order, item: @item_2, order_price: 2, order_quantity: 1)
     @order = create(:packaged_order, user: @user)
-    @oi_1 = create(:fulfilled_order_item, order: @order, item: @item_1, order_price: 1, order_quantity: 1, created_at: 3.5.days.ago, updated_at: 1.minutes.ago)
-    @oi_2 = create(:fulfilled_order_item, order: @order, item: @item_2, order_price: 2, order_quantity: 1, created_at: 4.5.days.ago, updated_at: 1.minutes.ago)
+    @oi_1 = create(:fulfilled_order_item, order: @order, item: @item_1, order_price: 1, order_quantity: 1, created_at: 3.5.days.ago, updated_at: 1.days.ago)
+    @oi_2 = create(:fulfilled_order_item, order: @order, item: @item_2, order_price: 2, order_quantity: 1, created_at: 4.5.days.ago, updated_at: 1.days.ago)
   end
   describe 'relationships' do
     it { should belong_to :order }
@@ -20,13 +20,16 @@ RSpec.describe OrderItem, type: :model do
   end
 
   describe 'instance methods' do
-    xit 'can calc avg fulfillment time' do
-      actual = @oi_1.fulfillment_time(@item_1.id)
-      expect(actual).to eq(4)
+    it 'can calc fulfillment time' do
+      actual = @oi_1.fulfillment_time
+      expect(actual).to eq(2.50)
     end
-    xit 'can identify fulfilled order items' do
-      actual = @oi_1.fulfilled?
-      expect(actual).to eq(true)
+  end
+
+  describe 'class methods' do
+    it 'can calc avg fulfillment_time' do
+      actual = OrderItem.fulfillment_time(@item_1)
+      expect(actual).to eq(1.25)
     end
   end
 end
