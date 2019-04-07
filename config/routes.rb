@@ -19,7 +19,9 @@ Rails.application.routes.draw do
 
   resources :items, only: [:index]
   resources :merchants, only: [:index]
+
   get '/cart', to: 'carts#show', as: :cart
+  get '/carts', to: 'carts#create', as: :carts
 
   get '/dashboard', to: 'merchants#show'
 
