@@ -144,6 +144,25 @@ RSpec.describe 'cart page', type: :feature do
         end
       end
 
+      describe "I see a link next to item to decrement by one" do
+        it "decrements that item by one and removes item if decremented to zero" do
+          item_1 = create(:item, id: 1, current_price: 3.0)
+          visit item_path(item_1)
+          click_link "Add to Cart"
+          visit cart_path
+          click_link "Add One"
+          expect(page).to have_content("Quantity: 2")
+
+          click_link "Delete One"
+
+          expect(page).to have_content("Quantity: 1")
+
+          click_link "Delete One"
+
+          expect(page).to_not have_content(item_1.name)
+        end
+      end
+
     end
   end
 end
