@@ -122,6 +122,28 @@ RSpec.describe 'cart page', type: :feature do
         end
       end
 
+      describe "I see a link next to item to increment by one" do
+        it "increments that item by one" do
+          item_1 = create(:item, id: 1, current_price: 3.0)
+          visit item_path(item_1)
+          click_link "Add to Cart"
+
+          visit cart_path
+
+          click_link "Add One"
+
+          expect(page).to have_content("Quantity: 2")
+
+          click_link "Add One"
+
+          expect(page).to have_content("Quantity: 3")
+
+          click_link "Delete One"
+
+          expect(page).to have_content("Quantity: 2")
+        end
+      end
+
     end
   end
 end

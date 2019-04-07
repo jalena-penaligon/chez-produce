@@ -17,6 +17,14 @@ class CartsController < ApplicationController
     redirect_to items_path
   end
 
+  def update
+    # binding.pry
+    if params[:increment] == "add"
+      session[:cart][params[:item_id]]+=1
+      redirect_to cart_path
+    end
+  end
+
   def destroy
     if params[:item_id] == nil
       session[:cart].clear
