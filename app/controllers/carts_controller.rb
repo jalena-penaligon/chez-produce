@@ -21,8 +21,10 @@ class CartsController < ApplicationController
     # binding.pry
     if params[:increment] == "add"
       session[:cart][params[:item_id]]+=1
-      redirect_to cart_path
+    else params[:increment] == "subtract"
+      session[:cart][params[:item_id]] -= 1
     end
+    redirect_to cart_path
   end
 
   def destroy
