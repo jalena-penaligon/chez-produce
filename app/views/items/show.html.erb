@@ -7,4 +7,4 @@
   <li> <%= @item.user.name %> </li>
   <li> <%=@fulfillment_time %>  </li> 
 </ul>
-<%= link_to "Add to Cart", cart_path %>
+<%= link_to "Add to Cart", carts_path(item_id: @item.id) %>

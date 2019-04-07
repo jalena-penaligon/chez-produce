@@ -23,6 +23,14 @@ RSpec.describe 'user profile', type: :feature do
         click_link("Edit Profile")
         expect(current_path).to eq(edit_profile_path)
       end
+
+      it "can display my orders, if I have any orders" do
+
+        visit profile_path
+        
+        click_on "My Orders"
+        expect(current_path).to eq(profile_orders_path(@user))
+      end
     end
   end
 end

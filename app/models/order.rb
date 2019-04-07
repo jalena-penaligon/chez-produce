@@ -26,4 +26,11 @@ class Order < ApplicationRecord
   #   .pluck('avg(order_items.updated_at - order_items.created_at)as avg_time')
   # end
 
+  def total_quantity
+    order_items.sum(:order_quantity)
+  end
+
+  def grand_total
+    order_items.sum(:order_price)
+  end
 end

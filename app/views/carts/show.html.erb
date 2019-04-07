@@ -1,4 +1,17 @@
-
 <% if session[:cart] != nil %>
+  <% @cart.contents.each do |id| %>
+    <section id="item-<%= id[0].to_i %>">
+    <% item = @cart.find_item(id) %>
+    <%= item.name %>
+    Price: $<%= number_with_precision(item.current_price, precision: 2) %>
+    Quantity: <%= id[1] %>
+    Merchant: <%= item.user.name %>
+    Subtotal: $<%= number_with_precision(@cart.item_subtotal(item), precision: 2) %>
+    <img src="<%= item.image %> width="100" height="100" ">
+    </section>
+  <% end %>
+
+  Total: $<%= number_with_precision(@cart.total_cost, precision: 2) %>
+
   <%= link_to "Clear Cart" %>
 <% end %>

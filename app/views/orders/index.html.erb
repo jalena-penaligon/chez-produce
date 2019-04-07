@@ -1,0 +1,12 @@
+<h1>My Orders</h1>
+
+<%= @orders.each do |order| %>
+  <ul id="order-info-<%= order.id %>">
+    <li><%= link_to "#{order.id}", profile_order_path(order.user_id, order.id) %></li>
+    <li><%= order.created_at %></li>
+    <li><%= order.updated_at %></li>
+    <li><%= order.status %></li>
+      <li>Total Quantity: <%= order.total_quantity %></li>
+      <li>Total Price: <%= order.grand_total %></li>
+  </ul>
+<% end %>
