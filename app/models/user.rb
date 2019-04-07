@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
 
   def self.all_merchants
-    where(role: 1)
+    where(role: 1).order(:id)
   end
 
   def self.top_merchants_by_revenue
