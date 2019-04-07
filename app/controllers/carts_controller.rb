@@ -18,7 +18,11 @@ class CartsController < ApplicationController
   end
 
   def destroy
-    session[:cart].clear
+    if params[:item_id] == nil
+      session[:cart].clear
+    else
+      session[:cart].delete(params[:item_id])
+    end
     redirect_to cart_path
   end
 end

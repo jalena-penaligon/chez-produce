@@ -97,6 +97,31 @@ RSpec.describe 'cart page', type: :feature do
           expect(page).to have_content("Cart: 0")
         end
       end
+
+      describe "I see a link next to the item to delete it" do
+        it "deletes only that item" do
+          item_1 = create(:item, id: 1, current_price: 3.0)
+          visit item_path(item_1)
+          click_link "Add to Cart"
+
+          visit item_path(item_1)
+          click_link "Add to Cart"
+
+          item_2 = create(:item, id: 2, current_price: 4.5)
+          visit item_path(item_2)
+          click_link "Add to Cart"
+
+          visit cart_path
+
+          within "#item-#{item_2.id}" do
+            click_link "Delete Item"
+          end
+
+          expect(page).to_not have_content(item_2.name)
+          expect(page).to have_content(item_1.name)
+        end
+      end
+
     end
   end
 end
