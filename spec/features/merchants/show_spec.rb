@@ -39,10 +39,13 @@ RSpec.describe "When a merchant visits dashboard show page", type: :feature do
   it "I can see pending orders for items I sell" do
 
     visit dashboard_path
-    
+
     expect(page).to have_content(@order.id)
     expect(page).to have_content(@order.created_at)
     expect(page).to have_content(@order_item_1.order_quantity)
     expect(page).to have_content("Subtotal: 1")
+
+    click_on "#{@order.id}"
+    expect(current_path).to eq(profile_order_path(@merchant_1, @order))
   end
 end
