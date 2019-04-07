@@ -1,3 +1,10 @@
+<% if session[:cart] != nil && current_user == nil %>
+  <section id="login-message">
+    "You must <%= link_to 'login', login_path %> or
+    <%= link_to 'register', register_path %> to checkout."
+  </section>
+<% end %>
+
 <% if session[:cart] != nil %>
   <% @cart.contents.each do |id| %>
     <section id="item-<%= id[0].to_i %>">

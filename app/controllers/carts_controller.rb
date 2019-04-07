@@ -4,6 +4,8 @@ class CartsController < ApplicationController
       render_not_found
     elsif session[:cart] == nil
       flash[:notice] = "Your cart is empty."
+    # elsif session[:cart] != nil && current_user == nil
+    #   flash[:notice] = "You must login or register to checkout."
     end
   end
 
