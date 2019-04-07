@@ -9,7 +9,7 @@ RSpec.describe "As a registered user, merchant, or admin" do
       visit root_path
 
       click_link "Login"
- 
+
       fill_in :email, with: user.email
       fill_in :password, with: user.password
 
@@ -26,8 +26,8 @@ RSpec.describe "As a registered user, merchant, or admin" do
       expect(page).to_not have_content("Please try logging out again.")
     end
 
-    xit "Any items I had in my shopping cart are deleted" do
-      visit logout_path
+    it "Any items I had in my shopping cart are deleted" do
+      visit logout_path 
 
       expect(current_path).to eq(root_path)
       expect(page).to have_content("Cart: 0")
