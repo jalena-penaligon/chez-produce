@@ -13,5 +13,5 @@
 
   Total: $<%= number_with_precision(@cart.total_cost, precision: 2) %>
 
-  <%= link_to "Clear Cart" %>
+  <%= link_to "Clear Cart", @carts, method: :delete %>
 <% end %>

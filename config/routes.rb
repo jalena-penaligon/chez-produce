@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   get '/cart', to: 'carts#show', as: :cart
   get '/carts', to: 'carts#create', as: :carts
+  delete '/cart', to: 'carts#destroy'
 
   get '/dashboard', to: 'merchants#show'
 
