@@ -2,6 +2,7 @@
   <%= @order.id %>
   <%= @order.user.name %>
   <%= @order.user.street_address %>
+  Order Status: <%= @order.status %>
   <% @order.items.each do |item| %>
   <div id="item-info-<%=item.id %>">
         Current Inventory: <%= item.inventory %>

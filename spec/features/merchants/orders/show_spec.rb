@@ -22,6 +22,11 @@ RSpec.describe 'As a merchant' do
     @order_4 = create(:order, user: @user)
     @order_item_6 = create(:order_item, order: @order_4, item: @item_3, order_price: 1, order_quantity: 1)
     @order_item_7 = create(:fulfilled_order_item, order: @order_4, item: @item_2, order_price: 2, order_quantity: 1, created_at: 5.days.ago, updated_at: 1.days.ago)
+    # packaged order
+    @order_5 = create(:packaged_order, user: @user)
+    @order_item_8 = create(:fulfilled_order_item, order: @order_5, item: @item_2, order_price: 1, order_quantity: 1, created_at: 5.days.ago, updated_at: 1.days.ago)
+    @order_item_9 = create(:fulfilled_order_item, order: @order_5, item: @item_3, order_price: 2, order_quantity: 1, created_at: 5.days.ago, updated_at: 1.days.ago)
+
 end
   describe 'When I visit an order show page from my dashboard' do
     it 'i can fulfill an order item belonging to me' do
@@ -52,6 +57,29 @@ end
       end
       click_on "Fulfill"
       expect(page).to have_content("You do not enough inventory to fulfilled this order")
+    end
+
+    it 'when all items in the order have been fulfilled, the order status changes to packaged' do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_1)
+      visit dashboard_order_path(@order_5)
+      within ".fulfill-item-#{@order_item_8.id}" do
+        expect(page).to have_content("Status: fulfilled")
+      end
+      within ".fulfill-item-#{@order_item_9.id}" do
+        expect(page).to have_content("Status: fulfilled")
+      end
+      expect(page).to have_content("Order Status: packaged")
+    end
+    it 'when all items in the order have been fulfilled, the order status changes to packaged' do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_1)
+      visit dashboard_order_path(@order_4)
+      within ".fulfill-item-#{@order_item_6.id}" do
+        expect(page).to have_content("Status: not fulfilled")
+      end
+      within ".fulfill-item-#{@order_item_7.id}" do
+        expect(page).to have_content("Status: fulfilled")
+      end
+      expect(page).to have_content("Order Status: pending")
     end
   end
 end
