@@ -17,8 +17,28 @@ class CartsController < ApplicationController
     redirect_to items_path
   end
 
+  def update
+    if params[:increment] == "add"
+      item_total = (session[:cart][params[:item_id]])
+      inventory = params[:inventory].to_i
+      if item_total < inventory
+        session[:cart][params[:item_id]]+=1
+      end
+    else params[:increment]
+      item_total = (session[:cart][params[:item_id]] -= 1)
+      if item_total == 0
+        session[:cart].delete(params[:item_id])
+      end
+    end
+    redirect_to cart_path
+  end
+
   def destroy
-    session[:cart].clear
+    if params[:item_id] == nil
+      session[:cart].clear
+    else
+      session[:cart].delete(params[:item_id])
+    end
     redirect_to cart_path
   end
 end

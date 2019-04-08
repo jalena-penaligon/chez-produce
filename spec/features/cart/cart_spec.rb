@@ -71,7 +71,6 @@ RSpec.describe 'cart page', type: :feature do
 
           expect(page).to have_content("Total: $10.50")
           expect(page).to have_link("Clear Cart")
-
         end
       end
 
@@ -95,6 +94,72 @@ RSpec.describe 'cart page', type: :feature do
 
           expect(current_path).to eq(cart_path)
           expect(page).to have_content("Cart: 0")
+        end
+      end
+
+      describe "I see a link next to the item to delete it" do
+        it "deletes only that item" do
+          item_1 = create(:item, id: 1, current_price: 3.0)
+          visit item_path(item_1)
+          click_link "Add to Cart"
+
+          visit item_path(item_1)
+          click_link "Add to Cart"
+
+          item_2 = create(:item, id: 2, current_price: 4.5)
+          visit item_path(item_2)
+          click_link "Add to Cart"
+
+          visit cart_path
+
+          within "#item-#{item_2.id}" do
+            click_link "Delete Item"
+          end
+
+          expect(page).to_not have_content(item_2.name)
+          expect(page).to have_content(item_1.name)
+        end
+      end
+
+      describe "I see a link next to item to increment by one" do
+        it "increments that item by one, but not above the merchant's inventory size" do
+          # merchant_1 = create(:merchant)
+          item_1 = create(:item, id: 1, current_price: 3.0, inventory: 2)
+
+          visit item_path(item_1)
+
+          click_link "Add to Cart"
+
+          visit cart_path
+
+          click_link "Add One"
+
+          expect(page).to have_content("Quantity: 2")
+
+          visit cart_path
+
+          click_link "Add One"
+          
+          expect(page).to have_content("Quantity: 2")
+        end
+      end
+
+      describe "I see a link next to item to decrement by one" do
+        it "decrements that item by one and removes item if decremented to zero" do
+          item_1 = create(:item, id: 1, current_price: 3.0)
+          visit item_path(item_1)
+          click_link "Add to Cart"
+          visit cart_path
+          click_link "Add One"
+          expect(page).to have_content("Quantity: 2")
+
+          click_link "Delete One"
+
+          expect(page).to have_content("Quantity: 1")
+
+          click_link "Delete One"
+
+          expect(page).to_not have_content(item_1.name)
         end
       end
     end
