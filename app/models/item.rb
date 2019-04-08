@@ -20,5 +20,4 @@ class Item < ApplicationRecord
        .limit(limit)
   end
 
-
 end

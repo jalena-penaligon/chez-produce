@@ -14,18 +14,6 @@ class Order < ApplicationRecord
     .limit(3)
   end
 
-  # def one_day
-  #   3600*24
-  # end
-  #
-  # def self.fulfillment_time(item)
-  #   self.joins(:order_items)
-  #   .select('avg(order_items.updated_at - order_items.created_at)as avg_time')
-  #   .group(:item_id)
-  #   .where('order_items.item_id = item.id')
-  #   .pluck('avg(order_items.updated_at - order_items.created_at)as avg_time')
-  # end
-
   def total_quantity
     order_items.sum(:order_quantity)
   end
