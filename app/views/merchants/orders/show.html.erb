@@ -7,6 +7,7 @@
         Current Inventory: <%= item.inventory %>
         <%= link_to "#{item.name}", item_path(item)  %>
         <%= link_to image_tag(item.image), item_path(item) %>
+  </div>
     <% end %>
     <% @order.order_items.each do |order_item| %>
     <div class="fulfill-item-<%=order_item.id%>">
@@ -20,5 +21,4 @@
         Order Price: <%= order_item.order_price %>
         Order Quantity: <%= order_item.order_quantity %>
         Subtotal: <%= order_item.order_price * order_item.order_quantity %>
-  </div>
   <% end %>

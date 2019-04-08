@@ -36,18 +36,18 @@ end
       end
       within "#item-info-#{@item_1.id}" do
         expect(current_path).to eq(dashboard_order_path(@order_3))
-        expect(page).to have_content("Status: fulfilled")
-        expect(page).to have_content("Current Inventory: 0")
       end
+      expect(page).to have_content("Status: fulfilled")
+      expect(page).to have_content("Current Inventory: 0")
       expect(page).to have_content("You have successfully fulfilled this order")
     end
-    
+
     it 'i can not fulfill an order item belonging to me without sufficient inventory' do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_1)
       visit dashboard_order_path(@order_4)
 
       expect(current_path).to eq(dashboard_order_path(@order_4))
-      within "#item-info-#{@item_3.id}" do
+      within ".fulfill-item-#{@order_item_6.id}" do
         expect(page).to have_content("Status: not fulfilled")
       end
       click_on "Fulfill"
