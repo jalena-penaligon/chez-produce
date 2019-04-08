@@ -9,11 +9,9 @@ Rails.application.routes.draw do
 
   # get '/profile/orders', to: 'orders#index'
 
-
   # resources :users, only: [:create], as: :register
   # post '/register', to: 'users#create'
   resources :items, only: [:index, :show]
-
 
   # namespace :users, as: :profile do
   #   get '/edit', to: 'users#edit', as: :edit
@@ -32,19 +30,25 @@ Rails.application.routes.draw do
   end
 
   resources :items, only: [:index]
-  resources :merchants, only: [:index]
+
+  scope :dashboard, as: :dashboard do
+    get '/orders/:id', to: 'merchants/orders#show', as: :order
+  end
+
+  get '/dashboard', to: 'merchants#show'
+  resources :merchants, only: [:index, :show]
 
   patch '/cart', to: 'carts#update', as: :edit_cart
   get '/cart', to: 'carts#show', as: :cart
   get '/carts', to: 'carts#create', as: :carts
   delete '/cart', to: 'carts#destroy'
 
-  get '/dashboard', to: 'merchants#show'
 
   get 'admin/dashboard', to: 'users#show', as: :admin_dashboard
 
   namespace :admin do
     resources :users, only: [:index, :show]
+    resources :merchants, only: [:index]
   end
 
   get 'admin/merchants/:id', to: 'admin/merchants#show', as: :admin_merchant

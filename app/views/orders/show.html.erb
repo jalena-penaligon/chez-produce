@@ -11,11 +11,11 @@
   <%= item.current_price %>
 <% end %>
 <% @order.order_items.each do |order_item| %>
-<div id="item-info-<%= order_item.id %>">
-  Item Price: $<%= order_item.order_price %>
-  Number of Items: <%= order_item.order_quantity%>
-  Subtotal: $<%= (order_item.order_price * order_item.order_quantity) %>
-</div>
+  <div id="item-info-<%= order_item.id %>">
+    Item Price: $<%= order_item.order_price %>
+    Number of Items: <%= order_item.order_quantity%>
+    Subtotal: $<%= (order_item.order_price * order_item.order_quantity) %>
+  </div>
 <% end %>
 Total Quantity: <%= @order.total_quantity %>
 Total Price: <%= @order.grand_total %>
