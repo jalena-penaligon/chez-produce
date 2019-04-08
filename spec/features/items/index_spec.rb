@@ -2,8 +2,8 @@ require 'rails_helper'
 # include Range
 RSpec.describe 'As any kind of user on the system' do
   before :each do
-    @sam = User.create!(name:"samFields", role: 2, password: "salad", email:"sam@g.com", city: "Denver", state: "CO", zipcode: "80209", street_address: "23 lilly ave")
-    @justin = User.create!(name:"justinFields", role: 2, password: "salad", email:"justinfields@g.com", city: "Denver", state: "CO", zipcode: "80209", street_address: "24 lilly ave")
+    @sam = User.create!(name:"samFields", role: 1, password: "salad", email:"sam@g.com", city: "Denver", state: "CO", zipcode: "80209", street_address: "23 lilly ave")
+    @justin = User.create!(name:"justinFields", role: 1, password: "salad", email:"justinfields@g.com", city: "Denver", state: "CO", zipcode: "80209", street_address: "24 lilly ave")
     @item_1 = @sam.items.create(name:"apples", inventory: 10, current_price: 1.50, active: true, image: "http://kriokrush.com.au/wp-content/uploads/2016/12/ComingSoon.jpg", description: "some stuff")
     @item_2 = @justin.items.create(name:"bananas", inventory: 5, current_price: 2.00, active: true, image: "http://kriokrush.com.au/wp-content/uploads/2016/12/ComingSoon.jpg", description: "some stuff")
     @item_3 = @sam.items.create(name:"cantaloupe", inventory: 5, current_price: 1.50, active: true, image: "http://kriokrush.com.au/wp-content/uploads/2016/12/ComingSoon.jpg", description: "some stuff")
@@ -40,7 +40,7 @@ RSpec.describe 'As any kind of user on the system' do
     end
     it 'i see an area with statistics' do
       visit items_path
-      
+
       within ".most-popular" do
         expect(page).to have_content("Most Popular Items: zucchini: 6 rutabaga: 5 kale: 4 cantaloupe: 3 bananas: 2")
       end
