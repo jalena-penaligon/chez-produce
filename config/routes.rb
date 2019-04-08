@@ -37,6 +37,9 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: 'merchants#show'
   resources :merchants, only: [:index, :show]
+  get '/order_items/:id', to: 'merchants/order_items#update'#, as: :fulfill_order_item
+  put '/order_items/:id', to: 'merchants/order_items#update', as: :fulfill_order_item
+
 
   get '/cart', to: 'carts#show', as: :cart
   get '/carts', to: 'carts#create', as: :carts
