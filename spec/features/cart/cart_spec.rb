@@ -139,7 +139,7 @@ RSpec.describe 'cart page', type: :feature do
           visit cart_path
 
           click_link "Add One"
-          
+
           expect(page).to have_content("Quantity: 2")
         end
       end
@@ -160,6 +160,31 @@ RSpec.describe 'cart page', type: :feature do
           click_link "Delete One"
 
           expect(page).to_not have_content(item_1.name)
+        end
+      end
+    end
+
+    describe 'as a visitor' do
+      describe 'if I have items in my cart' do
+        it 'displays a message, with links, that you need to login or register' do
+          item_1 = create(:item, id: 1, current_price: 3.0)
+
+          visit item_path(item_1)
+          click_link "Add to Cart"
+
+          visit cart_path
+
+          within "#login-message" do
+            expect(page).to have_content("You must login or register to checkout.")
+
+            click_link "login"
+            expect(current_path).to eq(login_path)
+
+            visit cart_path
+
+            click_link "register"
+            expect(current_path).to eq(register_path)
+          end
         end
       end
     end
