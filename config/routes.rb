@@ -41,8 +41,10 @@ Rails.application.routes.draw do
   put '/order_items/:id', to: 'merchants/order_items#update', as: :fulfill_order_item
 
 
+  patch '/cart', to: 'carts#update', as: :edit_cart
   get '/cart', to: 'carts#show', as: :cart
   get '/carts', to: 'carts#create', as: :carts
+  delete '/cart', to: 'carts#destroy'
 
 
   get 'admin/dashboard', to: 'users#show', as: :admin_dashboard
