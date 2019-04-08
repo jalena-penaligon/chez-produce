@@ -188,5 +188,34 @@ RSpec.describe 'cart page', type: :feature do
         end
       end
     end
+
+    describe 'as a registered user' do
+      describe 'if I have items in my cart' do
+        it 'allows the user to checkout and create an order' do
+          user = create(:user)
+          allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+          item_1 = create(:item, id: 1, current_price: 3.0)
+
+          visit item_path(item_1)
+          click_link "Add to Cart"
+
+          visit cart_path
+
+          click_button("Checkout")
+
+          order = Order.last
+
+          expect(current_path).to eq(profile_orders_path(user))
+
+          expect(page).to have_content("Your order has been created!")
+          expect(page).to have_content(order.id)
+          expect(page).to have_content(order.status)
+          expect(page).to have_content("Total Quantity: 1")
+          expect(page).to have_content(order.grand_total)
+          expect(page).to have_content("Total Price: $3.00")
+        end
+      end
+    end
   end
 end

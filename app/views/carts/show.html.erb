@@ -10,10 +10,10 @@
     <section id="item-<%= id[0].to_i %>">
     <% item = @cart.find_item(id) %>
     <%= item.name %>
-    Price: $<%= number_with_precision(item.current_price, precision: 2) %>
+    Price: <%= number_to_currency(item.current_price) %>
     Quantity: <%= id[1] %>
     Merchant: <%= item.user.name %>
-    Subtotal: $<%= number_with_precision(@cart.item_subtotal(item), precision: 2) %>
+    Subtotal: <%= number_to_currency(@cart.item_subtotal(item)) %>
     <img src="<%= item.image %> width="100" height="100" ">
     <%= link_to "Add One", cart_path(item_id: item.id, increment: "add", inventory: item.inventory), method: :patch  %>
     <%= link_to "Delete One", cart_path(item_id: item.id, increment: "subtract"), method: :patch  %>
@@ -21,7 +21,11 @@
     </section>
   <% end %>
 
-  Total: $<%= number_with_precision(@cart.total_cost, precision: 2) %>
+  Total: <%= number_to_currency(@cart.total_cost) %>
+
+  <% if current_user != nil %>
+    <%= button_to "Checkout", orders_path(user_id: current_user.id), method: :create %>
+  <% end %>
 
   <%= link_to "Clear Cart", @carts, method: :delete %>
 <% end %>
