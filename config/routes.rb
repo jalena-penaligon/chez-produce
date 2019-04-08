@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   scope :dashboard, as: :dashboard do
     get '/orders/:id', to: 'merchants/orders#show', as: :order
+    get '/items', to: 'merchants/items#index'
     get '/orders/', to: 'merchants/orders#index', as: :orders
   end
 
@@ -55,6 +56,5 @@ Rails.application.routes.draw do
   end
 
   get 'admin/merchants/:id', to: 'admin/merchants#show', as: :admin_merchant
-  post '/orders', to: 'orders#create' 
-
+  post '/orders', to: 'orders#create'
 end
