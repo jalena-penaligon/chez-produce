@@ -55,5 +55,5 @@ Rails.application.routes.draw do
   end
 
   get 'admin/merchants/:id', to: 'admin/merchants#show', as: :admin_merchant
-
+  post '/orders', to: 'orders#create' 
 end
