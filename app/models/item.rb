@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   def self.active_items_by_merchant
         select('users.name as merchant_name, items.*')
             .joins(:user)
-            .where('users.role': 2, active:true, "users.active": true)
+            .where('users.role': 1, active:true, "users.active": true)
             .entries
   end
 

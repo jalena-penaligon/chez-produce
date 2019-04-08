@@ -16,11 +16,7 @@ class Merchants::OrderItemsController < ApplicationController
       flash[:success] = "You have successfully fulfilled this order"
       redirect_to dashboard_order_path(orderItem.order_id)
     else
-      flash[:failure] = "You do not enough inventory to fulfilled this order"
-      flash[:success] = "You have successfully fulfilled this order"
-      redirect_to dashboard_order_path(orderItem.order_id)
-    else
-      flash[:failure] = "You do not have enough inventory to fulfilled this order"
+      flash[:failure] = "You do not have enough inventory to fulfill this order"
       redirect_to dashboard_order_path(orderItem.order_id)
     end
   end
