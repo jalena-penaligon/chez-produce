@@ -14,7 +14,7 @@
     <div class="fulfill-item-<%=order_item.id%>">
         <% if order_item.fulfilled == false %>
             Status: not fulfilled
-            <%= link_to "Fulfill", fulfill_order_item_path(order_item.id) %>
+            <%= link_to "Fulfill", fulfill_order_item_path(order_item.id), method: :patch %>
         <% else %>
             Status: fulfilled
         <% end %>
