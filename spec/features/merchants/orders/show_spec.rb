@@ -56,6 +56,7 @@ end
         expect(page).to have_content("Status: not fulfilled")
       end
       click_on "Fulfill"
+
       expect(page).to have_content("You do not enough inventory to fulfilled this order")
     end
 
@@ -80,6 +81,9 @@ end
         expect(page).to have_content("Status: fulfilled")
       end
       expect(page).to have_content("Order Status: pending")
+
+      expect(page).to have_content("You do not have enough inventory to fulfilled this order")
+
     end
   end
 end
