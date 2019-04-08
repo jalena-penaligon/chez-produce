@@ -38,8 +38,10 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'merchants#show'
   resources :merchants, only: [:index, :show]
 
+  patch '/cart', to: 'carts#update', as: :edit_cart
   get '/cart', to: 'carts#show', as: :cart
   get '/carts', to: 'carts#create', as: :carts
+  delete '/cart', to: 'carts#destroy'
 
 
   get 'admin/dashboard', to: 'users#show', as: :admin_dashboard
