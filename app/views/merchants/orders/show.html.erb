@@ -4,12 +4,21 @@
   <%= @order.user.street_address %>
   <% @order.items.each do |item| %>
   <div id="item-info-<%=item.id %>">
-    <%= link_to "#{item.name}", item_path(item)  %>
-    <%= link_to image_tag(item.image), item_path(item) %>
+        Current Inventory: <%= item.inventory %>
+        <%= link_to "#{item.name}", item_path(item)  %>
+        <%= link_to image_tag(item.image), item_path(item) %>
   </div>
-  <% end %>
-  <% @order.order_items.each do |order_item| %>
-    <%= order_item.order_price %>
-    <%= order_item.order_quantity %>
-    <%= order_item.order_price * order_item.order_quantity %>
+    <% end %>
+    <% @order.order_items.each do |order_item| %>
+    <div class="fulfill-item-<%=order_item.id%>">
+        <% if order_item.fulfilled == false %>
+            Status: not fulfilled
+            <%= link_to "Fulfill", fulfill_order_item_path(order_item.id) %>
+        <% else %>
+            Status: fulfilled
+        <% end %>
+  </div>
+        Order Price: <%= order_item.order_price %>
+        Order Quantity: <%= order_item.order_quantity %>
+        Subtotal: <%= order_item.order_price * order_item.order_quantity %>
   <% end %>
