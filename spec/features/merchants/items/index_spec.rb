@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "As a merchant" do
   describe "when I visit my items page /dashboard/items" do
-    it "I see a link to add a new item to the system and I see each item I have already added to the system and it's information" do
+    it "I see a link to add a new item, all items and info I have in the system, disable and enable buttons, and delete button if never ordered" do
+
       merchant = create(:merchant)
-      item_1 = create(:item)
-      item_2 = create(:item)
+      item_1 = create(:item, user_id: merchant.id, active: true)
+      item_2 = create(:item, user_id: merchant.id, active: false)
+      order_item_1 = create(:order_item, item_id: item_1.id)
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
 
@@ -21,6 +23,7 @@ RSpec.describe "As a merchant" do
         expect(page).to have_content(item_1.current_price)
         expect(page).to have_content(item_1.inventory)
         expect(page).to have_link("Edit Item")
+        expect(page).to have_button("Disable")
       end
 
       within "#item-#{item_2.id}" do
@@ -30,14 +33,9 @@ RSpec.describe "As a merchant" do
         expect(page).to have_content(item_2.current_price)
         expect(page).to have_content(item_2.inventory)
         expect(page).to have_link("Edit Item")
+        expect(page).to have_button("Enable")
+        expect(page).to have_button("Delete")
       end
-    end
-
-    xit "If no user has ever ordered this item, I see a link to delete the item" do
-    end
-    xit "If the item is enabled, I see a button or link to disable the item" do
-    end
-    xit "If the item is disabled, I see a button or link to enable the item" do
     end
   end
 end

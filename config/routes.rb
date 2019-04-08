@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   scope :dashboard, as: :dashboard do
     get '/orders/:id', to: 'merchants/orders#show', as: :order
+    get '/items', to: 'merchants/items#index'
   end
 
   get '/dashboard', to: 'merchants#show'
