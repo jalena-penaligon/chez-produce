@@ -1,7 +1,7 @@
 <% if session[:cart] != nil && current_user == nil %>
   <section id="login-message">
-    "You must <%= link_to 'login', login_path %> or
-    <%= link_to 'register', register_path %> to checkout."
+    You must <%= link_to 'login', login_path %> or
+    <%= link_to 'register', register_path %> to checkout.
   </section>
 <% end %>
 
