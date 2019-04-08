@@ -54,4 +54,20 @@ RSpec.describe "When a merchant visits dashboard show page", type: :feature do
     expect(current_path).to eq(profile_order_path(@merchant_1, @order))
 
   end
+
+  it "sees a link to view their items" do
+    merchant_1 = create(:merchant)
+    item_1 = create(:item, user: merchant_1)
+    item_2 = create(:item, user: merchant_1)
+
+    merchant_2 = create(:merchant)
+    item_3 = create(:item, user: merchant_2)
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_1)
+
+    visit dashboard_path
+
+    click_on "My Items"
+    expect(current_path).to eq('/dashboard/items')
+  end
 end
