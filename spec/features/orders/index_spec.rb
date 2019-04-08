@@ -30,7 +30,7 @@ RSpec.describe "As a registered user" do
         expect(page).to have_content(@order_1.updated_at)
         expect(page).to have_content(@order_1.status)
         expect(page).to have_content('Total Quantity: 2')
-        expect(page).to have_content('Total Price: 3')
+        expect(page).to have_content('Total Price: $3.00')
       end
 
       within "#order-info-#{@order_2.id}" do
@@ -39,7 +39,7 @@ RSpec.describe "As a registered user" do
         expect(page).to have_content(@order_2.updated_at)
         expect(page).to have_content(@order_2.status)
         expect(page).to have_content('Total Quantity: 2')
-        expect(page).to have_content('Total Price: 3')
+        expect(page).to have_content('Total Price: $3.00')
       end
 
       click_on "#{@order_1.id}"

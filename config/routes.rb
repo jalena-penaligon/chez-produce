@@ -54,4 +54,7 @@ Rails.application.routes.draw do
     # resources :orders, only: [:index]
   end
 
+  get 'admin/merchants/:id', to: 'admin/merchants#show', as: :admin_merchant
+  post '/orders', to: 'orders#create' 
+
 end
