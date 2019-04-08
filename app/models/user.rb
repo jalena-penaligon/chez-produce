@@ -11,7 +11,7 @@ class User < ApplicationRecord
   enum role: ['user', 'merchant', 'admin']
 
   def self.all_users
-    where(role: 0)
+    where(role: 0).order(:id)
   end
 
   def self.active_merchants
