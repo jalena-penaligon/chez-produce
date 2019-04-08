@@ -18,13 +18,13 @@ class Order < ApplicationRecord
 
   def self.sort_by_status
     self.order(:status, id: :asc)
+  end
 
   def generate_order_items(cart)
     cart.contents.each do |id_quantity|
       item = cart.find_item(id_quantity)
       OrderItem.create(order_id: self.id, item_id: item.id, order_price: item.current_price, order_quantity: id_quantity.last)
     end
-
   end
 
   def total_quantity
