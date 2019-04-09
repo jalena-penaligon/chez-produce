@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :users, only:  [:index, :create, :update]
 
   resources :users, only: [:destroy], as: :profile do #send key value of order_id, change to scope, remove destroy
-    resources :orders, only: [:index, :show]
+    resources :orders, only: [:index, :show, :update]
   end
 
   resources :items, only: [:index]
@@ -56,5 +56,6 @@ Rails.application.routes.draw do
   end
 
   # get 'admin/merchants/:id', to: 'admin/merchants#show', as: :admin_merchant
+
   post '/orders', to: 'orders#create'
 end
