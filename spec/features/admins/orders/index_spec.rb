@@ -67,18 +67,15 @@ end
       order_item_8 = create(:fulfilled_order_item, order: order, item: item_2, order_price: 1, order_quantity: 1, created_at: 5.days.ago, updated_at: 1.days.ago)
       order_item_9 = create(:fulfilled_order_item, order: order, item: item_1, order_price: 2, order_quantity: 1, created_at: 5.days.ago, updated_at: 1.days.ago)
       visit admin_dashboard_path
-        # within (page.all(".orders")[1]) do#{}"#order-#{order.id}"
         within ("#order-#{order.id}") do
           expect(order.status).to eq("packaged")
           click_on "Ship"
           expect(current_path).to eq(admin_dashboard_path)
         end
-          # binding.pry
           within "#order-#{order.id}" do
             order = Order.find(order.id)
             expect(order.status).to eq("shipped")
             expect(page).to have_content("shipped")
-            # expect(order.status).to eq("shipped")
             expect(page).to_not have_content("Cancel")
           end
       end
