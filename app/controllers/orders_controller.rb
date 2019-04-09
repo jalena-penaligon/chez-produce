@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
     @order.save
     redirect_to admin_dashboard_path
   end
-  
+
   def create
     user = User.find(params[:user_id])
     order = Order.create(user_id: user.id, status: 0)
