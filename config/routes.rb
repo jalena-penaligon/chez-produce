@@ -38,7 +38,8 @@ Rails.application.routes.draw do
 
     get '/items/new', to: 'merchants/items#new'
     post '/items', to: 'merchants/items#create'
-
+    get '/items/:id/edit', to: 'merchants/items#edit', as: :item_edit
+    patch '/items/:id/edit', to: 'merchants/items#update', as: :item_update
     get '/orders/', to: 'merchants/orders#index', as: :orders
   end
 

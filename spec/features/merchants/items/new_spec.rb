@@ -34,7 +34,7 @@ RSpec.describe 'merchant new item', type: :feature do
         within "#item-#{item_2.id}" do
           expect(page).to have_content("ID: #{item_2.id}")
           expect(page).to have_content(item_2.name)
-          expect(page).to have_content("Price: #{item_2.current_price}")
+          expect(page).to have_content("Price: $2.00")
           expect(page).to have_content("Inventory: #{item_2.inventory}")
           expect(page).to have_css("img[src*='#{item_2.image}']")
           expect(page).to have_button("Disable")

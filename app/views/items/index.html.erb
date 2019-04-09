@@ -11,7 +11,7 @@
 <% @items.each do |item| %>
   <h3><%= link_to "#{item.name}", item_path(item) %></h3>
   <%= item.merchant_name %>
-    Price: <%= item.current_price %>
+    Price: <%= number_to_currency(item.current_price) %>
     Inventory: <%= item.inventory %>
     <%= link_to image_tag(item.image), item_path(item) %>
 <% end %>

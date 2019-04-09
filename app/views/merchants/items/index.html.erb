@@ -5,9 +5,9 @@
   <ul>
     <li>ID: <%= item.id %></li>
     <li>Name: <%= item.name %></li>
-    <li>Price: <%= item.current_price %></li>
+    <li>Price: <%= number_to_currency(item.current_price) %></li>
     <li>Inventory: <%= item.inventory %></li>
-    <li><%= link_to "Edit Item" %></li>
+    <li><%= link_to "Edit Item", dashboard_item_edit_path(item, merchant_id: item.user.id) %></li>
       <% if item.active? %>
         <%= button_to "Disable", dashboard_toggle_item_path(item), method: :patch %>
       <% else %>
