@@ -1,0 +1,16 @@
+<h1>Admin Dashboard</h1>
+  <% @orders.each do |order| %>
+  <section class="orders">
+    <div id="order-<%=order.id%>">
+      <%= link_to "#{order.user.name}", admin_user_path(order.user.id) %>
+      <%= order.id %>
+      <%= order.created_at %>
+      <%= order.status %>
+        <% if order.status == "packaged" %>
+            <%= link_to "Ship",  ship_path(order), method: :patch%>
+        <% elsif order.status != "cancelled"  && order.status != "shipped"%>
+            <%= link_to "Cancel", cancel_path(order), method: :patch %>
+        <% end %>
+    </div>
+  </section>
+  <% end %>

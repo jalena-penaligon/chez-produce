@@ -1,0 +1,24 @@
+<h1><%= @merchant.name %></h1>
+<section id="merchant-profile">
+  <ul>
+    <li><%= @merchant.street_address %></li>
+    <li><%= @merchant.city %></li>
+    <li><%= @merchant.state %></li>
+    <li><%= @merchant.zipcode %></li>
+    <li><%= @merchant.email %></li>
+  </ul>
+</section>
+
+<section id="merchant-orders">
+  <% @merchant.items.each do |item| %>
+    <% item.order_items.each do |order_item| %>
+
+      Order ID: <%= link_to "#{order_item.order_id}", profile_order_path(@merchant, order_item.order_id) %>
+
+      Order Created: <%= order_item.created_at %>
+      Quantity: <%= order_item.order_quantity %>
+      Price: <%= order_item.order_price %>
+      Subtotal: <%= order_item.order_quantity * order_item.order_price %>
+    <% end %>
+  <% end %>
+</section>

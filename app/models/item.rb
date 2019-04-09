@@ -20,4 +20,8 @@ class Item < ApplicationRecord
        .limit(limit)
   end
 
+  def not_ordered?
+    order_items.first == nil
+  end
+
 end
