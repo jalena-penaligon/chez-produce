@@ -164,7 +164,7 @@ RSpec.describe 'merchant index page', type: :feature do
         order_item_4 = create(:fulfilled_order_item, order: order_4, order_price: 10.0, order_quantity: 5, created_at: 6.days.ago, updated_at: 5.days.ago)
 
         visit merchants_path
-        
+
         within '#top-orders' do
           expect(page).to have_content(order_1.id)
           expect(page).to have_content("Total Quantity: 6")
@@ -185,7 +185,7 @@ RSpec.describe 'merchant index page', type: :feature do
       visit merchants_path
     end
     describe "I see all the merchants in the system" do
-      it "next to each merchant name I see city, state and their name is a link to their dashboard" do #"/admin/merchants/5"
+      it "next to each merchant name I see city, state and their name is a link to their dashboard" do
 
         within "#merchant-#{@merchant_1.id}" do
           expect(page).to have_link(@merchant_1.name)
@@ -220,6 +220,24 @@ RSpec.describe 'merchant index page', type: :feature do
         within "#merchant-#{@merchant_3.id}" do
           expect(page).to have_button("Enable")
         end
+      end
+
+      it "when I click enable for a disabled merchant I see a flash message that the merchant is enabled and they are enabled" do
+
+        within "#merchant-#{@merchant_3.id}" do
+          expect(page).to have_button("Enable")
+        end
+
+        within "#merchant-#{@merchant_3.id}" do
+          click_button "Enable"
+        end
+        
+        expect(page).to have_content("#{@merchant_3.name}'s account is now enabled.")
+        within "#merchant-#{@merchant_3.id}" do
+          expect(page).to have_button("Disable")
+        end
+      end
+      xit "an enabled merchant can log in" do
       end
     end
   end
