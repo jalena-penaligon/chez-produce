@@ -10,9 +10,9 @@
     <li><%= item.inventory %></li>
     <li><%= link_to "Edit Item" %></li>
       <% if item.active? %>
-        <%= button_to "Disable" %>
+        <%= button_to "Disable", dashboard_toggle_item_path(item), method: :patch %>
       <% else %>
-        <%= button_to "Enable" %>
+        <%= button_to "Enable", dashboard_toggle_item_path(item), method: :patch %>
       <% end %>
       <% if item.not_ordered? %>
         <%= button_to "Delete" %>

@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   scope :dashboard, as: :dashboard do
     get '/orders/:id', to: 'merchants/orders#show', as: :order
     get '/items', to: 'merchants/items#index'
+    patch '/items/:id', to: 'items#active_toggle', as: :toggle_item
     get '/orders/', to: 'merchants/orders#index', as: :orders
   end
 
