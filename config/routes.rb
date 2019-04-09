@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show]
     resources :merchants, only: [:index, :show]
     get 'dashboard', to: 'admin#show', as: :dashboard
+    patch '/users/:id/upgrade', to: 'users#upgrade', as: :user_upgrade
     # resources :orders, only: [:index]
   end
 
