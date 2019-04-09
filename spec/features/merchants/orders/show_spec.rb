@@ -49,13 +49,14 @@ end
 
     it 'i can not fulfill an order item belonging to me without sufficient inventory' do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_1)
-      visit dashboard_order_path(@order_4)
+      visit dashboard_order_path(@order_3)
 
-      expect(current_path).to eq(dashboard_order_path(@order_4))
-      within ".fulfill-item-#{@order_item_6.id}" do
+      expect(current_path).to eq(dashboard_order_path(@order_3))
+
+      within ".fulfill-item-#{@order_item_4.id}" do
         expect(page).to have_content("Status: not fulfilled")
+        click_on "Fulfill"
       end
-      click_on "Fulfill"
       expect(page).to have_content("You do not have enough inventory to fulfill this order")
     end
 
@@ -80,6 +81,16 @@ end
         expect(page).to have_content("Status: fulfilled")
       end
       expect(page).to have_content("Order Status: pending")
+    end
+
+    it 'can If the users desired quantity is greater than my current inventory quantity for that item' do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_1)
+      visit dashboard_order_path(@order_4)
+
+      within ".fulfill-item-#{@order_item_6.id}" do
+        expect(page).to_not have_content("Fulfill")
+        expect(page).to have_content("You do not have enough inventory to fulfill this order") #big red notice
+      end
     end
   end
 end

@@ -1,21 +1,27 @@
-<h1>Order Page</h1>
+<h1>Order: <%= @order.id %></h1>
 
-<%= @order.id %>
-<%= @order.created_at %>
-<%= @order.updated_at %>
-<%= @order.status %>
+<li>Created: <%= @order.created_at %></li>
+<li>Last Updated: <%= @order.updated_at %></li>
+<li>Status: <%= @order.status.capitalize %></li>
 <% @order.items.each do |item| %>
-  <%= item.name %>
-  <%= item.description %>
-  <%= item.image %>
-  <%= item.current_price %>
+  <h2><%= item.name %></h2>
+  <img src="<%= item.image %>">
+  <li><%= item.description %></li>
+  <li><%= item.current_price %></li>
+  <% item.order_items.each do |order_item| %>
+    <div id="item-info-<%= order_item.id %>">
+    <% if order_item.order_id == @order.id %>
+      <li>Item Price: <%= number_to_currency(order_item.order_price) %></li>
+      <li>Number of Items: <%= order_item.order_quantity%></li>
+      <li>Subtotal: <%= number_to_currency(order_item.order_price * order_item.order_quantity) %></li>
+    <% end %>
+    </div>
+  <% end %>
 <% end %>
-<% @order.order_items.each do |order_item| %>
-  <div id="item-info-<%= order_item.id %>">
-    Item Price: <%= number_to_currency(order_item.order_price) %>
-    Number of Items: <%= order_item.order_quantity%>
-    Subtotal: <%= number_to_currency(order_item.order_price * order_item.order_quantity) %>
-  </div>
+
+Total Quantity: <%= @order.total_quantity %><br />
+Total Price: <%= number_to_currency(@order.grand_total) %><br />
+
+<% if @order.status == "pending" %>
+  <%= link_to "Cancel Order", profile_order_path, method: :patch %>
 <% end %>
-Total Quantity: <%= @order.total_quantity %>
-Total Price: <%= number_to_currency(@order.grand_total) %>

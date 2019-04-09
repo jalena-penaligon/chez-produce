@@ -2,7 +2,9 @@ class Item < ApplicationRecord
   has_many :order_items
   has_many :orders, through: :order_items
   belongs_to :user
-  validates_presence_of :name
+  validates_presence_of :name, :description
+  validates :current_price, numericality: { greater_than: 0 }
+  validates :inventory, numericality: { greater_than: -1 }
 
   def self.active_items_by_merchant
         select('users.name as merchant_name, items.*')
@@ -22,6 +24,13 @@ class Item < ApplicationRecord
 
   def not_ordered?
     order_items.first == nil
+  end
+
+  def in_stock?(order_item)
+    order_item = OrderItem.find(order_item.id)
+    if self.inventory >= order_item.order_quantity
+      true
+    end
   end
 
 end
