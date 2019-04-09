@@ -222,6 +222,28 @@ RSpec.describe 'merchant index page', type: :feature do
         end
       end
 
+      it "when I click disable for a enabled merchant I see a flash message that the merchant is disabled and they are disabled" do
+
+        within "#merchant-#{@merchant_1.id}" do
+          expect(page).to have_button("Disable")
+        end
+
+        within "#merchant-#{@merchant_1.id}" do
+          click_button "Disable"
+        end
+        merchant_1 = User.find(@merchant_1.id)
+
+        expect(merchant_1.active).to eq(false)
+        expect(current_path).to eq(merchants_path)
+        expect(page).to have_content("The merchant's account is now disabled.")
+
+        within "#merchant-#{@merchant_1.id}" do
+          expect(page).to have_button("Enable")
+        end
+      end
+      xit "an enabled merchant can log in" do
+      end
+
       it "when I click enable for a disabled merchant I see a flash message that the merchant is enabled and they are enabled" do
 
         within "#merchant-#{@merchant_3.id}" do
@@ -231,8 +253,12 @@ RSpec.describe 'merchant index page', type: :feature do
         within "#merchant-#{@merchant_3.id}" do
           click_button "Enable"
         end
-        
-        expect(page).to have_content("#{@merchant_3.name}'s account is now enabled.")
+        merchant_3 = User.find(@merchant_3.id)
+
+        expect(merchant_3.active).to eq(true)
+        expect(current_path).to eq(merchants_path)
+        expect(page).to have_content("The merchant's account is now enabled.")
+
         within "#merchant-#{@merchant_3.id}" do
           expect(page).to have_button("Disable")
         end

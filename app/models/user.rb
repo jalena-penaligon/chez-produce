@@ -60,5 +60,4 @@ class User < ApplicationRecord
     .limit(3)
   end
 
-
 end

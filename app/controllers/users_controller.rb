@@ -41,6 +41,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def active_toggle
+    merchant = User.find(params[:id])
+    if merchant.active == false
+      merchant.active = true
+      merchant.save
+      flash[:notice] = "The merchant's account is now enabled."
+    else
+      merchant.active = false
+      merchant.save
+      flash[:notice] = "The merchant's account is now disabled."
+    end
+    redirect_to merchants_path
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :street_address, :city, :state, :zipcode, :email, :password, :password_confirmation)
