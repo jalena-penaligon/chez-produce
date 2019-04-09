@@ -12,6 +12,9 @@ class Admin::UsersController < ApplicationController
     if current_admin
       @admin = current_user
       @user = User.find(params[:id])
+      if @user.role != 'user'
+        redirect_to admin_merchant_path(params[:id])
+      end
     else
       render_not_found
     end
