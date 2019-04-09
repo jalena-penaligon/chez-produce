@@ -17,4 +17,10 @@ class OrdersController < ApplicationController
     redirect_to profile_orders_path(user)
   end
 
+  def update
+    user = User.find(params[:profile_id])
+    @order = Order.find(params[:id])
+    @order.update!(status: 3)
+    redirect_to profile_path
+  end
 end

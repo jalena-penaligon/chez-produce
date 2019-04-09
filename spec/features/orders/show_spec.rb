@@ -13,6 +13,10 @@ RSpec.describe "When I visit my order show page" do
     @order_1 = create(:shipped_order, user: @user)
     @order_item_1 = create(:fulfilled_order_item, order: @order_1, item: @item_1, order_price: 1, order_quantity: 1, created_at: 4.days.ago, updated_at: 1.days.ago)
     @order_item_2 = create(:fulfilled_order_item, order: @order_1, item: @item_2, order_price: 2, order_quantity: 1, created_at: 4.days.ago, updated_at: 1.days.ago)
+
+    @order_2 = create(:order, user: @user)
+    @order_item_3 = create(:order_item, order: @order_2, item: @item_1, order_price: 1, order_quantity: 1, created_at: 4.days.ago, updated_at: 1.days.ago)
+    @order_item_4 = create(:order_item, order: @order_2, item: @item_2, order_price: 2, order_quantity: 1, created_at: 4.days.ago, updated_at: 1.days.ago)
   end
 
   describe "As a registered user" do
@@ -23,7 +27,7 @@ RSpec.describe "When I visit my order show page" do
       expect(page).to have_content(@order_1.id)
       expect(page).to have_content(@order_1.created_at)
       expect(page).to have_content(@order_1.updated_at)
-      expect(page).to have_content(@order_1.status)
+      expect(page).to have_content(@order_1.status.capitalize)
       expect(page).to have_content('Total Quantity: 2')
       expect(page).to have_content('Total Price: $3.00')
 
@@ -59,6 +63,28 @@ RSpec.describe "When I visit my order show page" do
       end
       click_on "#{@item_1.name}"
       expect(current_path).to eq(item_path(@item_1))
+    end
+  end
+
+  describe 'As a registered user' do
+    it 'allows you to cancel pending orders' do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+      visit profile_order_path(@user, @order_1)
+      expect(page).to_not have_button("Cancel Order")
+
+      visit profile_order_path(@user, @order_2)
+
+      click_on("Cancel Order")
+      order_2 = Order.find(@order_2.id)
+      order_item_3 = OrderItem.find(@order_item_3.id)
+      order_item_4 = OrderItem.find(@order_item_4.id)
+
+      expect(current_path).to eq(profile_path)
+
+      expect(order_2.status).to eq("cancelled")
+      expect(order_item_3.fulfilled).to eq(false)
+      expect(order_item_3.fulfilled).to eq(false)
     end
   end
 end
