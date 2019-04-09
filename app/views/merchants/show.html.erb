@@ -13,12 +13,16 @@
   <% @merchant.items.each do |item| %>
     <% item.order_items.each do |order_item| %>
 
-      Order ID: <%= link_to "#{order_item.order_id}", profile_order_path(@merchant, order_item.order_id) %>
-
+      Order ID: <%= link_to "#{order_item.order_id}", dashboard_order_path(order_item.order_id) %>
+<!--@merchant,  -->
       Order Created: <%= order_item.created_at %>
       Quantity: <%= order_item.order_quantity %>
       Price: <%= order_item.order_price %>
       Subtotal: <%= order_item.order_quantity * order_item.order_price %>
     <% end %>
   <% end %>
+</section>
+
+<section id="merchant-items">
+  <%= link_to "My Items", dashboard_items_path %>
 </section>

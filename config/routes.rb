@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   get '/profile', to: 'users#show'
   resources :users, only:  [:index, :create, :update]
 
-  resources :users, only: [:destroy], as: :profile do
+  resources :users, only: [:destroy], as: :profile do #send key value of order_id, change to scope, remove destroy
     resources :orders, only: [:index, :show]
   end
 
@@ -33,13 +33,13 @@ Rails.application.routes.draw do
   scope :dashboard, as: :dashboard do
     get '/orders/:id', to: 'merchants/orders#show', as: :order
     get '/items', to: 'merchants/items#index'
+    get '/orders/', to: 'merchants/orders#index', as: :orders
   end
 
   get '/dashboard', to: 'merchants#show'
   resources :merchants, only: [:index, :show]
-  get '/order_items/:id', to: 'merchants/order_items#update'#, as: :fulfill_order_item
-  put '/order_items/:id', to: 'merchants/order_items#update', as: :fulfill_order_item
-
+  # get '/order_items/:id', to: 'merchants/order_items#update'#, as: :fulfill_order_item
+  patch '/order_items/:id', to: 'merchants/order_items#update', as: :fulfill_order_item
 
   patch '/cart', to: 'carts#update', as: :edit_cart
   get '/cart', to: 'carts#show', as: :cart
@@ -47,13 +47,13 @@ Rails.application.routes.draw do
   delete '/cart', to: 'carts#destroy'
 
 
-  get 'admin/dashboard', to: 'users#show', as: :admin_dashboard
-
   namespace :admin do
     resources :users, only: [:index, :show]
-    resources :merchants, only: [:index]
+    resources :merchants, only: [:index, :show]
+    get 'dashboard', to: 'admin#show', as: :dashboard
+    # resources :orders, only: [:index]
   end
 
   get 'admin/merchants/:id', to: 'admin/merchants#show', as: :admin_merchant
-
+  post '/orders', to: 'orders#create'
 end

@@ -21,8 +21,8 @@ RSpec.describe Order, type: :model do
       order_item_4 = create(:fulfilled_order_item, order: order_4, order_price: 10.0, order_quantity: 5, created_at: 6.days.ago, updated_at: 5.days.ago)
 
       expect(Order.top_orders).to eq([order_1, order_4, order_2])
-
     end
+
     # it 'can calc 'do
     #   user = create(:user)
     #   merchant_1 = create(:merchant)
@@ -41,4 +41,27 @@ RSpec.describe Order, type: :model do
     # end
   end
 
+  describe 'instance methods' do
+    it '.generate_order_items creates all order_items' do
+      user = create(:user)
+      item_1 = create(:item, id: 1)
+      item_2 = create(:item, id: 2)
+      cart = Cart.new({"1" => 1, "2" => 2})
+      order = create(:order, user: user)
+
+      order.generate_order_items(cart)
+
+      expect(order.order_items.count).to eq(2)
+
+      expect(order.order_items.first.item_id).to eq(item_1.id)
+      expect(order.order_items.first.order_id).to eq(order.id)
+      expect(order.order_items.first.order_quantity).to eq(1)
+      expect(order.order_items.first.order_price).to eq(item_1.current_price)
+
+      expect(order.order_items.last.item_id).to eq(item_2.id)
+      expect(order.order_items.last.order_id).to eq(order.id)
+      expect(order.order_items.last.order_quantity).to eq(2)
+      expect(order.order_items.last.order_price).to eq(item_2.current_price)
+    end
+  end
 end

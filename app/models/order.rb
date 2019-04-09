@@ -3,7 +3,8 @@ class Order < ApplicationRecord
   has_many :items, through: :order_items
   belongs_to :user
 
-  enum status: ['pending', 'packaged', 'shipped', 'cancelled']
+  enum status:['packaged','pending','shipped','cancelled']
+  #['pending', 'packaged', 'shipped', 'cancelled']
 
   def self.top_orders
     joins(:order_items)
@@ -12,6 +13,18 @@ class Order < ApplicationRecord
     .group(:id)
     .order('total_quantity DESC')
     .limit(3)
+  end
+
+
+  def self.sort_by_status
+    self.order(:status, id: :asc)
+  end
+
+  def generate_order_items(cart)
+    cart.contents.each do |id_quantity|
+      item = cart.find_item(id_quantity)
+      OrderItem.create(order_id: self.id, item_id: item.id, order_price: item.current_price, order_quantity: id_quantity.last)
+    end
   end
 
   def total_quantity
