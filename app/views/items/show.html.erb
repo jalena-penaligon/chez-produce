@@ -1,10 +1,10 @@
 <h1><%=@item.name%></h1>
 <ul>
-  <li> <%= @item.description %> </li>
+  <li>Description: <%= @item.description %> </li>
   <li> <img src="<%= @item.image %>" /> </li>
-  <li> <%= @item.inventory %> </li>
-  <li> <%= @item.current_price %> </li>
-  <li> <%= @item.user.name %> </li>
-  <li> <%=@fulfillment_time %>  </li> 
+  <li>Inventory: <%= @item.inventory %> </li>
+  <li>Price: <%= number_to_currency(@item.current_price) %> </li>
+  <li>Merchant: <%= @item.user.name %> </li>
+  <li>Average Fulfillment Time: <%=@fulfillment_time %>  </li>
 </ul>
 <%= link_to "Add to Cart", carts_path(item_id: @item.id) %>

@@ -24,10 +24,34 @@ class Merchants::ItemsController < ApplicationController
     end
   end
 
+  def edit
+    @merchant = User.find(params[:merchant_id])
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    @merchant = User.find(params[:id].to_i)
+    @item = Item.find(params[:id])
+    if @item.update(update_params)
+      flash[:notice] =  "Your item has been updated."
+      redirect_to dashboard_items_path
+    else
+      render :edit
+    end
+  end
+
   private
 
   def item_params
     params.require(:item).permit(:name, :description, :current_price, :inventory, :image, :active)
+  end
+
+  def update_params
+    update_params = params.require(:item).permit(:name, :description, :current_price, :inventory, :image, :active)
+    if update_params[:image] == ""
+      update_params[:image] = "http://kriokrush.com.au/wp-content/uploads/2016/12/ComingSoon.jpg"
+    end
+    update_params
   end
 
 end
