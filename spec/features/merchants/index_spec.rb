@@ -241,14 +241,6 @@ RSpec.describe 'merchant index page', type: :feature do
           expect(page).to have_button("Enable")
         end
       end
-      # it "a disabled merchant cannot log in" do
-      #   visit login_path
-      #
-      #   fill_in :email, with: @merchant_1.email
-      #   fill_in :password, with: @merchant_1.password
-      #
-      #   expect(page).to have_content("Username or password does not match.")
-      # end
 
       it "when I click enable for a disabled merchant I see a flash message that the merchant is enabled and they are enabled" do
 
