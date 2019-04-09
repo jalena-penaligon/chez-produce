@@ -164,7 +164,7 @@ RSpec.describe 'merchant index page', type: :feature do
         order_item_4 = create(:fulfilled_order_item, order: order_4, order_price: 10.0, order_quantity: 5, created_at: 6.days.ago, updated_at: 5.days.ago)
 
         visit merchants_path
-        
+
         within '#top-orders' do
           expect(page).to have_content(order_1.id)
           expect(page).to have_content("Total Quantity: 6")
@@ -185,7 +185,7 @@ RSpec.describe 'merchant index page', type: :feature do
       visit merchants_path
     end
     describe "I see all the merchants in the system" do
-      it "next to each merchant name I see city, state and their name is a link to their dashboard" do #"/admin/merchants/5"
+      it "next to each merchant name I see city, state and their name is a link to their dashboard" do
 
         within "#merchant-#{@merchant_1.id}" do
           expect(page).to have_link(@merchant_1.name)
@@ -221,6 +221,70 @@ RSpec.describe 'merchant index page', type: :feature do
           expect(page).to have_button("Enable")
         end
       end
+
+      it "when I click disable for a enabled merchant I see a flash message that the merchant is disabled and they are disabled" do
+
+        within "#merchant-#{@merchant_1.id}" do
+          expect(page).to have_button("Disable")
+        end
+
+        within "#merchant-#{@merchant_1.id}" do
+          click_button "Disable"
+        end
+        merchant_1 = User.find(@merchant_1.id)
+
+        expect(merchant_1.active).to eq(false)
+        expect(current_path).to eq(merchants_path)
+        expect(page).to have_content("The merchant's account is now disabled.")
+
+        within "#merchant-#{@merchant_1.id}" do
+          expect(page).to have_button("Enable")
+        end
+      end
+
+      it "when I click enable for a disabled merchant I see a flash message that the merchant is enabled and they are enabled" do
+
+        within "#merchant-#{@merchant_3.id}" do
+          expect(page).to have_button("Enable")
+        end
+
+        within "#merchant-#{@merchant_3.id}" do
+          click_button "Enable"
+        end
+        merchant_3 = User.find(@merchant_3.id)
+
+        expect(merchant_3.active).to eq(true)
+        expect(current_path).to eq(merchants_path)
+        expect(page).to have_content("The merchant's account is now enabled.")
+
+        within "#merchant-#{@merchant_3.id}" do
+          expect(page).to have_button("Disable")
+        end
+      end
+    end
+  end
+
+  describe 'As a merchant' do
+    it 'I cannot log in if I have been disabled' do
+
+      visit login_path
+
+      fill_in :email, with: @merchant_3.email
+      fill_in :password, with: @merchant_3.password
+      click_button "Login"
+
+      expect(page).to have_content("Username or password does not match.")
+    end
+
+    it 'I can log in if I have been enabled' do
+
+      visit login_path
+
+      fill_in :email, with: @merchant_1.email
+      fill_in :password, with: @merchant_1.password
+      click_button "Login"
+
+      expect(page).to have_content("You're logged in!")
     end
   end
 end

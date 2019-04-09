@@ -48,6 +48,8 @@ Rails.application.routes.draw do
   patch '/order/:id', to: 'orders#ship', as: :ship
   patch '/order/:id', to: 'orders#cancel', as: :cancel
 
+  patch '/merchant/:id', to: 'users#active_toggle', as: :toggle_merchant
+
   namespace :admin do
     resources :users, only: [:index, :show]
     resources :merchants, only: [:index, :show]
