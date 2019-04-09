@@ -25,7 +25,7 @@ RSpec.describe "When I visit my order show page" do
       expect(page).to have_content(@order_1.updated_at)
       expect(page).to have_content(@order_1.status)
       expect(page).to have_content('Total Quantity: 2')
-      expect(page).to have_content('Total Price: 3')
+      expect(page).to have_content('Total Price: $3.00')
 
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@item_1.description)
@@ -33,10 +33,10 @@ RSpec.describe "When I visit my order show page" do
       expect(page).to have_content(@order_item_1.order_price)
 
       within "#item-info-#{@order_item_1.id}" do
-        expect(page).to have_content("Subtotal: $1")
+        expect(page).to have_content("Subtotal: $1.00")
       end
       within "#item-info-#{@order_item_2.id}" do
-        expect(page).to have_content("Subtotal: $2")
+        expect(page).to have_content("Subtotal: $2.00")
       end
       expect(page).to have_content(@order_1.total_quantity)
       expect(page).to have_content(@order_1.grand_total)

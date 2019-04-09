@@ -14,7 +14,7 @@ class OrderItem < ApplicationRecord
   def order_items_by_user(current_user, item_id)
     OrderItem.where(item_id: item_id)
   end
-  
+
 
   def self.fulfillment_time(item)
     orderitems = OrderItem.where(item_id: item.id)

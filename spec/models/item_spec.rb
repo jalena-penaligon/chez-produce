@@ -30,7 +30,7 @@ RSpec.describe Item, type: :model do
     it { should belong_to :user }
   end
 
-  describe 'class methiods' do
+  describe 'class methods' do
     it 'can calc most popular items' do
       actual = Item.items_sold(5,'desc')
       expect(actual).to eq([@item_6,@item_5,@item_4,@item_3,@item_2])
@@ -39,6 +39,17 @@ RSpec.describe Item, type: :model do
       actual = Item.items_sold(5,'asc')
       expect(actual).to eq([@item_1,@item_2,@item_3,@item_4,@item_5])
     end
+  end
 
+  describe 'instance methods' do
+    it '#not_ordered?' do
+      merchant = create(:merchant)
+      item_1 = create(:item, user_id: merchant.id, active: true)
+      item_2 = create(:item, user_id: merchant.id, active: false)
+      order_item_1 = create(:order_item, item_id: item_1.id)
+
+      expect(item_1.not_ordered?).to eq(false)
+      expect(item_2.not_ordered?).to eq(true)
+    end
   end
 end
