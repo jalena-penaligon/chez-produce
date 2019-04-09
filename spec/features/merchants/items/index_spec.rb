@@ -40,7 +40,7 @@ RSpec.describe "As a merchant" do
 
     it 'when I click on Disable it disables the item, I stay on my items page, there is a flash message, the item is disabled.' do
 
-      merchant = create(:merchant)
+      merchant = create(:merchant, id: 1)
       item_1 = create(:item, user_id: merchant.id, active: true)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
 
@@ -63,6 +63,14 @@ RSpec.describe "As a merchant" do
       expect(current_path).to eq('/dashboard/items')
       expect(page).to have_content("The item is now disabled.")
 
+      merchant = User.find(1)
+
+      item_1 = Item.last
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+
+      visit '/dashboard/items'
+
       within "#item-#{item_1.id}" do
         expect(page).to have_button("Enable")
       end
@@ -70,7 +78,7 @@ RSpec.describe "As a merchant" do
 
     it 'when I click on Enable it enables the item, I stay on my items page, there is a flash message, the item is enabled.' do
 
-      merchant = create(:merchant)
+      merchant = create(:merchant, id: 1)
       item_1 = create(:item, user_id: merchant.id, active: false)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
 
@@ -92,6 +100,14 @@ RSpec.describe "As a merchant" do
       expect(item_1.active).to eq(true)
       expect(current_path).to eq('/dashboard/items')
       expect(page).to have_content("The item is now enabled.")
+
+      merchant = User.find(1)
+
+      item_1 = Item.last
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+
+      visit '/dashboard/items'
 
       within "#item-#{item_1.id}" do
         expect(page).to have_button("Disable")
