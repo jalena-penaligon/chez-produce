@@ -55,5 +55,29 @@ end
       end
       expect(current_path).to eq(admin_user_path(@user_2.id))
     end
+
+    it 'I see any "packaged" orders ready to ship' do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
+      user = create(:user)
+      merchant_1, merchant_2 = create_list(:merchant, 2)
+      item_1 = create(:item, user: merchant_1, inventory: 1)
+      item_2 = create(:item, user: merchant_2)
+      # packaged order
+      order = create(:packaged_order, user: user, status: 0)
+      order_item_8 = create(:fulfilled_order_item, order: order, item: item_2, order_price: 1, order_quantity: 1, created_at: 5.days.ago, updated_at: 1.days.ago)
+      order_item_9 = create(:fulfilled_order_item, order: order, item: item_1, order_price: 2, order_quantity: 1, created_at: 5.days.ago, updated_at: 1.days.ago)
+      visit admin_dashboard_path
+        within ("#order-#{order.id}") do
+          expect(order.status).to eq("packaged")
+          click_on "Ship"
+          expect(current_path).to eq(admin_dashboard_path)
+        end
+          within "#order-#{order.id}" do
+            order = Order.find(order.id)
+            expect(order.status).to eq("shipped")
+            expect(page).to have_content("shipped")
+            expect(page).to_not have_content("Cancel")
+          end
+      end
+    end
   end
-end

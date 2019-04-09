@@ -6,6 +6,11 @@
       <%= order.id %>
       <%= order.created_at %>
       <%= order.status %>
+        <% if order.status == "packaged" %>
+            <%= link_to "Ship",  ship_path(order), method: :patch%>
+        <% elsif order.status != "cancelled"  && order.status != "shipped"%>
+            <%= link_to "Cancel", cancel_path(order), method: :patch %>
+        <% end %>
     </div>
   </section>
   <% end %>
