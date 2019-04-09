@@ -24,4 +24,11 @@ class Item < ApplicationRecord
     order_items.first == nil
   end
 
+  def in_stock?(order_item)
+    order_item = OrderItem.find(order_item.id)
+    if self.inventory >= order_item.order_quantity
+      true
+    end
+  end
+
 end

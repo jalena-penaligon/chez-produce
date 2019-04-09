@@ -5,6 +5,7 @@
   Order Status: <%= @order.status %>
   <% @order.items.each do |item| %>
   <div id="item-info-<%=item.id %>">
+    <% @item = item %>
         Current Inventory: <%= item.inventory %>
         <%= link_to "#{item.name}", item_path(item)  %>
         <%= link_to image_tag(item.image), item_path(item) %>
@@ -12,7 +13,11 @@
     <% end %>
     <% @order.order_items.each do |order_item| %>
     <div class="fulfill-item-<%=order_item.id%>">
-        <% if order_item.fulfilled == false %>
+
+        <% if order_item.fulfilled == false  && !@item.in_stock?(order_item)%>
+            <%=  flash[:notice] = "You do not have enough inventory to fulfill this order"%>
+            Status: not fulfilled
+        <% elsif  order_item.fulfilled == false && @item.in_stock?(order_item)%>
             Status: not fulfilled
             <%= link_to "Fulfill", fulfill_order_item_path(order_item.id), method: :patch %>
         <% else %>
