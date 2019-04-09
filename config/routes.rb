@@ -61,6 +61,7 @@ Rails.application.routes.draw do
     resources :merchants, only: [:index, :show]
     get 'dashboard', to: 'admin#show', as: :dashboard
     patch '/users/:id/upgrade', to: 'users#upgrade', as: :user_upgrade
+    patch '/merchants/:id/downgrade', to: 'merchants#downgrade', as: :merchant_downgrade
     # resources :orders, only: [:index]
   end
 
