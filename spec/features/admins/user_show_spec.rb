@@ -20,11 +20,33 @@ RSpec.describe 'admin views a user show page', type: :feature do
       expect(page).to have_content(user.state)
       expect(page).to have_content(user.zipcode)
     end
+
+    it "can make a User a merchant" do
+      user = create(:user)
+      admin = create(:admin)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
+
+      visit admin_user_path(user)
+
+      click_button "Upgrade"
+      expect(current_path).to eq(admin_merchant_path(user))
+
+      expect(page).to have_content("User has been upgraded.")
+    end
+
+    it "user can now login as merchant" do
+      user = create(:user)
+      admin = create(:admin)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
+
+      visit admin_user_path(user)
+
+      click_button "Upgrade"
+      merchant = User.find(user.id)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+
+      visit dashboard_path
+      expect(page.status_code).to eq(200)
+    end
   end
 end
-
-
-# As an admin user
-# When I visit a user's profile page ("/admin/users/5")
-# I see the same information the user would see themselves
-# I do not see a link to edit their profile

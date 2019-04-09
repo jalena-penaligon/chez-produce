@@ -4,3 +4,5 @@
 <li><%= @user.city %></li>
 <li><%= @user.state %></li>
 <li><%= @user.zipcode %></li>
+
+<li><%= button_to "Upgrade", admin_user_upgrade_path(@user), method: :patch %></li>
