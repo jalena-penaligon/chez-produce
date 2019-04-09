@@ -113,5 +113,23 @@ RSpec.describe "As a merchant" do
         expect(page).to have_button("Disable")
       end
     end
+
+    it 'when I click on a delete button for an item, I am returned to the page, I see a flash message, the item is gone' do
+      merchant = create(:merchant, id: 1)
+      item_1 = create(:item, user_id: merchant.id, active: true)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+
+      visit '/dashboard/items'
+
+      expect(current_path).to eq(dashboard_items_path)
+
+      within "item-#{item_1.id}" do
+        click_button "Delete"
+      end
+
+      expect(current_path).to eq(dashboard_items_path)
+      expect(page).to have_content("The item has been deleted.")
+      expect(page).to_not have_content(item_1.name)
+    end
   end
 end
