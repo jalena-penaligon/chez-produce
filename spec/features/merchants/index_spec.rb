@@ -241,8 +241,14 @@ RSpec.describe 'merchant index page', type: :feature do
           expect(page).to have_button("Enable")
         end
       end
-      xit "an enabled merchant can log in" do
-      end
+      # it "a disabled merchant cannot log in" do
+      #   visit login_path
+      #
+      #   fill_in :email, with: @merchant_1.email
+      #   fill_in :password, with: @merchant_1.password
+      #
+      #   expect(page).to have_content("Username or password does not match.")
+      # end
 
       it "when I click enable for a disabled merchant I see a flash message that the merchant is enabled and they are enabled" do
 
@@ -263,8 +269,30 @@ RSpec.describe 'merchant index page', type: :feature do
           expect(page).to have_button("Disable")
         end
       end
-      xit "an enabled merchant can log in" do
-      end
+    end
+  end
+
+  describe 'As a merchant' do
+    it 'I cannot log in if I have been disabled' do
+
+      visit login_path
+
+      fill_in :email, with: @merchant_3.email
+      fill_in :password, with: @merchant_3.password
+      click_button "Login"
+
+      expect(page).to have_content("Username or password does not match.")
+    end
+
+    it 'I can log in if I have been enabled' do
+
+      visit login_path
+
+      fill_in :email, with: @merchant_1.email
+      fill_in :password, with: @merchant_1.password
+      click_button "Login"
+
+      expect(page).to have_content("You're logged in!")
     end
   end
 end
