@@ -62,6 +62,31 @@ RSpec.describe 'merchant new item', type: :feature do
         expect(page).to have_content("Current price is not a number")
       end
 
+      it 'will auto populate info if only some items are missing' do
+
+        merchant = create(:merchant, id: 1)
+        item_1 = create(:item, user: merchant)
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+
+        visit dashboard_items_path
+
+        click_link("Add New Item")
+
+        expect(current_path).to eq(dashboard_items_new_path)
+
+        fill_in :Name, with: "Zucchini"
+        fill_in :Description, with: "Organic Zucchini Squash, 1.5 lb"
+        fill_in :Image, with: "https://images.unsplash.com/photo-1499125650409-2c437d5cca77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1789&q=80"
+
+        click_button("Add New Item")
+
+        expect(page).to have_content("Inventory is not a number")
+        expect(page).to have_content("Current price is not a number")
+        expect(page).to have_selector("input[value='Zucchini']")
+        expect(page).to have_selector("input[value='Organic Zucchini Squash, 1.5 lb']")
+        expect(page).to have_selector("input[value='https://images.unsplash.com/photo-1499125650409-2c437d5cca77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1789&q=80']")
+      end
+
       it "will use a default image if no image is added" do
         merchant = create(:merchant, id: 1)
         item_1 = create(:item, user: merchant)
