@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_cart
-    @cart ||= Cart.new(session[:cart])
+    @cart ||= Cart.new(session[:cart] ||= Hash.new(0))
   end
 
   private
