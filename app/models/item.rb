@@ -6,6 +6,10 @@ class Item < ApplicationRecord
   validates :current_price, numericality: { greater_than: 0 }
   validates :inventory, numericality: { greater_than: -1 }
 
+  def not_ordered?
+    order_items.first == nil
+  end
+
   def self.active_items_by_merchant
         select('users.name as merchant_name, items.*')
             .joins(:user)
@@ -22,8 +26,21 @@ class Item < ApplicationRecord
        .limit(limit)
   end
 
-  def not_ordered?
-    order_items.first == nil
+  def self.merchant_items_sold(limit = 5, order = 'desc', merchant_id)
+    joins(:order_items)
+    .select('items.*, sum(order_items.order_quantity)as total_sold')
+    .group(:id)
+    .where("items.user_id = #{merchant_id}")
+    .order("total_sold #{order}")
+    .limit(limit)
+  end
+
+  def self.percent_sold(merchant_id)
+      joins(:order_items)
+      .select('items.user_id, coalesce(sum(order_items.order_quantity),0)as total_sold, sum(items.inventory) as total_inventory')
+      .where("items.user_id = #{merchant_id}")
+      .group('items.user_id')
+      .limit(1)
   end
 
   def in_stock?(order_item)
@@ -32,5 +49,6 @@ class Item < ApplicationRecord
       true
     end
   end
+
 
 end

@@ -1,7 +1,6 @@
 class Merchants::ItemsController < ApplicationController
 
   def index
-    # binding.pry
     if current_merchant
       @merchant = current_user
     else

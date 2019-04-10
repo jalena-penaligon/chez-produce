@@ -1,5 +1,7 @@
 <h1>Merchant's Items Page</h1>
+
 <p><%= link_to "Add New Item", dashboard_items_new_path(merchant_id: @merchant.id) %></p>
+
 <% @merchant.items.each do |item| %>
 <section id="item-<%=item.id%>">
   <ul>

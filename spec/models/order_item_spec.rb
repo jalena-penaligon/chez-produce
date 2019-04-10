@@ -31,5 +31,6 @@ RSpec.describe OrderItem, type: :model do
       actual = OrderItem.fulfillment_time(@item_1)
       expect(actual).to eq(1.25)
     end
+
   end
 end

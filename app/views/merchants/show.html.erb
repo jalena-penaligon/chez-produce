@@ -8,7 +8,48 @@
     <li><%= @merchant.email %></li>
   </ul>
 </section>
+<div class="statistics">
+  <% if @items_sold %>
+<section class="top-5">
+  Top 5 Items Sold<% @items_sold.each do |item| %>
+      <%= item.name %>: <%= item.total_sold %>
+  <% end %>
+</section>
+<section class="percent-sold">
+  <% @percent_sold.each do |item| %>
+      Sold <%= item.total_sold %> items, which is <%=  ((item.total_sold/item.total_inventory.to_f).round(2))*100 %>% of your total inventory.
+  <% end %>
+</section>
+<section class="top-states">
+  Top States: <% @top_states.each do |user| %>
+      <%= user.state %>: <%= user.total_orders.to_f.round(2) %>
+  <% end %>
+</section>
+<section class="top-cities">
+  Top Cities: <% @top_cities.each do |user| %>
+      <%= user.city %>, <%= user.state %>: <%= user.total_orders.to_f.round(2) %>
+  <% end %>
+</section>
+<section class="top-purchaser-orders">
+  Top Purchaser by Orders: <% @top_purchaser_by_orders.each do |user| %>
+      <%= user.name %> - <%= user.total_orders.to_f.round(2) %>
+  <% end %>
+</section>
+<section class="top-purchaser-quantity">
+  Top Purchaser by Quantity: <% @top_purchaser_by_quantity.each do |user| %>
+      <%= user.name %> - <%= user.total_quantity.to_f.round(2) %>
+  <% end %>
+</section>
+<section class="top-spenders">
+  Top Spenders: <% @top_spenders.each do |user| %>
+      <%= user.name %> $ <%= user.total_spent.to_f.round(2) %>
+  <% end %>
+</section><br/>
+<% else %>
+No items sold
+<% end %>
 
+</div>
 <section id="merchant-orders">
   <% @merchant.items.each do |item| %>
     <% item.order_items.each do |order_item| %>
