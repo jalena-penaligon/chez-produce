@@ -140,7 +140,7 @@ RSpec.describe 'As a merchant', type: :feature do
     end
     it 'top 3 users who have spent the most money on my items, and the total amount theyve spent' do
       visit dashboard_path
-      expect(page).to have_content("Top Spenders: Tim $ 18.75 Tanya $ 12.25 Tony $ 10.75")
+      expect(page).to have_content("Top Spenders: Tim $18.75 Tanya $12.25 Tony $10.75")
     end
   end
 end
