@@ -16,8 +16,8 @@
   <% end %>
 </section>
 <section class="percent-sold">
-  <% @percent_sold.each do |item| %>
-      Sold <%= item.total_sold %> items, which is <%=  ((item.total_sold/item.total_inventory.to_f).round(2))*100 %>% of your total inventory.
+  <% @items_sold_1.each do |item| %>
+      Sold <%= item.total_sold %> items, which is <%=  ((item.total_sold/@merchant.total_inventory.to_f).round(2))*100 %>% of your total inventory.
   <% end %>
 </section>
 <section class="top-states">
