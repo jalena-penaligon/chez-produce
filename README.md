@@ -28,7 +28,7 @@ This group project was completed as a requirement for Module 2 at Turing School 
 ##Contributors:
               Erin King - @erin-king
               Jalena (Penaligon) Taylor - @jalena-penaligon
-              Jennica Stiehl - @stiehlrod
+              Jennica Stiehl - @JennicaStiehl
               Smitha Hosmani - @hsmitha26
 
 ##System requirements:
