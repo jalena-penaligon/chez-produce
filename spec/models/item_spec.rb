@@ -12,12 +12,12 @@ RSpec.describe Item, type: :model do
     @item_6 = @sam.items.create(name:"zucchini", inventory: 5, current_price: 1.50, active: true, image: "http://kriokrush.com.au/wp-content/uploads/2016/12/ComingSoon.jpg", description: "some stuff")
     @user = create(:user)
     @order = create(:shipped_order, user: @user)
-    create(:fulfilled_order_item, order: @order, item: @item_1, order_price: 1, order_quantity: 1, created_at: 3.days.ago, updated_at: 59.minutes.ago)
-    create(:fulfilled_order_item, order: @order, item: @item_2, order_price: 2, order_quantity: 2, created_at: 4.hour.ago, updated_at: 59.minutes.ago)
-    create(:fulfilled_order_item, order: @order, item: @item_3, order_price: 1, order_quantity: 3, created_at: 3.days.ago, updated_at: 59.minutes.ago)
-    create(:fulfilled_order_item, order: @order, item: @item_4, order_price: 2, order_quantity: 4, created_at: 4.hour.ago, updated_at: 59.minutes.ago)
-    create(:fulfilled_order_item, order: @order, item: @item_5, order_price: 2, order_quantity: 5, created_at: 4.hour.ago, updated_at: 59.minutes.ago)
-    create(:fulfilled_order_item, order: @order, item: @item_6, order_price: 2, order_quantity: 6, created_at: 4.hour.ago, updated_at: 59.minutes.ago)
+    @order_item_1 = create(:fulfilled_order_item, order: @order, item: @item_1, order_price: 1, order_quantity: 1, created_at: 3.days.ago, updated_at: 59.minutes.ago)
+    @order_item_2 = create(:fulfilled_order_item, order: @order, item: @item_2, order_price: 2, order_quantity: 2, created_at: 4.hour.ago, updated_at: 59.minutes.ago)
+    @order_item_3 = create(:fulfilled_order_item, order: @order, item: @item_3, order_price: 1, order_quantity: 3, created_at: 3.days.ago, updated_at: 59.minutes.ago)
+    @order_item_4 = create(:fulfilled_order_item, order: @order, item: @item_4, order_price: 2, order_quantity: 4, created_at: 4.hour.ago, updated_at: 59.minutes.ago)
+    @order_item_5 = create(:fulfilled_order_item, order: @order, item: @item_5, order_price: 2, order_quantity: 5, created_at: 4.hour.ago, updated_at: 59.minutes.ago)
+    @order_item_6 = create(:fulfilled_order_item, order: @order, item: @item_6, order_price: 2, order_quantity: 6, created_at: 4.hour.ago, updated_at: 59.minutes.ago)
   end
 
   describe 'validations' do
@@ -43,7 +43,15 @@ RSpec.describe Item, type: :model do
       actual = Item.merchant_items_sold(5,'desc',@justin.id).first.total_sold
       expect(actual).to eq(2)
     end
-
+    it 'can calculate active_items_by_merchant' do
+      actual = Item.active_items_by_merchant
+      expect(actual).to eq([])
+    end
+    xit 'can calculate percent sold' do
+      results = Item.items_sold(@sam.id).first
+      actual = results.total_sold / @sam.total_inventory
+      expect(actual).to eq(0)
+    end
   end
 
   describe 'instance methods' do
@@ -55,6 +63,14 @@ RSpec.describe Item, type: :model do
 
       expect(item_1.not_ordered?).to eq(false)
       expect(item_2.not_ordered?).to eq(true)
+    end
+    it 'can calc in_stock?' do
+      actual = @item_1.in_stock?(@order_item_1)
+      expect(actual).to eq(true)
+    end
+    it 'can calc in_stock?' do
+      actual = @item_6.in_stock?(@order_item_6)
+      expect(actual).to eq(false)
     end
   end
 end

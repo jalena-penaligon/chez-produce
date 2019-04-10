@@ -19,6 +19,7 @@ class MerchantsController < ApplicationController
     if current_merchant
       @merchant = current_user
       @items_sold = Item.merchant_items_sold(5,'desc',current_user.id)
+      @items_sold_1 = Item.merchant_items_sold(1,'desc',current_user.id)
       @percent_sold = Item.percent_sold(current_user.id)
       @top_states = User.merchant_top_states(current_user.id)
       @top_cities = User.merchant_top_cities(current_user.id)

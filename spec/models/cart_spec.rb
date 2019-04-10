@@ -7,6 +7,12 @@ RSpec.describe Cart do
 
       expect(subject.total_count).to eq(3)
     end
+
+    it "returns 0 if cart is empty" do
+      cart = Cart.new({})
+
+      expect(cart.total_count).to eq(0)
+    end
   end
 
   describe "#find_item" do

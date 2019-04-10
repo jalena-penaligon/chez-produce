@@ -48,6 +48,7 @@ class User < ApplicationRecord
     .select("users.*, count(orders.id) as total_orders")
     .where("orders.status = 2")
     .group(:id)
+    .order('total_orders DESC')
     .limit(3)
   end
 
@@ -73,7 +74,7 @@ class User < ApplicationRecord
      joins(orders: {order_items: :item})
      .select("users.city, users.state, count(orders.id) as total_orders")
      .where("items.user_id = #{merchant_id}")
-     .group("users.city, users.state")      
+     .group("users.city, users.state")
      .order("total_orders DESC, city ASC, state ASC")
      .limit(3)
    end
@@ -105,17 +106,8 @@ class User < ApplicationRecord
       .limit(3)
     end
 
-    # def percent_sold
-    #   binding.pry
-    #   self.items.order_items.sum(order_quantity)/items.items.sum(inventory)
-    # end
-    #
-    # def percent_sold
-    #   # binding.pry
-    #   self.items
-    #     .joins(:order_items)
-    #     .select('coalesce(sum(order_items.order_quantity),0)as total_sold, sum(items.inventory) as total_inventory')
-    #     .limit(1)
-    #     # .where("users.id = #{merchant_id}")
-    # end
+    def total_inventory
+        items.sum(:inventory)
+    end
+
 end

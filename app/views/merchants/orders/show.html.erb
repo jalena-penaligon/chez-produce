@@ -1,30 +1,33 @@
 <h1>Merchant Order Show Page</h1>
-  <%= @order.id %>
-  <%= @order.user.name %>
-  <%= @order.user.street_address %>
-  Order Status: <%= @order.status %>
-  <% @order.items.each do |item| %>
+<li>Order ID: <%= @order.id %></li>
+<li><%= @order.user.name %></li>
+<li><%= @order.user.street_address %></li>
+<li>Order Status: <%= @order.status %></li>
+<% @order.items.each do |item| %>
+  <% if item.user_id == @merchant.id %>
   <div id="item-info-<%=item.id %>">
     <% @item = item %>
-        Current Inventory: <%= item.inventory %>
-        <%= link_to "#{item.name}", item_path(item)  %>
-        <%= link_to image_tag(item.image), item_path(item) %>
-  </div>
-    <% end %>
-    <% @order.order_items.each do |order_item| %>
-    <div class="fulfill-item-<%=order_item.id%>">
+    <li><%= link_to "#{item.name}", item_path(item)  %></li>
+    <li>Current Inventory: <%= item.inventory %></li>
+    <li><%= link_to image_tag(item.image), item_path(item) %></li>
 
-        <% if order_item.fulfilled == false  && !@item.in_stock?(order_item)%>
-            <%=  flash[:notice] = "You do not have enough inventory to fulfill this order"%>
-            Status: not fulfilled
-        <% elsif  order_item.fulfilled == false && @item.in_stock?(order_item)%>
-            Status: not fulfilled
-            <%= link_to "Fulfill", fulfill_order_item_path(order_item.id), method: :patch %>
-        <% else %>
-            Status: fulfilled
-        <% end %>
-  </div>
-        Order Price: <%= order_item.order_price %>
-        Order Quantity: <%= order_item.order_quantity %>
-        Subtotal: <%= order_item.order_price * order_item.order_quantity %>
+    <% item.order_items.each do |order_item| %>
+      <% if order_item.order_id == @order.id %>
+        <div class="fulfill-item-<%=order_item.id%>">
+          <% if order_item.fulfilled == false  && !@item.in_stock?(order_item)%>
+              <%=  flash[:notice] = "You do not have enough inventory to fulfill this order"%>
+              Status: not fulfilled
+              <% elsif  order_item.fulfilled == false && @item.in_stock?(order_item)%>
+              Status: not fulfilled
+              <%= link_to "Fulfill", fulfill_order_item_path(order_item.id), method: :patch %>
+          <% else %>
+              Status: fulfilled
+          <% end %>
+        </div>
+        <li>Order Price: <%= order_item.order_price %></li>
+        <li>Order Quantity: <%= order_item.order_quantity %></li>
+        <li>Subtotal: <%= order_item.order_price * order_item.order_quantity %></li>
+      <% end %>
+    <% end %>
   <% end %>
+<% end %>

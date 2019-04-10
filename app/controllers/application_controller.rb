@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_cart
-    @cart ||= Cart.new(session[:cart])
+    @cart ||= Cart.new(session[:cart] ||= Hash.new(0))
   end
 
   private
@@ -22,7 +22,11 @@ class ApplicationController < ActionController::Base
     current_user && current_user.merchant?
   end
 
-    def current_admin
-      current_user && current_user.admin?
-    end
+  def current_admin
+    current_user && current_user.admin?
+  end
+
+  def current_visitor
+    current_user == nil
+  end
 end

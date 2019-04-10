@@ -16,8 +16,8 @@
   <% end %>
 </section>
 <section class="percent-sold">
-  <% @percent_sold.each do |item| %>
-      Sold <%= item.total_sold %> items, which is <%=  ((item.total_sold/item.total_inventory.to_f).round(2))*100 %>% of your total inventory.
+  <% @items_sold_1.each do |item| %>
+      Sold <%= item.total_sold %> items, which is <%=  ((item.total_sold/@merchant.total_inventory.to_f).round(2))*100 %>% of your total inventory.
   <% end %>
 </section>
 <section class="top-states">
@@ -42,7 +42,7 @@
 </section>
 <section class="top-spenders">
   Top Spenders: <% @top_spenders.each do |user| %>
-      <%= user.name %> $ <%= user.total_spent.to_f.round(2) %>
+      <%= user.name %> <%= number_to_currency(user.total_spent.to_f.round(2)) %>
   <% end %>
 </section><br/>
 <% else %>
@@ -52,14 +52,13 @@ No items sold
 </div>
 <section id="merchant-orders">
   <% @merchant.items.each do |item| %>
-    <% item.order_items.each do |order_item| %>
 
-      Order ID: <%= link_to "#{order_item.order_id}", dashboard_order_path(order_item.order_id) %>
-<!--@merchant,  -->
-      Order Created: <%= order_item.created_at %>
-      Quantity: <%= order_item.order_quantity %>
-      Price: <%= order_item.order_price %>
-      Subtotal: <%= order_item.order_quantity * order_item.order_price %>
+    <% item.order_items.each do |order_item| %>
+      <li>Order ID: <%= link_to "#{order_item.order_id}", dashboard_order_path(order_item.order_id) %></li>
+      <li>Order Created: <%= order_item.created_at %></li>
+      <li>Quantity: <%= item.name %> - <%= order_item.order_quantity %></li>
+      <li>Price: <%= order_item.order_price %></li>
+      <li>Subtotal: <%= order_item.order_quantity * order_item.order_price %></li>
     <% end %>
   <% end %>
 </section>

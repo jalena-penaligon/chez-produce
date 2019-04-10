@@ -17,6 +17,23 @@ RSpec.describe User, type: :model do
     it { should have_many :orders }
   end
 
+  describe 'instance methods' do
+    it 'can calc total_inventory' do
+        user = create(:user)
+        merchant_1 = create(:merchant)
+        merchant_2 = create(:merchant)
+        item_1 = create(:item, user: merchant_1, name: "Zucchini", inventory: 4)
+        item_2 = create(:item, user: merchant_1, name: "Zucchini", inventory: 4)
+        order = create(:order, user: user)
+        create(:order_item, order: order, item: item_1, order_price: 1, order_quantity: 1)
+        order = create(:packaged_order, user: user)
+        oi_1 = create(:fulfilled_order_item, order: order, item: item_1, order_price: 1, order_quantity: 1, created_at: 3.5.days.ago, updated_at: 1.days.ago)
+        oi_2 = create(:fulfilled_order_item, order: order, item: item_1, order_price: 1, order_quantity: 3, created_at: 3.5.days.ago, updated_at: 1.days.ago)
+      actual = merchant_1.total_inventory
+      expect(actual).to eq(8)
+    end
+  end
+
   describe 'class methods' do
     it '.all_users returns all users' do
       user_1 = create(:user)
