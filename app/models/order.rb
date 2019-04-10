@@ -15,7 +15,6 @@ class Order < ApplicationRecord
     .limit(3)
   end
 
-
   def self.sort_by_status
     self.order(:status, id: :asc)
   end
@@ -32,6 +31,6 @@ class Order < ApplicationRecord
   end
 
   def grand_total
-    order_items.sum(:order_price)
+    order_items.sum('order_price * order_quantity')
   end
 end
