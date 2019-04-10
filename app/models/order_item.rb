@@ -18,10 +18,14 @@ class OrderItem < ApplicationRecord
     orderitems = OrderItem.where(item_id: item.id).order(:id)
   end
 
+
   def self.map_it(orderitemsarray)
     the_sum = orderitemsarray.map do |orderitem|
       (orderitem.updated_at - orderitem.created_at)
     end.sum
+
+  def fulfillment_time
+    ((updated_at - created_at)/one_day).round(2)
   end
 
   def self.fulfillment_time(item)
