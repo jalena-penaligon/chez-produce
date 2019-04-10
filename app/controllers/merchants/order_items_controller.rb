@@ -4,6 +4,7 @@ class Merchants::OrderItemsController < ApplicationController
     orderItem = OrderItem.find(params[:id])
     item = Item.find_by(id: orderItem.item_id)
     order = Order.find_by(id: orderItem.order_id)
+    merchant = User.find(item.user_id)
     if item.inventory >= orderItem.order_quantity
       item.inventory = item.inventory - orderItem.order_quantity
       item.save
@@ -14,10 +15,10 @@ class Merchants::OrderItemsController < ApplicationController
           order.save
         end
       flash[:success] = "You have successfully fulfilled this order"
-      redirect_to dashboard_order_path(orderItem.order_id)
+      redirect_to dashboard_order_path(orderItem.order_id, merchant_id: merchant.id)
     else
       flash[:failure] = "You do not have enough inventory to fulfill this order"
-      redirect_to dashboard_order_path(orderItem.order_id)
+      redirect_to dashboard_order_path(orderItem.order_id, merchant_id: merchant.id)
     end
   end
 

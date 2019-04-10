@@ -48,6 +48,7 @@ class User < ApplicationRecord
     .select("users.*, count(orders.id) as total_orders")
     .where("orders.status = 2")
     .group(:id)
+    .order('total_orders DESC')
     .limit(3)
   end
 
@@ -73,7 +74,7 @@ class User < ApplicationRecord
      joins(orders: {order_items: :item})
      .select("users.city, users.state, count(orders.id) as total_orders")
      .where("items.user_id = #{merchant_id}")
-     .group("users.city, users.state")      
+     .group("users.city, users.state")
      .order("total_orders DESC, city ASC, state ASC")
      .limit(3)
    end

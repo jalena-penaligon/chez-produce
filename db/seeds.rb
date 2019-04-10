@@ -80,19 +80,19 @@ o_10 = u_10.orders.create(status: 1, created_at: 3.days.ago, updated_at: 1.day.a
 oi_18 = OrderItem.create(order_id: o_10.id, item_id: it_03.id, order_price: 1.79, order_quantity: 5, fulfilled: false, created_at: 3.days.ago, updated_at: 1.day.ago)
 
 o_11 = u_01.orders.create(status: 2, created_at: 4.days.ago, updated_at: 2.days.ago)
-oi_19 = OrderItem.create(order_id: o_01.id, item_id: it_01.id, order_price: 0.50, order_quantity: 3, fulfilled: true, created_at: 4.days.ago, updated_at: 3.days.ago)
-oi_20 = OrderItem.create(order_id: o_01.id, item_id: it_02.id, order_price: 1.42, order_quantity: 4, fulfilled: true, created_at: 4.days.ago, updated_at: 2.days.ago)
+oi_19 = OrderItem.create(order_id: o_11.id, item_id: it_01.id, order_price: 0.50, order_quantity: 3, fulfilled: true, created_at: 4.days.ago, updated_at: 3.days.ago)
+oi_20 = OrderItem.create(order_id: o_11.id, item_id: it_02.id, order_price: 1.42, order_quantity: 4, fulfilled: true, created_at: 4.days.ago, updated_at: 2.days.ago)
 
 o_12 = u_02.orders.create(status: 2, created_at: 10.days.ago, updated_at: 8.days.ago)
-oi_21 = OrderItem.create(order_id: o_02.id, item_id: it_03.id, order_price: 1.79, order_quantity: 2, fulfilled: true, created_at: 10.days.ago, updated_at: 8.days.ago)
+oi_21 = OrderItem.create(order_id: o_12.id, item_id: it_03.id, order_price: 1.79, order_quantity: 2, fulfilled: true, created_at: 10.days.ago, updated_at: 8.days.ago)
 
 o_13 = u_04.orders.create(status: 2, created_at: 5.days.ago, updated_at: 1.day.ago)
-oi_22 = OrderItem.create(order_id: o_04.id, item_id: it_06.id, order_price: 2.99, order_quantity: 3, fulfilled: true, created_at: 5.days.ago, updated_at: 1.day.ago)
+oi_22 = OrderItem.create(order_id: o_13.id, item_id: it_06.id, order_price: 2.99, order_quantity: 3, fulfilled: true, created_at: 5.days.ago, updated_at: 1.day.ago)
 
 o_14 = u_05.orders.create(status: 2, created_at: 3.days.ago, updated_at: 1.hour.ago)
-oi_23 = OrderItem.create(order_id: o_05.id, item_id: it_07.id, order_price: 0.99, order_quantity: 2, fulfilled: true, created_at: 10.days.ago, updated_at: 2.days.ago)
-oi_24 = OrderItem.create(order_id: o_05.id, item_id: it_08.id, order_price: 1.99, order_quantity: 3, fulfilled: true, created_at: 10.days.ago, updated_at: 10.hours.ago)
-oi_25 = OrderItem.create(order_id: o_05.id, item_id: it_09.id, order_price: 2.99, order_quantity: 7, fulfilled: true, created_at: 10.days.ago, updated_at: 2.hours.ago)
+oi_23 = OrderItem.create(order_id: o_14.id, item_id: it_07.id, order_price: 0.99, order_quantity: 2, fulfilled: true, created_at: 10.days.ago, updated_at: 2.days.ago)
+oi_24 = OrderItem.create(order_id: o_14.id, item_id: it_08.id, order_price: 1.99, order_quantity: 3, fulfilled: true, created_at: 10.days.ago, updated_at: 10.hours.ago)
+oi_25 = OrderItem.create(order_id: o_14.id, item_id: it_09.id, order_price: 2.99, order_quantity: 7, fulfilled: true, created_at: 10.days.ago, updated_at: 2.hours.ago)
 
 
 

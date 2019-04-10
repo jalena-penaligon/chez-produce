@@ -46,25 +46,6 @@ RSpec.describe "When I visit my order show page" do
       expect(page).to have_content(@order_1.grand_total)
     end
   end
-  describe "As a merchant" do
-    it "shows only the order page with items belonging to the merchant" do
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_1)
-      visit dashboard_order_path(@order_1)
-
-      expect(page).to have_content(@user.name)
-      expect(page).to have_content(@user.street_address)
-
-      expect(page).to have_content(@item_1.name)
-      expect(page).to have_content(@order_item_1.order_price)
-      expect(page).to have_content(@order_item_1.order_quantity)
-      expect(page).to have_css("img[src*='#{@item_1.image}']")
-      within "#item-info-#{@item_1.id}" do
-        expect(page).to_not have_content(@item_2.name)
-      end
-      click_on "#{@item_1.name}"
-      expect(current_path).to eq(item_path(@item_1))
-    end
-  end
 
   describe 'As a registered user' do
     it 'allows you to cancel pending orders' do
