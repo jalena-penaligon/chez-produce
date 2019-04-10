@@ -10,7 +10,7 @@ https://mysterious-beyond-30964.herokuapp.com/
 
 ## Intent:  
 
-This group project was completed as a requirement for Module 2 at Turing School of Software and Design.
+This group project was completed in 10 days as a requirement for Module 2 at Turing School of Software and Design.
 
 The project was built using Rails which implements the following:
 * MVC design pattern.
