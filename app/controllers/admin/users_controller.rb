@@ -12,6 +12,21 @@ class Admin::UsersController < ApplicationController
     if current_admin
       @admin = current_user
       @user = User.find(params[:id])
+      if @user.role != 'user'
+        redirect_to admin_merchant_path(params[:id])
+      end
+    else
+      render_not_found
+    end
+  end
+
+  def upgrade
+    if current_admin
+      user = User.find(params[:id])
+      user.role = 'merchant'
+      user.save
+      flash[:notice] = "User has been upgraded."
+      redirect_to admin_merchant_path(user)
     else
       render_not_found
     end

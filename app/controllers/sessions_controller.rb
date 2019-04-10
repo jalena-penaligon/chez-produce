@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:email])
-    if user && user.authenticate(params[:password])
+    if user && user.authenticate(params[:password]) && user.active == true
       session[:user_id] = user.id
       flash[:notice] = "You're logged in!"
       redirect_to profile_path if user.role == "user"

@@ -1,44 +1,49 @@
 <aside>
-  <h2>Merchant Statistics</h2>
+  <h2>Top Merchants by Revenue</h2>
   <section id="top-by-revenue">
     <% @top_by_revenue.each do |merchant| %>
-      <%= merchant.name %> <br />
-      Total Revenue: <%= merchant.revenue %>
+      <h3><%= merchant.name %></h3>
+      Total Revenue: <%= merchant.revenue %><br />
     <% end %>
   </section>
 
+  <h2>Fastest Fulfilling Merchants</h2>
   <section id="top-by-fulfillment">
     <% @top_by_fulfillment.each do |merchant| %>
-      <%= merchant.name %> <br />
-      Fulfillment Time: <%= merchant.fulfillment_time %><br />
+      <h3><%= merchant.name %></h3>
+      Fulfillment Time: <%= (merchant.fulfillment_time) %><br />
     <% end %>
 
   </section>
 
+  <h2>Slowest Fulfilling Merchants</h2>
   <section id="bottom-by-fulfillment">
     <% @bottom_by_fulfillment.each do |merchant| %>
-      <%= merchant.name %> <br />
+      <h3><%= merchant.name %></h3>
       Fulfillment Time: <%= merchant.fulfillment_time %><br />
     <% end %>
   </section>
 
+  <h2>Top States Shipped To</h2>
   <section id="top-states">
     <% @top_states.each do |user| %>
-      <%= user.state %> <br />
+      <h3><%= user.state %></h3>
       Total Orders: <%= user.total_orders %><br />
     <% end %>
   </section>
 
+  <h2>Top Cities Shipped To</h2>
   <section id="top-cities">
     <% @top_cities.each do |user| %>
-      <%= user.city %> <br />
+      <h3><%= user.city %></h3>
       Total Orders: <%= user.total_orders %><br />
     <% end %>
   </section>
 
+  <h2>Largest Orders</h2>
   <section id="top-orders">
     <% @top_orders.each do |order| %>
-      <%= order.id %> <br />
+      <h3>Order ID: <%= order.id %></h3>
       Total Quantity: <%= order.total_quantity %><br />
     <% end %>
   </section>
@@ -52,9 +57,9 @@
     <% if current_admin %>
       <h2><%= link_to merchant.name, admin_merchant_path(merchant) %></h2>
       <% if merchant.active? %>
-        <%= button_to "Disable" %>
+        <%= button_to "Disable", toggle_merchant_path(merchant), method: :patch %>
       <% else %>
-        <%= button_to "Enable" %>
+        <%= button_to "Enable", toggle_merchant_path(merchant), method: :patch %>
       <% end %>
     <% else %>
       <h2><%= merchant.name %></h2>

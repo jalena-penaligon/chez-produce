@@ -1,21 +1,22 @@
 <h1>Merchant's Items Page</h1>
-<p><%= link_to "Add New Item" %></p>
+
+<p><%= link_to "Add New Item", dashboard_items_new_path(merchant_id: @merchant.id) %></p>
 
 <% @merchant.items.each do |item| %>
 <section id="item-<%=item.id%>">
   <ul>
-    <li><%= item.id %></li>
-    <li><%= item.name %></li>
-    <li><%= item.current_price %></li>
-    <li><%= item.inventory %></li>
-    <li><%= link_to "Edit Item" %></li>
+    <li>ID: <%= item.id %></li>
+    <li>Name: <%= item.name %></li>
+    <li>Price: <%= number_to_currency(item.current_price) %></li>
+    <li>Inventory: <%= item.inventory %></li>
+    <li><%= link_to "Edit Item", dashboard_item_edit_path(item, merchant_id: item.user.id) %></li>
       <% if item.active? %>
-        <%= button_to "Disable" %>
+        <%= button_to "Disable", dashboard_toggle_item_path(item), method: :patch %>
       <% else %>
-        <%= button_to "Enable" %>
+        <%= button_to "Enable", dashboard_toggle_item_path(item), method: :patch %>
       <% end %>
       <% if item.not_ordered? %>
-        <%= button_to "Delete" %>
+        <%= button_to "Delete", dashboard_delete_item_path(item), method: :delete %>
       <% end %>
     <li><img src="<%= item.image %>" /></li>
   </ul>

@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :users, only:  [:index, :create, :update]
 
   resources :users, only: [:destroy], as: :profile do #send key value of order_id, change to scope, remove destroy
-    resources :orders, only: [:index, :show]
+    resources :orders, only: [:index, :show, :update]
   end
 
   resources :items, only: [:index]
@@ -33,6 +33,14 @@ Rails.application.routes.draw do
   scope :dashboard, as: :dashboard do
     get '/orders/:id', to: 'merchants/orders#show', as: :order
     get '/items', to: 'merchants/items#index'
+
+    patch '/items/:id', to: 'items#active_toggle', as: :toggle_item
+    delete '/items/:item_id', to: 'merchants/items#destroy', as: :delete_item
+
+    get '/items/new', to: 'merchants/items#new'
+    post '/items', to: 'merchants/items#create'
+    get '/items/:id/edit', to: 'merchants/items#edit', as: :item_edit
+    patch '/items/:id/edit', to: 'merchants/items#update', as: :item_update
     get '/orders/', to: 'merchants/orders#index', as: :orders
   end
 
@@ -48,13 +56,18 @@ Rails.application.routes.draw do
   patch '/order/:id', to: 'orders#ship', as: :ship
   patch '/order/:id', to: 'orders#cancel', as: :cancel
 
+  patch '/merchant/:id', to: 'users#active_toggle', as: :toggle_merchant
+
   namespace :admin do
     resources :users, only: [:index, :show]
     resources :merchants, only: [:index, :show]
     get 'dashboard', to: 'admin#show', as: :dashboard
+    patch '/users/:id/upgrade', to: 'users#upgrade', as: :user_upgrade
+    patch '/merchants/:id/downgrade', to: 'merchants#downgrade', as: :merchant_downgrade
     # resources :orders, only: [:index]
   end
 
   # get 'admin/merchants/:id', to: 'admin/merchants#show', as: :admin_merchant
+
   post '/orders', to: 'orders#create'
 end

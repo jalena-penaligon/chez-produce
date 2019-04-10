@@ -69,14 +69,14 @@ class User < ApplicationRecord
     .limit(3)
   end
 
-    def self.merchant_top_cities(merchant_id)
-      joins(orders: {order_items: :item})
-      .select("users.city, users.state, count(orders.id) as total_orders")
-      .where("items.user_id = #{merchant_id}")
-      .group("users.city, users.state")
-      .order("total_orders DESC, city ASC, state ASC")
-      .limit(3)
-    end
+   def self.merchant_top_cities(merchant_id)
+     joins(orders: {order_items: :item})
+     .select("users.city, users.state, count(orders.id) as total_orders")
+     .where("items.user_id = #{merchant_id}")
+     .group("users.city, users.state")      
+     .order("total_orders DESC, city ASC, state ASC")
+     .limit(3)
+   end
 
     def self.top_purchaser_by_orders(merchant_id)
       joins(orders: {order_items: :item})

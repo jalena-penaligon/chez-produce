@@ -9,4 +9,19 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @fulfillment_time = OrderItem.fulfillment_time(@item)
   end
+
+  def active_toggle
+    item = Item.find(params[:id])
+    if item.active?
+      item.active = false
+      item.save
+      flash[:notice] = "The item is now disabled."
+      redirect_to dashboard_items_path
+    else 
+      item.active = true
+      item.save
+      flash[:notice] = "The item is now enabled."
+      redirect_to dashboard_items_path
+    end
+  end
 end
