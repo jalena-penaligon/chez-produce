@@ -1,17 +1,28 @@
 <h1>Browse All Items</h1>
-<section class="tron">
-  <p class="most-popular">Most Popular Items: <%@most_popular.each do |item| %>
-  <%= item.name %>: <%= item.items_qty %>
-  <% end %></p>
-<p class="least-popular"> Least Popular Items: <% @least_popular.each do |item| %>
-  <%= item.name %>: <%= item.items_qty %>
-  <% end %></p>
-</section>
+<aside class="stats">
+  <summary class="most-popular">
+    <h2>Most Popular Items:</h2>
+    <%@most_popular.each do |item| %>
+      <li><%= item.name.capitalize %>: <%= item.items_qty %></li>
+    <% end %>
+  </summary>
 
+  <summary class="least-popular">
+    <h2>Least Popular Items:</h2>
+    <% @least_popular.each do |item| %>
+      <li><%= item.name.capitalize %>: <%= item.items_qty %></li>
+    <% end %>
+  </summary>
+</aside>
+
+<div class="items-container">
 <% @items.each do |item| %>
-  <h3><%= link_to "#{item.name}", item_path(item) %></h3>
-  <%= item.merchant_name %>
-    Price: <%= number_to_currency(item.current_price) %>
-    Inventory: <%= item.inventory %>
+  <section class="items-index">
     <%= link_to image_tag(item.image), item_path(item) %>
+    <h3><%= link_to "#{item.name}", item_path(item) %></h3>
+    <li><%= item.merchant_name %></li>
+    <li>Price: <%= number_to_currency(item.current_price) %></li>
+    <li>Inventory: <%= item.inventory %></li>
+  </section>
 <% end %>
+</div>

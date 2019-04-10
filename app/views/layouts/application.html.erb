@@ -4,48 +4,58 @@
     <title>LittleShopV2</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= stylesheet_link_tag    'reset', 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
 
-  <body>
-    <nav class="nav-bar">
-      <ul>
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "Shop", items_path %></li>
-        <li><%= link_to "Merchants", merchants_path %></li>
-        <% if current_merchant %>
-          <section id="merchant-nav">
+  <nav class="nav-bar">
+    <ul class="float-left">
+      <li><%= link_to image_tag('cp-logo.png', alt: "logo", size: "200x20"), root_path %></li>
+      <li><%= link_to "Shop", items_path %></li>
+      <li><%= link_to "Merchants", merchants_path %></li>
+    </ul>
+      <% if current_merchant %>
+        <section id="merchant-nav">
+          <span class="float-right">
+            Logged in as <%= current_user.name %>
             <li><%= link_to "Dashboard", dashboard_path %></li>
             <li><%= link_to "Logout", logout_path, method: :delete %></li>
-            <li>Logged in as <%= current_user.name %></li>
-          </section>
-        <% elsif current_admin %>
-          <section id="admin-nav">
+          </span>
+        </section>
+      <% elsif current_admin %>
+        <section id="admin-nav">
+          <span class="float-right">
+            Logged in as <%= current_user.name %>
             <li><%= link_to "Users", admin_users_path %></li>
             <li><%= link_to "Dashboard", admin_dashboard_path %></li>
             <li><%= link_to "Logout", logout_path, method: :delete %></li>
-            <li>Logged in as <%= current_user.name %></li>
-          </section>
-        <% elsif current_user %>
-          <section id="user-nav">
+          </span>
+        </section>
+      <% elsif current_user %>
+        <section id="user-nav">
+          <span class="float-right">
+            Logged in as <%= current_user.name %>
             <li><%= link_to "Cart: #{@cart.total_count}", cart_path %></li>
             <li><%= link_to "Profile", profile_path %></li>
             <li><%= link_to "Logout", logout_path, method: :delete %></li>
-            <li>Logged in as <%= current_user.name %></li>
-          </section>
-        <% else %>
-            <li> <%= link_to "Cart: #{@cart.total_count}", cart_path %> </li>
-            <li> <%= link_to "Register", register_path %> </li>
-            <li> <%= link_to "Login", login_path %> </li>
-        <% end %>
-      </ul>
-    </nav>
+          </span>
+        </section>
+      <% else %>
+        <span class="float-right">
+          <li> <%= link_to "Cart: #{@cart.total_count}", cart_path %> </li>
+          <li> <%= link_to "Register", register_path %> </li>
+          <li> <%= link_to "Login", login_path %> </li>
+        </span>
+      <% end %>
 
+  </nav>
+  <body>
+    <section class="body-content">
     <% flash.each do |type, message| %>
       <p class="flash"><%= message %></p>
     <% end %>
 
     <%= yield %>
+    </section>
   </body>
 </html>

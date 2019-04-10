@@ -42,10 +42,18 @@ RSpec.describe 'As any kind of user on the system' do
       visit items_path
 
       within ".most-popular" do
-        expect(page).to have_content("Most Popular Items: zucchini: 6 rutabaga: 5 kale: 4 cantaloupe: 3 bananas: 2")
+        expect(page).to have_content("Zucchini: 6")
+        expect(page).to have_content("Rutabaga: 5")
+        expect(page).to have_content("Kale: 4")
+        expect(page).to have_content("Cantaloupe: 3")
+        expect(page).to have_content("Bananas: 2")
       end
       within ".least-popular" do
-        expect(page).to have_content("Least Popular Items: apples: 1 bananas: 2 cantaloupe: 3 kale: 4 rutabaga: 5")
+        expect(page).to have_content("Apples: 1")
+        expect(page).to have_content("Bananas: 2")
+        expect(page).to have_content("Cantaloupe: 3")
+        expect(page).to have_content("Kale: 4")
+        expect(page).to have_content("Rutabaga: 5")
       end
       # - the top 5 most popular items by quantity purchased, plus the quantity bought
       # - the bottom 5 least popular items, plus the quantity bought

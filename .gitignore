@@ -19,3 +19,4 @@ tmp/
 /yarn-error.log
 public/assets
 .byebug_history
+.DS_Store
