@@ -35,8 +35,9 @@ class Item < ApplicationRecord
 
   def self.percent_sold(merchant_id)
       joins(:order_items)
-      .select('coalesce(sum(order_items.order_quantity),0)as total_sold, sum(items.inventory) as total_inventory')
+      .select('items.user_id, coalesce(sum(order_items.order_quantity),0)as total_sold, sum(items.inventory) as total_inventory')
       .where("items.user_id = #{merchant_id}")
+      .group('items.user_id')
       .limit(1)
   end
 

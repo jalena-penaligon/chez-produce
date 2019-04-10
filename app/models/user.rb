@@ -105,5 +105,17 @@ class User < ApplicationRecord
       .limit(3)
     end
 
-
+    # def percent_sold
+    #   binding.pry
+    #   self.items.order_items.sum(order_quantity)/items.items.sum(inventory)
+    # end
+    #
+    # def percent_sold
+    #   # binding.pry
+    #   self.items
+    #     .joins(:order_items)
+    #     .select('coalesce(sum(order_items.order_quantity),0)as total_sold, sum(items.inventory) as total_inventory')
+    #     .limit(1)
+    #     # .where("users.id = #{merchant_id}")
+    # end
 end
