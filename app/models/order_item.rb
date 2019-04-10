@@ -23,7 +23,8 @@ class OrderItem < ApplicationRecord
     the_sum = orderitemsarray.map do |orderitem|
       (orderitem.updated_at - orderitem.created_at)
     end.sum
-
+  end
+  
   def fulfillment_time
     ((updated_at - created_at)/one_day).round(2)
   end
