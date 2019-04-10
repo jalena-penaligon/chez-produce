@@ -7,4 +7,5 @@
   <li>Merchant: <%= @item.user.name %> </li>
   <li>Average Fulfillment Time: <%=@fulfillment_time %>  </li>
 </ul>
+
 <%= link_to "Add to Cart", carts_path(item_id: @item.id) %>

@@ -22,6 +22,8 @@ RSpec.describe 'all users' do
       expect(page).to have_content(merchant_1.name)
       expect(page).to have_content(item_1.inventory)
       expect(page).to have_content(item_1.current_price)
+      expect(page).to have_content("Add to Cart")
+
       # expect(page).to have_content("Average Fulfillment Time: 3")
     end
   end
