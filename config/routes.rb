@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     get '/items', to: 'merchants/items#index'
 
     patch '/items/:id', to: 'items#active_toggle', as: :toggle_item
+    delete '/items/:item_id', to: 'merchants/items#destroy', as: :delete_item
 
     get '/items/new', to: 'merchants/items#new'
     post '/items', to: 'merchants/items#create'

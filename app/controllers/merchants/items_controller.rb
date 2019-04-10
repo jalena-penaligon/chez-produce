@@ -1,6 +1,7 @@
 class Merchants::ItemsController < ApplicationController
 
   def index
+    # binding.pry
     if current_merchant
       @merchant = current_user
     else
@@ -23,6 +24,12 @@ class Merchants::ItemsController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    item = Item.find(params[:item_id])
+    item.destroy
+    flash[:alert] = "The item has been deleted."
+    redirect_to dashboard_items_path
 
   def edit
     @merchant = User.find(params[:merchant_id])

@@ -14,7 +14,7 @@
         <%= button_to "Enable", dashboard_toggle_item_path(item), method: :patch %>
       <% end %>
       <% if item.not_ordered? %>
-        <%= button_to "Delete" %>
+        <%= button_to "Delete", dashboard_delete_item_path(item), method: :delete %>
       <% end %>
     <li><img src="<%= item.image %>" /></li>
   </ul>
