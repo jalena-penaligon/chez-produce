@@ -8,8 +8,6 @@ class Cart
   def total_count
     if @contents != nil
       @contents.values.sum
-    else
-      0
     end
   end
 
