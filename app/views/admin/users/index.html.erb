@@ -2,6 +2,6 @@
   <section id="user-<%=user.id%>">
     <%= link_to user.name, admin_user_path(user) %> <br />
     Date Registered: <%= user.created_at.to_s(:long) %>
-    <%= button_to "Upgrade to Merchant" %>
+    <%= button_to "Upgrade to Merchant", admin_user_upgrade_path(user), method: :patch %>
   </section>
 <% end %>
