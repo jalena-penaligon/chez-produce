@@ -115,21 +115,51 @@ RSpec.describe "As a merchant" do
     end
 
     it 'when I click on a delete button for an item, I am returned to the page, I see a flash message, the item is gone' do
-      merchant = create(:merchant, id: 1)
-      item_1 = create(:item, user_id: merchant.id, active: true)
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+      merchant = create(:merchant, id: 25)
+      item = create(:item, user_id: merchant.id)
+
+      visit login_path
+
+      fill_in 'Email', with: merchant.email
+      fill_in 'Password', with: merchant.password
+      click_button "Login"
 
       visit '/dashboard/items'
 
       expect(current_path).to eq(dashboard_items_path)
 
-      within "item-#{item_1.id}" do
+      within "#item-#{item.id}" do
         click_button "Delete"
       end
 
       expect(current_path).to eq(dashboard_items_path)
       expect(page).to have_content("The item has been deleted.")
-      expect(page).to_not have_content(item_1.name)
+      expect(page).to_not have_content(item.name)
+    end
+
+    it 'when I click on a delete button for an item that has a order_item record, it is not deleted and there is a message stating that' do
+      merchant = create(:merchant, id: 2)
+      item = create(:item, user_id: merchant.id, id: 1)
+      order_item = create(:order_item, item_id: 2)
+
+      visit login_path
+
+      fill_in 'Email', with: merchant.email
+      fill_in 'Password', with: merchant.password
+      click_button "Login"
+
+      visit '/dashboard/items'
+
+      expect(current_path).to eq(dashboard_items_path)
+
+      within "#item-#{item.id}" do
+        click_button "Delete"
+      end
+
+      expect(current_path).to eq(dashboard_items_path)
+      expect(page).to have_content("This item has been ordered and cannot be deleted.")
+      expect(page).to have_content(item.name)
     end
   end
 end
+#tst if associated with order item. then add if logic i
