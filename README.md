@@ -37,6 +37,9 @@ Rails 5.x, PostgreSQL.
 ##GitHub Repository:
 https://github.com/jalena-penaligon/little_shop_v2
 
+##Database Diagram:
+![alt text](https://files.slack.com/files-pri/T029P2S9M-FHVL77BFH/chezproduce-database.png)
+
 ##Instructions:
   ###How to setup:
       1. Clone the GitHub repository.
@@ -48,3 +51,8 @@ https://github.com/jalena-penaligon/little_shop_v2
         1. Run rspec.
         2. To run a single test, example: rspec ./spec/features/items/index_spec.rb:22
         3. The above example can be edited to run spec folders and files.
+
+  ###Sample login credentials for users:
+        1. Login as an admin: email admin@chezproduce.com, password: admin (edited)
+        2. Login as a merchant: email sams@samsproduce.com, password: fruity
+        3. Login as a customer: mforeman@produce.com, password: orange123
