@@ -26,10 +26,10 @@ This group project was completed as a requirement for Module 2 at Turing School 
     * Project management tool: GitHub Projects.
 
 ##Contributors:
-              Erin King - @erin-king
-              Jalena (Penaligon) Taylor - @jalena-penaligon
-              Jennica Stiehl - @stiehlrod
-              Smitha Hosmani - @hsmitha26
+Erin King - @erin-king
+Jalena (Penaligon) Taylor - @jalena-penaligon
+Jennica Stiehl - @stiehlrod
+Smitha Hosmani - @hsmitha26
 
 ##System requirements:
 Rails 5.x, PostgreSQL.
@@ -38,7 +38,7 @@ Rails 5.x, PostgreSQL.
 https://github.com/jalena-penaligon/little_shop_v2
 
 ##Database Diagram:
-![alt text](https://files.slack.com/files-pri/T029P2S9M-FHVL77BFH/chezproduce-database.png)
+![alt text](database_diagram/diagram.png)
 
 ##Instructions:
   ###How to setup:
