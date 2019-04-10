@@ -26,10 +26,10 @@ The project was built using Rails which implements the following:
 * Project management tool: GitHub Projects.
 
 ## Contributors:
-  Erin King - @erin-king
-  Jalena (Penaligon) Taylor - @jalena-penaligon
-  Jennica Stiehl - @JennicaStiehl
-  Smitha Hosmani - @hsmitha26
+* Erin King - @erin-king
+* Jalena (Penaligon) Taylor - @jalena-penaligon
+* Jennica Stiehl - @JennicaStiehl
+* Smitha Hosmani - @hsmitha26
 
 ## System requirements:
 Rails 5.x, PostgreSQL.
