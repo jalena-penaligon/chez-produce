@@ -1,7 +1,7 @@
 <h1>Merchant's Items Page</h1>
 <p><%= link_to "Add New Item" %></p>
 
-<% current_user.items.each do |item| %>
+<% @merchant.items.each do |item| %>
 <section id="item-<%=item.id%>">
   <ul>
     <li><%= item.id %></li>

@@ -18,6 +18,13 @@ class MerchantsController < ApplicationController
   def show
     if current_merchant
       @merchant = current_user
+      @items_sold = Item.merchant_items_sold(5,'desc',current_user.id)
+      @percent_sold = Item.percent_sold(current_user.id)
+      @top_states = User.merchant_top_states(current_user.id)
+      @top_cities = User.merchant_top_cities(current_user.id)
+      @top_purchaser_by_orders = User.top_purchaser_by_orders(current_user.id)
+      @top_purchaser_by_quantity = User.top_purchaser_by_quantity(current_user.id)
+      @top_spenders = User.top_spenders(current_user.id)
     else
       render_not_found
     end

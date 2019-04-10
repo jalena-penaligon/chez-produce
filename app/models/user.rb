@@ -51,6 +51,15 @@ class User < ApplicationRecord
     .limit(3)
   end
 
+  def self.merchant_top_states(merchant_id)
+    joins(orders: {order_items: :item})
+    .select("users.state, count(orders.id) as total_orders")
+    .where("items.user_id = #{merchant_id}")
+    .group(:state)
+    .limit(3)
+    # .where("orders.status = 2")
+  end
+
   def self.top_cities
     joins(:orders)
     .select("users.*, count(orders.id) as total_orders")
@@ -59,6 +68,42 @@ class User < ApplicationRecord
     .order("total_orders DESC, city ASC, state ASC")
     .limit(3)
   end
+
+    def self.merchant_top_cities(merchant_id)
+      joins(orders: {order_items: :item})
+      .select("users.city, users.state, count(orders.id) as total_orders")
+      .where("items.user_id = #{merchant_id}")
+      .group("users.city, users.state")
+      .order("total_orders DESC, city ASC, state ASC")
+      .limit(3)
+    end
+
+    def self.top_purchaser_by_orders(merchant_id)
+      joins(orders: {order_items: :item})
+      .select("users.name, count(orders.id) as total_orders")
+      .where("items.user_id = #{merchant_id}")
+      .group("users.name")
+      .order("total_orders DESC")
+      .limit(1)
+    end
+
+    def self.top_purchaser_by_quantity(merchant_id)
+      joins(orders: {order_items: :item})
+      .select("users.name, sum(order_items.order_quantity) as total_quantity")
+      .where("items.user_id = #{merchant_id}")
+      .group("users.name")
+      .order("total_quantity DESC")
+      .limit(1)
+    end
+
+    def self.top_spenders(merchant_id)
+      joins(orders: {order_items: :item})
+      .select("users.name, sum(order_items.order_price) as total_spent")
+      .where("items.user_id = #{merchant_id}")
+      .group("users.name")
+      .order("total_spent DESC")
+      .limit(3)
+    end
 
 
 end
