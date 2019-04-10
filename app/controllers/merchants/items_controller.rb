@@ -29,6 +29,7 @@ class Merchants::ItemsController < ApplicationController
     item.destroy
     flash[:alert] = "The item has been deleted."
     redirect_to dashboard_items_path
+  end
 
   def edit
     @merchant = User.find(params[:merchant_id])
@@ -59,5 +60,4 @@ class Merchants::ItemsController < ApplicationController
     end
     update_params
   end
-
 end
