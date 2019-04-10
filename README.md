@@ -28,7 +28,7 @@ The project was built using Rails which implements the following:
 ## Contributors:
 Erin King - @erin-king
 Jalena (Penaligon) Taylor - @jalena-penaligon
-Jennica Stiehl - @stiehlrod
+Jennica Stiehl - @JennicaStiehl
 Smitha Hosmani - @hsmitha26
 
 ## System requirements:
