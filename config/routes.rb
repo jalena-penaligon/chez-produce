@@ -39,7 +39,8 @@ Rails.application.routes.draw do
 
     get '/items/new', to: 'merchants/items#new'
     post '/items', to: 'merchants/items#create'
-
+    get '/items/:id/edit', to: 'merchants/items#edit', as: :item_edit
+    patch '/items/:id/edit', to: 'merchants/items#update', as: :item_update
     get '/orders/', to: 'merchants/orders#index', as: :orders
   end
 
@@ -62,6 +63,7 @@ Rails.application.routes.draw do
     resources :merchants, only: [:index, :show]
     get 'dashboard', to: 'admin#show', as: :dashboard
     patch '/users/:id/upgrade', to: 'users#upgrade', as: :user_upgrade
+    patch '/merchants/:id/downgrade', to: 'merchants#downgrade', as: :merchant_downgrade
     # resources :orders, only: [:index]
   end
 
