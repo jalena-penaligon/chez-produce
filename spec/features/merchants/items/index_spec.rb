@@ -137,10 +137,10 @@ RSpec.describe "As a merchant" do
       expect(page).to_not have_content(item.name)
     end
 
-    it 'when I click on a delete button for an item that has a order_item record, it is not deleted and there is a message stating that' do
+    it 'if the item has been ordered, there is no delete button and it cannot be deleted' do
       merchant = create(:merchant, id: 2)
       item = create(:item, user_id: merchant.id, id: 1)
-      order_item = create(:order_item, item_id: 2)
+      order_item = create(:order_item, item_id: 1)
 
       visit login_path
 
@@ -153,13 +153,11 @@ RSpec.describe "As a merchant" do
       expect(current_path).to eq(dashboard_items_path)
 
       within "#item-#{item.id}" do
-        click_button "Delete"
+        expect(page).to_not have_button("Delete")
       end
 
       expect(current_path).to eq(dashboard_items_path)
-      expect(page).to have_content("This item has been ordered and cannot be deleted.")
       expect(page).to have_content(item.name)
     end
   end
 end
-#tst if associated with order item. then add if logic i

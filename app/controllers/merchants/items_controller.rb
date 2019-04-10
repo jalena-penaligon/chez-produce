@@ -27,9 +27,7 @@ class Merchants::ItemsController < ApplicationController
 
   def destroy
     item = Item.find(params[:item_id])
-    # item.order_items.destroy_all
     item.destroy
-    # binding.pry
     flash[:alert] = "The item has been deleted."
     redirect_to dashboard_items_path
   end
