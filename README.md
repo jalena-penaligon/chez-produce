@@ -12,18 +12,18 @@ https://mysterious-beyond-30964.herokuapp.com/
 
 This group project was completed as a requirement for Module 2 at Turing School of Software and Design.
 
-  The project was built using Rails which implements the following:
-    * MVC design pattern.
-    * Object oriented programming principles.
-    * CRUD functions - create, read, update, delete.
-    * Behavior Driven Development - BDD.
-    * Advanced database queries and calculations using ActiveRecord.
-    * Authentication using bcrypt.
-    * Session management to implement authorization for various users and shopping cart experience.
-    * Feature and model testing with test coverage at 99% or better.
-    * FactoryBot to create objects for efficient testing.
-    * Version control using GitHub.
-    * Project management tool: GitHub Projects.
+The project was built using Rails which implements the following:
+* MVC design pattern.
+* Object oriented programming principles.
+* CRUD functions - create, read, update, delete.
+* Behavior Driven Development - BDD.
+* Advanced database queries and calculations using ActiveRecord.
+* Authentication using bcrypt.
+* Session management to implement authorization for various users and shopping cart experience.
+* Feature and model testing with test coverage at 99% or better.
+* FactoryBot to create objects for efficient testing.
+* Version control using GitHub.
+* Project management tool: GitHub Projects.
 
 ## Contributors:
               Erin King - @erin-king
