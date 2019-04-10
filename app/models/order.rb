@@ -32,6 +32,6 @@ class Order < ApplicationRecord
   end
 
   def grand_total
-    order_items.sum(:order_price)
+    order_items.sum('order_price * order_quantity')
   end
 end
