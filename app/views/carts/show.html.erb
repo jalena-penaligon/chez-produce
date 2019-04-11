@@ -1,31 +1,42 @@
+<h1>Shopping Cart</h1>
 <% if session[:cart] != {} && current_user == nil %>
-  <section id="login-message">
-    You must <%= link_to 'login', login_path %> or
-    <%= link_to 'register', register_path %> to checkout.
-  </section>
+<section id="login-message">
+  <br />
+  <h3>You must <%= link_to 'login', login_path %> or
+  <%= link_to 'register', register_path %> to checkout.</h3>
+</section>
 <% end %>
 
-<% if session[:cart] != {} %>
-  <% @cart.contents.each do |id| %>
-    <section id="item-<%= id[0].to_i %>">
-    <% item = @cart.find_item(id) %>
-    <%= item.name %>
-    Price: <%= number_to_currency(item.current_price) %>
-    Quantity: <%= id[1] %>
-    Merchant: <%= item.user.name %>
-    Subtotal: <%= number_to_currency(@cart.item_subtotal(item)) %>
-    <img src="<%= item.image %> width="100" height="100" ">
-    <%= link_to "Add One", cart_path(item_id: item.id, increment: "add", inventory: item.inventory), method: :patch  %>
-    <%= link_to "Delete One", cart_path(item_id: item.id, increment: "subtract"), method: :patch  %>
-    <%= link_to "Delete Item", cart_path(item_id: item.id), method: :delete  %>
+<aside class="checkout">
+  Cart Total: <%= number_to_currency(@cart.total_cost) %><br />
+
+  <% if current_user != nil && session[:cart] != {} %>
+    <%= button_to "Checkout", orders_path(user_id: current_user.id), method: :create, class: :button %><br />
+  <% end %>
+
+  <% if session[:cart] != {} %>
+    <%= link_to "Clear Cart", @carts, method: :delete %>
+  <% end %>
+</aside>
+<section class="items-container">
+
+  <% if session[:cart] != {} %>
+    <% @cart.contents.each do |id| %>
+      <section id="item-<%= id[0].to_i %>" class="items-index">
+      <% item = @cart.find_item(id) %>
+      <img src="<%= item.image %>">
+      <%= link_to "Add One", cart_path(item_id: item.id, increment: "add", inventory: item.inventory), method: :patch  %>
+      | <%= link_to "Delete One", cart_path(item_id: item.id, increment: "subtract"), method: :patch  %>
+      | <%= link_to "Delete Item", cart_path(item_id: item.id), method: :delete  %>
+
+      <h2><%= item.name %></h2>
+      <li>Price: <%= number_to_currency(item.current_price) %></li>
+      <li>Quantity: <%= id[1] %></li>
+      <li>Merchant: <%= item.user.name %></li>
+      <li>Subtotal: <%= number_to_currency(@cart.item_subtotal(item)) %></li>
     </section>
+    <% end %>
+
+
   <% end %>
-
-  Total: <%= number_to_currency(@cart.total_cost) %>
-
-  <% if current_user != nil %>
-    <%= button_to "Checkout", orders_path(user_id: current_user.id), method: :create %>
-  <% end %>
-
-  <%= link_to "Clear Cart", @carts, method: :delete %>
-<% end %>
+</section>

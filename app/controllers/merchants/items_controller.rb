@@ -37,7 +37,7 @@ class Merchants::ItemsController < ApplicationController
   end
 
   def update
-    @merchant = User.find(params[:id].to_i)
+    @merchant = User.find(params[:user_id].to_i)
     @item = Item.find(params[:id])
     if @item.update(update_params)
       flash[:notice] =  "Your item has been updated."

@@ -44,7 +44,7 @@ RSpec.describe "When a merchant visits dashboard show page", type: :feature do
     visit dashboard_path #'merchants#show'
 
     expect(page).to have_content(@order.id)
-    expect(page).to have_content(@order.created_at)
+    expect(page).to have_content(@order.created_at.to_s(:long))
     expect(page).to have_content(@order_item_1.order_quantity)
     expect(page).to have_content("Subtotal: 1")
 
@@ -69,7 +69,7 @@ RSpec.describe "When a merchant visits dashboard show page", type: :feature do
 
     visit dashboard_path
 
-    click_on "My Items"
+    click_button "My Items"
     expect(current_path).to eq('/dashboard/items')
   end
 end

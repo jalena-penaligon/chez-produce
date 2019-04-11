@@ -37,12 +37,12 @@ end
       within "#order-#{@order_1.id}" do
         expect(page).to have_content(@user.name)
         expect(page).to have_content(@order_1.id)
-        expect(page).to have_content(@order_1.created_at)
+        expect(page).to have_content(@order_1.created_at.to_s(:long))
       end
       within "#order-#{@order_2.id}" do
         expect(page).to have_content(@user_2.name)
         expect(page).to have_content(@order_2.id)
-        expect(page).to have_content(@order_2.created_at)
+        expect(page).to have_content(@order_2.created_at.to_s(:long))
       end
       expect(page.all(".orders")[0]).to have_content("#{@order_5.id}")
       expect(page.all(".orders")[1]).to have_content("#{@order_3.id}")

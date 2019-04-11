@@ -129,14 +129,19 @@ RSpec.describe User, type: :model do
       user_2 = User.create(name: "name", state: "WY", city: "Denver", email: "ema@email.com", zipcode: "12345", password: "pass", street_address: "123 street")
       user_3 = User.create(name: "name", state: "CT", city: "Denver", email: "em@email.com", zipcode: "12345", password: "pass", street_address: "123 street")
       user_4 = User.create(name: "name", state: "MN", city: "Denver", email: "e@email.com", zipcode: "12345", password: "pass", street_address: "123 street")
-      order_1 = create(:shipped_order, user: user_1)
-      order_2 = create(:shipped_order, user: user_1)
-      order_3 = create(:shipped_order, user: user_1)
-      order_4 = create(:shipped_order, user: user_2)
-      order_5 = create(:shipped_order, user: user_2)
-      order_6 = create(:shipped_order, user: user_3)
+      order_1 = create(:shipped_order, user: user_3)
+      order_2 = create(:shipped_order, user: user_3)
+      order_3 = create(:shipped_order, user: user_3)
+      order_3 = create(:shipped_order, user: user_3)
+      order_4 = create(:shipped_order, user: user_1)
+      order_5 = create(:shipped_order, user: user_1)
+      order_6 = create(:shipped_order, user: user_1)
+      order_7 = create(:shipped_order, user: user_2)
+      order_8 = create(:shipped_order, user: user_2)
 
-      expect(User.top_states).to eq([user_1, user_2, user_3])
+      expect(User.top_states[0].state).to eq("CT")
+      expect(User.top_states[1].state).to eq("CO")
+      expect(User.top_states[2].state).to eq("WY")
     end
 
     it '.top_cities returns top cities ordered from' do
@@ -144,16 +149,21 @@ RSpec.describe User, type: :model do
       user_2 = User.create(name: "name", state: "WY", city: "Cheyenne", email: "ema@email.com", zipcode: "12345", password: "pass", street_address: "123 street")
       user_3 = User.create(name: "name", state: "CT", city: "Hartford", email: "em@email.com", zipcode: "12345", password: "pass", street_address: "123 street")
       user_4 = User.create(name: "name", state: "MN", city: "Minneapolis", email: "e@email.com", zipcode: "12345", password: "pass", street_address: "123 street")
-      user_5 = User.create(name: "name", state: "WY", city: "Denver", email: "e@email.com", zipcode: "12345", password: "pass", street_address: "123 street")
+      user_5 = User.create(name: "name", state: "CO", city: "Denver", email: "e@email.com", zipcode: "12345", password: "pass", street_address: "123 street")
       order_1 = create(:shipped_order, user: user_3)
       order_2 = create(:shipped_order, user: user_3)
       order_3 = create(:shipped_order, user: user_3)
+      order_3 = create(:shipped_order, user: user_3)
       order_4 = create(:shipped_order, user: user_1)
       order_5 = create(:shipped_order, user: user_1)
-      order_6 = create(:shipped_order, user: user_2)
-      order_7 = create(:shipped_order, user: user_5)
+      order_6 = create(:shipped_order, user: user_1)
+      order_7 = create(:shipped_order, user: user_2)
+      order_8 = create(:shipped_order, user: user_2)
+      order_9 = create(:shipped_order, user: user_5)
 
-      expect(User.top_cities).to eq([user_3, user_1, user_2])
+      expect(User.top_cities[0].city).to eq("Hartford")
+      expect(User.top_cities[1].city).to eq("Denver")
+      expect(User.top_cities[2].city).to eq("Cheyenne")
     end
   end
 end

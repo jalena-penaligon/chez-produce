@@ -2,7 +2,7 @@
 
 <p class="float-right"><%= link_to "Add New Item", dashboard_items_new_path(merchant_id: @merchant.id) %></p>
 
-<div class="items-container">
+<div id="merchant" class="items-container">
 <% @merchant.items.each do |item| %>
 <section id="item-<%=item.id%>" class="items-index">
   <img src="<%= item.image %>" />
