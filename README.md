@@ -5,10 +5,10 @@ A fruity fictitious e-commerce application that has admins, merchants, registere
 Merchants can fulfill orders, change order status and enable/disable items.  Registered users and visitors can browse the items, place items in their shopping cart and checkout.
 Customers of the site can register and log in.
 
-## Visit our app on Heroku:  
+## Visit our app on Heroku
 https://mysterious-beyond-30964.herokuapp.com/
 
-## Intent:  
+## Intent  
 
 This group project was completed in 10 days as a requirement for Module 2 at Turing School of Software and Design.
 
@@ -25,22 +25,33 @@ The project was built using Rails which implements the following:
 * Version control using GitHub.
 * Project management tool: GitHub Projects.
 
-## Contributors:
+## Contributors
 * Erin King - @erin-king
 * Jalena (Penaligon) Taylor - @jalena-penaligon
 * Jennica Stiehl - @JennicaStiehl
 * Smitha Hosmani - @hsmitha26
 
-## System requirements:
-Rails 5.x, PostgreSQL.
+## System Requirements
+* Rails 5.x
+* ActiveRecord - PostgreSQL.
 
-## GitHub Repository:
+## Gems Userd
+* Bcrypt
+* RSpec
+* FactoryBot
+* Shoulda Matchers
+* Capybara
+* Simplecov
+* Pry
+* Launchy
+
+## GitHub Repository
 https://github.com/jalena-penaligon/little_shop_v2
 
-## Database Diagram:
+## Database Diagram
 ![alt text](database_diagram/diagram.png)
 
-## Instructions:
+## Instructions
   ### How to setup:
       1. Clone the GitHub repository.
       2. Go to the directory with the new repo.  Run bundle install.
@@ -56,3 +67,8 @@ https://github.com/jalena-penaligon/little_shop_v2
         1. Login as an admin: email admin@chezproduce.com, password: admin (edited)
         2. Login as a merchant: email sams@samsproduce.com, password: fruity
         3. Login as a customer: mforeman@produce.com, password: orange123
+
+## Ready to shop?
+The view with a list of all items for sale when you click on Shop:
+
+![alt text](app/assets/images/items_index_page_image.png)
