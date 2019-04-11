@@ -7,7 +7,9 @@
     <%= stylesheet_link_tag    'reset', 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <link href="https://fonts.googleapis.com/css?family=Nunito|Raleway|Rubik" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= favicon_link_tag asset_path('favicon_image.png') %>
+
   </head>
 
   <nav class="nav-bar">
@@ -37,14 +39,14 @@
         <section id="user-nav">
           <span class="float-right">
             Logged in as <%= current_user.name %>
-            <li><%= link_to "Cart: #{@cart.total_count}", cart_path %></li>
+            <li><i class="material-icons">shopping_cart</i><%= link_to "Cart: #{@cart.total_count}", cart_path %></li>
             <li><%= link_to "Profile", profile_path %></li>
             <li><%= link_to "Logout", logout_path, method: :delete %></li>
           </span>
         </section>
       <% else %>
         <span class="float-right">
-          <li> <%= link_to "Cart: #{@cart.total_count}", cart_path %> </li>
+          <li><i class="material-icons">shopping_cart</i> <%= link_to "Cart: #{@cart.total_count}", cart_path %> </li>
           <li> <%= link_to "Register", register_path %> </li>
           <li> <%= link_to "Login", login_path %> </li>
         </span>

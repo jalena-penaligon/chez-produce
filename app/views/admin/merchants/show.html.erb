@@ -1,11 +1,12 @@
+<section class="profile">
 <h1><%= @merchant.name %></h1>
 <section id="merchant-profile">
   <ul>
-    <li><%= @merchant.street_address %></li>
-    <li><%= @merchant.city %></li>
-    <li><%= @merchant.state %></li>
-    <li><%= @merchant.zipcode %></li>
-    <li><%= @merchant.email %></li>
+    <li>Email: <%= @merchant.email %></li>
+    <li>Street Address: <%= @merchant.street_address %></li>
+    <li>City: <%= @merchant.city %></li>
+    <li>State: <%= @merchant.state %></li>
+    <li>Zipcode: <%= @merchant.zipcode %></li><br />
   </ul>
 </section>
 
@@ -13,14 +14,15 @@
   <% @merchant.items.each do |item| %>
     <% item.order_items.each do |order_item| %>
 
-      Order ID: <%= link_to "#{order_item.order_id}", profile_order_path(@merchant, order_item.order_id) %>
+      <h3>Order ID: <%= link_to "#{order_item.order_id}", profile_order_path(@merchant, order_item.order_id) %></h3>
 
-      Order Created: <%= order_item.created_at %>
-      Quantity: <%= order_item.order_quantity %>
-      Price: <%= order_item.order_price %>
-      Subtotal: <%= order_item.order_quantity * order_item.order_price %>
+      <li>Order Created: <%= order_item.created_at %></li>
+      <li>Quantity: <%= order_item.order_quantity %></li>
+      <li>Price: <%= order_item.order_price %></li>
+      <li>Subtotal: <%= order_item.order_quantity * order_item.order_price %></li><br />
     <% end %>
   <% end %>
 </section>
 
-<li><%= button_to "Downgrade", admin_merchant_downgrade_path(@merchant), method: :patch %></li>
+<li><%= button_to "Downgrade", admin_merchant_downgrade_path(@merchant), method: :patch, class: :button %></li><br />
+</section>

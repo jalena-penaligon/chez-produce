@@ -1,9 +1,11 @@
-<aside>
+<h1>All Merchants</h1>
+<aside class="stats">
   <h2>Top Merchants by Revenue</h2>
   <section id="top-by-revenue">
     <% @top_by_revenue.each do |merchant| %>
       <h3><%= merchant.name %></h3>
-      Total Revenue: <%= merchant.revenue %><br />
+      <i class="material-icons">label_important</i>
+      Total Revenue: <%= merchant.revenue %><br /><br />
     <% end %>
   </section>
 
@@ -11,7 +13,8 @@
   <section id="top-by-fulfillment">
     <% @top_by_fulfillment.each do |merchant| %>
       <h3><%= merchant.name %></h3>
-      Fulfillment Time: <%= (merchant.fulfillment_time) %><br />
+      <i class="material-icons">label_important</i>
+      Fulfillment Time: <%= (merchant.fulfillment_time) %><br /><br />
     <% end %>
 
   </section>
@@ -20,7 +23,8 @@
   <section id="bottom-by-fulfillment">
     <% @bottom_by_fulfillment.each do |merchant| %>
       <h3><%= merchant.name %></h3>
-      Fulfillment Time: <%= merchant.fulfillment_time %><br />
+      <i class="material-icons">label_important</i>
+      Fulfillment Time: <%= merchant.fulfillment_time %><br /><br />
     <% end %>
   </section>
 
@@ -28,7 +32,8 @@
   <section id="top-states">
     <% @top_states.each do |user| %>
       <h3><%= user.state %></h3>
-      Total Orders: <%= user.total_orders %><br />
+      <i class="material-icons">label_important</i> 
+      Total Orders: <%= user.total_orders %><br /><br />
     <% end %>
   </section>
 
@@ -36,7 +41,8 @@
   <section id="top-cities">
     <% @top_cities.each do |user| %>
       <h3><%= user.city %></h3>
-      Total Orders: <%= user.total_orders %><br />
+      <i class="material-icons">label_important</i>
+      Total Orders: <%= user.total_orders %><br /><br />
     <% end %>
   </section>
 
@@ -44,28 +50,33 @@
   <section id="top-orders">
     <% @top_orders.each do |order| %>
       <h3>Order ID: <%= order.id %></h3>
-      Total Quantity: <%= order.total_quantity %><br />
+      <i class="material-icons">label_important</i>
+      Total Quantity: <%= order.total_quantity %><br /><br />
     <% end %>
   </section>
 
 </aside>
 
 </aside>
-
+<div class="merchant">
 <% @merchants.each do |merchant| %>
-  <section id="merchant-<%= merchant.id %>">
+  <section id="merchant-<%= merchant.id %>" class="merchant-index">
     <% if current_admin %>
       <h2><%= link_to merchant.name, admin_merchant_path(merchant) %></h2>
+      City: <%= merchant.city %><br />
+      State: <%= merchant.state %><br />
+      Registered: <%= merchant.created_at.to_s(:long) %>
       <% if merchant.active? %>
-        <%= button_to "Disable", toggle_merchant_path(merchant), method: :patch %>
+        <%= button_to "Disable", toggle_merchant_path(merchant), method: :patch, class: :button %>
       <% else %>
-        <%= button_to "Enable", toggle_merchant_path(merchant), method: :patch %>
+        <%= button_to "Enable", toggle_merchant_path(merchant), method: :patch, class: :button %>
       <% end %>
     <% else %>
       <h2><%= merchant.name %></h2>
+      City: <%= merchant.city %><br />
+      State: <%= merchant.state %><br />
+      Registered: <%= merchant.created_at.to_s(:long) %>
     <% end %>
-    City: <%= merchant.city %><br />
-    State: <%= merchant.state %><br />
-    Registered: <%= merchant.created_at.to_s(:long) %>
   </section>
 <% end %>
+</div>

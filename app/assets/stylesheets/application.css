@@ -9,6 +9,7 @@ nav {
   background-color: white;
   height: 25px;
   padding: 20px;
+  border-bottom: 1px solid #e6e6e6;
 }
 
 nav img {
@@ -24,12 +25,7 @@ nav li {
 nav a {
   color: #EEA342;
   text-decoration: none;
-  font-size: 22px;
-}
-
-h1 {
-  font-size: 35px;
-  margin: 20px;
+  font-size: 20px;
 }
 
 a {
@@ -41,12 +37,20 @@ a:hover {
   color: #A50303;
 }
 
+h1 {
+  font-size: 35px;
+  margin: 20px;
+}
+
 h2 {
   font-size: 28px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 h3 {
   font-size: 23px;
+  margin-bottom: 10px;
 }
 
 li {
@@ -56,13 +60,60 @@ li {
 aside {
   float: right;
   width: 23%;
-  background-color: #bfbfbf;
+  background-color: #d3d3d3;
   padding: 20px;
   margin-left: 20px;
+  border: 1px solid #c3c2c2;
 }
 
 summary {
   margin-bottom: 20px;
+}
+
+p {
+  display: block;
+  margin: 10px;
+}
+
+.input {
+  width: 100%;
+  height: 25px;
+  padding: 25px 25px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 20px;
+  margin: center;
+}
+
+
+form {
+    display: inline-block;
+    width: 50%;
+    font-size:20px;
+    align: center;
+}
+
+#home {
+  background: url(https://images.unsplash.com/photo-1498579397066-22750a3cb424?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80);
+  background-color: block;
+}
+
+.button {
+  background-color: #eea342;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.button:hover {
+  background-color: #A50303;
+  cursor:pointer;
 }
 
 .items-container {
@@ -92,11 +143,83 @@ summary {
   margin-bottom: 15px;
 }
 
+.merchant {
+  background-color: #f2f2f2;
+  border: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cart-index {
+  flex-grow: 3;
+  flex-shrink: 1;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.cart-index img {
+  object-fit: cover;
+  width:200px;
+  height:200px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+
+.merchant-index {
+  border: 1px solid #e6e6e6;
+  background-color: white;
+  padding: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  width: 40%;
+  flex-grow: 2;
+  flex-shrink: 1;
+  text-align: center;
+}
+
+.profile img {
+  object-fit: cover;
+  width:300px;
+  height:300px;
+  display: block;
+  align: center;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+.items-show {
+  overflow: auto;
+  font-size: 20px;
+  line-height: 1.5em;
+  background-color: white;
+  padding: 20px;
+}
 
 .items-show img {
   object-fit: cover;
   width:500px;
   height:500px;
+  float: left;
+  margin-right: 20px;
+}
+
+.order-show img {
+  object-fit: cover;
+  width:180px;
+  height:180px;
+  float: left;
+  margin-right: 20px;
+}
+
+.order-show {
+  overflow: auto;
+  font-size: 20px;
+  line-height: 1.5em;
+  background-color: white;
+  padding: 20px;
 }
 
 .body-content {
@@ -111,4 +234,86 @@ summary {
 .float-left {
   float: left;
   display: inline-block;
+}
+
+.material-icons {
+  color: #EEA342;
+  position: relative;
+  top: 5px;
+  left: 0px;
+}
+
+.welcome {
+  text-align: center;
+  border-radius: 25px;
+  margin-top: 75px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.92);
+  opacity: 50;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.note {
+  margin-top: 30px;
+  text-align: center;
+  padding: 20px;
+  background-color: #EEA342;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.note a {
+  color: white;
+}
+
+.note a:hover {
+  color: #A50303;
+}
+
+.stats, .checkout {
+  font-size: 20px;
+  line-height: 1.5em;
+}
+
+.checkout {
+  text-align: center;
+}
+
+.profile {
+  background-color: white;
+  border: 1px solid #e6e6e6;
+  padding: 20px;
+  font-size: 20px;
+  line-height: 1.5em;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 60px;
+  text-align: center;
+}
+
+.register {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 60px;
+  text-align: center;
+}
+
+.merchant-profile {
+  background-color: white;
+  border: 1px solid #e6e6e6;
+  padding: 30px;
+  font-size: 20px;
+  line-height: 1.5em;
+  width: 25%;
+  float: left;
+  margin-right: 25px;
+  text-align: center;
+  flex-grow: 3;
+  flex-shrink: 1;
+  min-width: 250px;
 }

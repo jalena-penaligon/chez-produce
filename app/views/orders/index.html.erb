@@ -1,12 +1,14 @@
+<section class="profile">
 <h1>My Orders</h1>
 
 <% @orders.each do |order| %>
   <ul id="order-info-<%= order.id %>">
-    <li><%= link_to "#{order.id}", profile_order_path(order.user_id, order.id) %></li>
-    <li><%= order.created_at %></li>
-    <li><%= order.updated_at %></li>
-    <li><%= order.status %></li>
+    <h3>Order ID: <%= link_to "#{order.id}", profile_order_path(order.user_id, order.id) %></h3>
+    <li>Created At: <%= order.created_at %></li>
+    <li>Updated At:<%= order.updated_at %></li>
+    <li>Status: <%= order.status %></li>
       <li>Total Quantity: <%= order.total_quantity %></li>
       <li>Total Price: <%= number_to_currency(order.grand_total) %></li>
-  </ul>
+  </ul><br />
 <% end %>
+</section>

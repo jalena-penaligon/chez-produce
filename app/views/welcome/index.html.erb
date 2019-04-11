@@ -1,15 +1,24 @@
+<body id="home">
+
+<section class="welcome">
+  <h1>Welcome to</h1>
+  <%= image_tag('cp-logo.png', alt: "chez-produce-logo", size: "700x71") %>
+  <%= button_to "Shop Now", items_path, method: :get, class: :button %>
+
+  <section class="welcome note">
+  <p>Chez Produce is a fruity fictitious e-commerce website created for a
+  project from the Backend Engineering program at Turing School of
+  Software & Design.</p>
+
+  <h2>Project Contributors:</h2>
+  <li><a href="https://github.com/erin-king" target="_blank">Erin King</a></li>
+  <li><a href="https://github.com/jalena-penaligon" target="_blank">Jalena (Penaligon) Taylor</a></li>
+  <li><a href="https://github.com/JennicaStiehl" target="_blank">Jennica Stiehl</a></li>
+  <li><a href="https://github.com/hsmitha26" target="_blank">Smitha Hosmani</a></li>
+  </section>
+
+  </section>
 
 
-<h1>Welcome to</h1>
-<%= image_tag('cp-logo.png', alt: "chez-produce-logo", size: "500x51") %>
-<%= button_to "Shop Now", items_path, method: :get %>
 
-Chez Produce is a fruity fictitious e-commerce website created for a
-project from the Backend Engineering program at Turing School of
-Software & Design.
-
-<h2>Project Contributors:</h2>
-<li><a href="https://github.com/erin-king">Erin King</a></li>
-<li><a href="https://github.com/jalena-penaligon">Jalena (Penaligon) Taylor</a></li>
-<li><a href="https://github.com/stiehlrod">Jennica Stiehl</a></li>
-<li><a href="https://github.com/hsmitha26">Smitha Hosmani</a></li>
+</body>

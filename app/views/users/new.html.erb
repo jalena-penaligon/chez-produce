@@ -1,3 +1,5 @@
+<section class="register">
+<h1>Create an Account</h1>
 <% if @user.errors.any? %>
   <ul class="errors">
     <% @user.errors.full_messages.each do |message| %>
@@ -7,21 +9,22 @@
 <% end %>
 
 <%= form_for @user, action: :create do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :street_address %>
-  <%= f.text_field :street_address %>
-  <%= f.label :city %>
-  <%= f.text_field :city %>
-  <%= f.label :state %>
-  <%= f.text_field :state %>
-  <%= f.label :zipcode %>
-  <%= f.text_field :zipcode %>
-  <%= f.label :email %>
-  <%= f.text_field :email, value: nil %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
-  <%= f.submit "Register" %>
+  <p><%= f.label :name %><br />
+  <%= f.text_field :name, class: :input %></p>
+  <p><%= f.label :street_address %><br />
+  <%= f.text_field :street_address, class: :input %></p>
+  <p><%= f.label :city %><br />
+  <%= f.text_field :city, class: :input %></p>
+  <p><%= f.label :state %><br />
+  <%= f.text_field :state, class: :input %></p>
+  <p><%= f.label :zipcode %><br />
+  <%= f.text_field :zipcode, class: :input %></p>
+  <p><%= f.label :email %><br />
+  <%= f.text_field :email, value: nil, class: :input %></p>
+  <p><%= f.label :password %><br />
+  <%= f.password_field :password, class: :input %></p>
+  <p><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation, class: :input %></p>
+  <p><%= f.submit "Register", class: :button %></p>
 <% end %>
+  </section>

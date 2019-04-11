@@ -1,16 +1,19 @@
+<section class="profile">
 <h1>Admin Dashboard</h1>
   <% @orders.each do |order| %>
   <section class="orders">
     <div id="order-<%=order.id%>">
-      <%= link_to "#{order.user.name}", admin_user_path(order.user.id) %>
-      <%= order.id %>
-      <%= order.created_at %>
-      <%= order.status %>
+      <li><%= link_to "#{order.user.name}", admin_user_path(order.user.id) %></li>
+      <li>Order ID: <%= order.id %></li>
+      <li>Created At: <%= order.created_at.to_s(:long) %></li>
+      <li>Status: <%= order.status %></li>
         <% if order.status == "packaged" %>
-            <%= link_to "Ship",  ship_path(order), method: :patch%>
+            <%= button_to "Ship",  ship_path(order), method: :patch, class: :button%><br />
         <% elsif order.status != "cancelled"  && order.status != "shipped"%>
-            <%= link_to "Cancel", cancel_path(order), method: :patch %>
+            <%= button_to "Cancel", cancel_path(order), method: :patch, class: :button %><br />
         <% end %>
+        <br />
     </div>
   </section>
   <% end %>
+</section>

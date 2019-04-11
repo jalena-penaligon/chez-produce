@@ -1,68 +1,83 @@
 <h1>Logged in as <%= @merchant.name %></h1>
-<section id="merchant-profile">
-  <ul>
-    <li><%= @merchant.street_address %></li>
-    <li><%= @merchant.city %></li>
-    <li><%= @merchant.state %></li>
-    <li><%= @merchant.zipcode %></li>
-    <li><%= @merchant.email %></li>
-  </ul>
-</section>
-<div class="statistics">
-  <% if @items_sold %>
-<section class="top-5">
-  Top 5 Items Sold<% @items_sold.each do |item| %>
-      <%= item.name %>: <%= item.total_sold %>
-  <% end %>
-</section>
-<section class="percent-sold">
-  <% @items_sold_1.each do |item| %>
-      Sold <%= item.total_sold %> items, which is <%=  ((item.total_sold/@merchant.total_inventory.to_f).round(2))*100 %>% of your total inventory.
-  <% end %>
-</section>
-<section class="top-states">
-  Top States: <% @top_states.each do |user| %>
-      <%= user.state %>: <%= user.total_orders.to_f.round(2) %>
-  <% end %>
-</section>
-<section class="top-cities">
-  Top Cities: <% @top_cities.each do |user| %>
-      <%= user.city %>, <%= user.state %>: <%= user.total_orders.to_f.round(2) %>
-  <% end %>
-</section>
-<section class="top-purchaser-orders">
-  Top Purchaser by Orders: <% @top_purchaser_by_orders.each do |user| %>
-      <%= user.name %> - <%= user.total_orders.to_f.round(2) %>
-  <% end %>
-</section>
-<section class="top-purchaser-quantity">
-  Top Purchaser by Quantity: <% @top_purchaser_by_quantity.each do |user| %>
-      <%= user.name %> - <%= user.total_quantity.to_f.round(2) %>
-  <% end %>
-</section>
-<section class="top-spenders">
-  Top Spenders: <% @top_spenders.each do |user| %>
-      <%= user.name %> <%= number_to_currency(user.total_spent.to_f.round(2)) %>
-  <% end %>
-</section><br/>
-<% else %>
-No items sold
-<% end %>
+  <section class="merchant">
+  <section class="merchant-profile" id="merchant-profile">
+    <ul>
+      <h2>Account Info:</h2>
+      <li>Email: <%= @merchant.email %></li>
+      <li>Street Address: <%= @merchant.street_address %></li>
+      <li>City: <%= @merchant.city %></li>
+      <li>State: <%= @merchant.state %></li>
+      <li>Zipcode: <%= @merchant.zipcode %></li>
+    </ul>
+    <section id="merchant-items">
+      <%= button_to "My Items", dashboard_items_path, class: :button, method: :get %><br />
+    </section>
+  </section>
 
-</div>
-<section id="merchant-orders">
-  <% @merchant.items.each do |item| %>
+  <section id="merchant-orders" class="merchant-profile">
+    <h2>Pending Orders:</h2>
+    <% @merchant.items.each do |item| %>
 
-    <% item.order_items.each do |order_item| %>
-      <li>Order ID: <%= link_to "#{order_item.order_id}", dashboard_order_path(order_item.order_id) %></li>
-      <li>Order Created: <%= order_item.created_at %></li>
-      <li>Quantity: <%= item.name %> - <%= order_item.order_quantity %></li>
-      <li>Price: <%= order_item.order_price %></li>
-      <li>Subtotal: <%= order_item.order_quantity * order_item.order_price %></li>
+      <% item.order_items.each do |order_item| %>
+        <% if order_item.order.status == "pending" %>
+          <h3>Order ID: <%= link_to "#{order_item.order_id}", dashboard_order_path(order_item.order_id) %></h3>
+          <li>Order Created: <%= order_item.created_at.to_s(:long) %></li>
+          <li>Quantity: <%= order_item.order_quantity %> <%= item.name %></li>
+          <li>Price: <%= order_item.order_price %></li>
+          <li>Subtotal: <%= order_item.order_quantity * order_item.order_price %></li>
+          <%= button_to "Update Order", dashboard_order_path(order_item.order_id), class: :button, method: :get %><br />
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
-</section>
+  </section>
 
-<section id="merchant-items">
-  <%= link_to "My Items", dashboard_items_path %>
+  <section class="stats merchant-profile">
+    <% if @items_sold %>
+  <section class="top-5">
+    <h2>Top 5 Items Sold:</h2> <% @items_sold.each do |item| %>
+        <li><%= item.name %>: <%= item.total_sold %></li>
+    <% end %>
+    <br />
+  </section>
+  <section class="percent-sold">
+    <% @items_sold_1.each do |item| %>
+      <h2>Percent of Inventory Sold:</h2>
+        Sold <%= item.total_sold %> items, which is <%=  ((item.total_sold/@merchant.total_inventory.to_f).round(2))*100 %>% of your total inventory.
+    <% end %>
+    <br /><br />
+  </section>
+  <section class="top-states">
+    <h2>Top States: </h2><% @top_states.each do |user| %>
+        <li><%= user.state %>: <%= user.total_orders.to_f.round(2) %></li>
+    <% end %>
+    <br />
+  </section>
+  <section class="top-cities">
+    <h2>Top Cities:</h2> <% @top_cities.each do |user| %>
+        <li><%= user.city %>, <%= user.state %>: <%= user.total_orders.to_f.round(2) %></li>
+    <% end %>
+    <br />
+  </section>
+  <section class="top-purchaser-orders">
+    <h2>Top Purchaser by Orders:</h2> <% @top_purchaser_by_orders.each do |user| %>
+        <li><%= user.name %> - <%= user.total_orders.to_f.round(2) %></li>
+    <% end %>
+    <br />
+  </section>
+  <section class="top-purchaser-quantity">
+    <h2>Top Purchaser by Quantity:</h2> <% @top_purchaser_by_quantity.each do |user| %>
+        <li><%= user.name %> - <%= user.total_quantity.to_f.round(2) %></li>
+    <% end %>
+    <br />
+  </section>
+  <section class="top-spenders">
+    <h2>Top Spenders:</h2> <% @top_spenders.each do |user| %>
+        <li><%= user.name %> <%= number_to_currency(user.total_spent.to_f.round(2)) %></li>
+    <% end %>
+    <br />
+  </section><br/>
+  <% else %>
+  No items sold
+  <% end %>
+  </section>
 </section>

@@ -1,8 +1,10 @@
-<h1><%= @user.name %></h1>
-<li><%= @user.email %></li>
-<li><%= @user.street_address %></li>
-<li><%= @user.city %></li>
-<li><%= @user.state %></li>
-<li><%= @user.zipcode %></li>
+<section class="profile">
+  <h1><%= @user.name %></h1>
+  <li>Email: <%= @user.email %></li>
+  <li>Street Address: <%= @user.street_address %></li>
+  <li>City: <%= @user.city %></li>
+  <li>State: <%= @user.state %></li>
+  <li>Zipcode: <%= @user.zipcode %></li>
 
-<li><%= button_to "Upgrade", admin_user_upgrade_path(@user), method: :patch %></li>
+  <li><%= button_to "Upgrade", admin_user_upgrade_path(@user), method: :patch, class: :button %></li>
+</section>

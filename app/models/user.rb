@@ -45,9 +45,9 @@ class User < ApplicationRecord
 
   def self.top_states
     joins(:orders)
-    .select("users.*, count(orders.id) as total_orders")
+    .select("users.state, count(orders.id) as total_orders")
     .where("orders.status = 2")
-    .group(:id)
+    .group(:state)
     .order('total_orders DESC')
     .limit(3)
   end
@@ -63,10 +63,10 @@ class User < ApplicationRecord
 
   def self.top_cities
     joins(:orders)
-    .select("users.*, count(orders.id) as total_orders")
+    .select("users.city, count(orders.id) as total_orders")
     .where("orders.status = 2")
-    .group(:id)
-    .order("total_orders DESC, city ASC, state ASC")
+    .group(:city)
+    .order("total_orders DESC, city ASC")
     .limit(3)
   end
 

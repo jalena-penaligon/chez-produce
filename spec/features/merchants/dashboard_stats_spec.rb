@@ -114,8 +114,9 @@ RSpec.describe 'As a merchant', type: :feature do
   describe 'When I visit my dashboard, I see an area with statistics' do
     it 'top 5 items I have sold by quantity, and the quantity of each that Ive sold' do
       visit dashboard_path
-
-      expect(page).to have_content("Top 5 Items Sold Turnip: 237 Pear: 159 Peach: 142 Zucchini: 121 Tomato: 23")
+      within '.top-5' do
+        expect(page).to have_content("Turnip: 237 Pear: 159 Peach: 142 Zucchini: 121 Tomato: 23")
+      end
     end
     xit 'total quantity of items Ive sold, and as a percentage against my sold units plus remaining inventory' do
       visit dashboard_path
@@ -131,15 +132,21 @@ RSpec.describe 'As a merchant', type: :feature do
   end
     it 'name of the user with the most orders from me (pick one if theres a tie), and number of orders' do
       visit dashboard_path
-      expect(page).to have_content("Top Purchaser by Orders: Tim - 8.0")
+      within ".top-purchaser-orders" do
+        expect(page).to have_content("Tim - 8.0")
+      end
     end
     it 'name of the user who bought the most total items from me (pick one if theres a tie), and the total quantity' do
       visit dashboard_path
-      expect(page).to have_content("Top Purchaser by Quantity: Tony - 200.0")
+      within ".top-purchaser-quantity" do
+        expect(page).to have_content("Tony - 200.0")
+      end
     end
     it 'top 3 users who have spent the most money on my items, and the total amount theyve spent' do
       visit dashboard_path
-      expect(page).to have_content("Top Spenders: Tim $18.75 Tanya $12.25 Tony $10.75")
+      within ".top-spenders" do
+        expect(page).to have_content("Tim $18.75 Tanya $12.25 Tony $10.75")
+      end
     end
   end
 end

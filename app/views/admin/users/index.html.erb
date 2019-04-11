@@ -1,7 +1,10 @@
-<% @users.each do |user| %>
-  <section id="user-<%=user.id%>">
-    <%= link_to user.name, admin_user_path(user) %> <br />
-    Date Registered: <%= user.created_at.to_s(:long) %>
-    <%= button_to "Upgrade to Merchant", admin_user_upgrade_path(user), method: :patch %>
-  </section>
-<% end %>
+<section class="profile">
+  <% @users.each do |user| %>
+    <section id="user-<%=user.id%>">
+      <li><%= link_to user.name, admin_user_path(user) %> </li>
+      <li>Date Registered: <%= user.created_at.to_s(:long) %></li>
+      <%= button_to "Upgrade to Merchant", admin_user_upgrade_path(user), method: :patch, class: :button %>
+    </section>
+    <br />
+  <% end %>
+</section>
