@@ -6,7 +6,7 @@ RSpec.describe "navigation" do
 
       visit root_path
 
-      click_on "Home"
+      find("img[alt='logo']").click
       expect(current_path).to eq(root_path)
 
       click_on "Shop"

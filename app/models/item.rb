@@ -40,7 +40,7 @@ class Item < ApplicationRecord
       .select('items.*, coalesce(sum(order_items.order_quantity),0)as total_sold')
       .where("items.user_id = #{merchant_id}")
       .group('items.*')
-      .limit(1)
+      # .limit(1)
   end
 
   def in_stock?(order_item)
