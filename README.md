@@ -64,7 +64,7 @@ https://github.com/jalena-penaligon/little_shop_v2
         3. The above example can be edited to run spec folders and files.
 
   ### Sample login credentials for users:
-        1. Login as an admin: email admin@chezproduce.com, password: admin (edited)
+        1. Login as an admin: email admin@chezproduce.com, password: admin
         2. Login as a merchant: email sams@samsproduce.com, password: fruity
         3. Login as a customer: mforeman@produce.com, password: orange123
 
