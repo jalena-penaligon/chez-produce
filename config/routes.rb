@@ -6,25 +6,14 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  # get '/profile/orders', to: 'orders#index'
-
-  # resources :users, only: [:create], as: :register
-  # post '/register', to: 'users#create'
   resources :items, only: [:index, :show]
-
-  # namespace :users, as: :profile do
-  #   get '/edit', to: 'users#edit', as: :edit
-  #   get '/', to: 'users#show'
-  #   get '/orders', to: 'orders#index'
-  #   resources :orders, only: [:show]
-  # end
 
   get '/register', to: 'users#new'
   get '/profile/edit', to: 'users#edit', as: :edit_profile
   get '/profile', to: 'users#show'
   resources :users, only:  [:index, :create, :update]
 
-  resources :users, only: [:destroy], as: :profile do #send key value of order_id, change to scope, remove destroy
+  resources :users, only: [:destroy], as: :profile do
     resources :orders, only: [:index, :show, :update]
   end
 
@@ -46,7 +35,6 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: 'merchants#show'
   resources :merchants, only: [:index, :show]
-  # get '/order_items/:id', to: 'merchants/order_items#update'#, as: :fulfill_order_item
   patch '/order_items/:id', to: 'merchants/order_items#update', as: :fulfill_order_item
   patch '/cart', to: 'carts#update', as: :edit_cart
   get '/cart', to: 'carts#show', as: :cart
@@ -64,10 +52,7 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'admin#show', as: :dashboard
     patch '/users/:id/upgrade', to: 'users#upgrade', as: :user_upgrade
     patch '/merchants/:id/downgrade', to: 'merchants#downgrade', as: :merchant_downgrade
-    # resources :orders, only: [:index]
   end
-
-  # get 'admin/merchants/:id', to: 'admin/merchants#show', as: :admin_merchant
 
   post '/orders', to: 'orders#create'
 end

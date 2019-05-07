@@ -236,6 +236,10 @@ form {
   display: inline-block;
 }
 
+.width {
+  width: 50%;
+}
+
 .material-icons {
   color: #EEA342;
   position: relative;
