@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
 
   def create
     user = User.find(params[:user_id])
-    order = Order.create(user_id: user.id, status: 0)
+    order = Order.create(user_id: user.id, status: 1)
     order_items = order.generate_order_items(@cart)
     flash[:notice] = "Your order has been created!"
     session[:cart].clear

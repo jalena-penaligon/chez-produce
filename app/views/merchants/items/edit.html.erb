@@ -1,25 +1,29 @@
-<h1>Edit Item</h1>
+<section class="register">
 
-<% if @item.errors.any? %>
-  <ul class="errors">
-    <% @item.errors.full_messages.each do |message| %>
-      <li class="error"><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+  <h1>Edit Item</h1>
 
-<%= form_for [@merchant, @item], action: :edit, :url => dashboard_item_edit_path(@item) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %><br />
-  <%= f.label :description %>
-  <%= f.text_field :description %><br />
-  <%= f.label :inventory %>
-  <%= f.number_field :inventory %><br />
-  <%= f.label :current_price %>
-  <%= f.number_field :current_price, class: :text_field, step: :any %><br />
-  <%= f.label :image %>
-  <%= f.text_field :image %><br />
-  <%= f.hidden_field :active, value: true %>
-  <%= hidden_field_tag "user_id", @merchant.id %>
-  <%= f.submit "Update Item" %>
-<% end %>
+  <% if @item.errors.any? %>
+    <ul class="errors">
+      <% @item.errors.full_messages.each do |message| %>
+        <li class="error"><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_for [@merchant, @item], action: :edit, :url => dashboard_item_edit_path(@item) do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: :input %><br />
+    <%= f.label :description %>
+    <%= f.text_field :description, class: :input %><br />
+    <%= f.label :inventory %>
+    <%= f.number_field :inventory, class: :input %><br />
+    <%= f.label :current_price %>
+    <%= f.number_field :current_price, class: :text_field, step: :any, class: :input %><br />
+    <%= f.label :image %>
+    <%= f.text_field :image, class: :input %><br />
+    <%= f.hidden_field :active, value: true %>
+    <%= hidden_field_tag "user_id", @merchant.id %>
+    <%= f.submit "Update Item", class: :button %>
+  <% end %>
+
+</section>
