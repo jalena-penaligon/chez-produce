@@ -6,7 +6,7 @@ Merchants can fulfill orders, change order status and enable/disable items.  Reg
 Customers of the site can register and log in.
 
 ## Visit our app on Heroku
-https://mysterious-beyond-30964.herokuapp.com/
+https://chez-produce-turing.herokuapp.com/
 
 ## Intent  
 
@@ -46,7 +46,7 @@ The project was built using Rails which implements the following:
 * Launchy
 
 ## GitHub Repository
-https://github.com/jalena-penaligon/little_shop_v2
+https://github.com/jalena-penaligon/chez-produce
 
 ## Database Diagram
 ![alt text](database_diagram/diagram.png)
